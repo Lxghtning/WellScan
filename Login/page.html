@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- <script src="scriptss.js"></script> -->
+    <title>WellScan</title>
+</head>
+
+<body>
+    <nav>
+        <div class="container" onclick="tochange(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+
+        <ul>
+            <li>
+                <a href="/Dashboard/dash.html">Dashboard</a>
+            </li>
+ 
+            <!-- <span class="material-symbols-outlined">
+                add
+            </span> -->
+        </ul>
+        <div class="name">
+            WellScan
+        </div>
+    </nav>
+    <section class="LoginForum">
+        <form class="forum" id="form">
+            <h1 class="headtouch">Login</h1>
+            <input class="emailuser" id="email" name="userEmail" placeholder="Email" required>
+            <input type="password" class="pass" id="pw" name="PassAc" placeholder="Password" required>
+            <input class="submitc" type="submit" id="contactsubmit" value="Sign Up" onclick="formfunc()">
+            <div id="wm" class="warning">Incorrect Password!</div>
+            <div id="ewm" class="Ewarning">Email not recognized!</div>
+            <div id="lwm" class="Lwarning">Login Credentials not found!</div>    
+            <h5 class="loginredirect" id="redl">
+                Don't have an account? <a href="/SignUp/signup.html">Sign Up</a>
+            </h5>        
+        </form>
+    </section>
+</body>
+<script>
+    //NAV change func
+    function tochange(x) {
+        x.classList.toggle("change");
+        x.classList.toggle("newnav");
+    }
+
+    
+    //Form Fetcher
+    document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+    })
+
+    function formfunc(x) {
+        let email = document.getElementById("email").value;
+        let pass_word = document.getElementById("pw").value;
+
+
+        
+        if(pass_word != localStorage.getItem("pass") && email != localStorage.getItem("mail")){
+            document.getElementById("lwm").style.display = "block";
+            document.getElementById("contactsubmit").style.marginTop = "40px";
+            document.getElementById("redl").style.marginTop = "70px";
+            
+            setInterval(function() 
+            {document.getElementById("lwm").style.display="none"
+            document.getElementById("contactsubmit").style.marginTop = "25px";
+            document.getElementById("redl").style.marginTop = "30px";
+    } , 3000);
+    return;
+
+        }
+        else if (pass_word != localStorage.getItem("pass")){
+            document.getElementById("wm").style.display = "block";
+            document.getElementById("contactsubmit").style.marginTop = "40px";
+            document.getElementById("redl").style.marginTop = "70px";
+
+            setInterval(function() {
+            document.getElementById("wm").style.display="none"
+            document.getElementById("redl").style.marginTop = "40px";
+
+    } , 3000);
+            
+
+            return;
+        }
+        else if(email != localStorage.getItem("mail")){
+            document.getElementById("ewm").style.display = "block";
+            document.getElementById("contactsubmit").style.marginTop = "40px";
+            document.getElementById("redl").style.marginTop = "70px";
+
+            setInterval(function() {
+            document.getElementById("ewm").style.display="none"
+            document.getElementById("contactsubmit").style.marginTop = "25px";
+            document.getElementById("redl").style.marginTop = "30px";
+    } , 3000);
+
+            return;
+        }
+        else if(pass_word === localStorage.getItem("pass") && email === localStorage.getItem("mail")){
+            document.getElementById("wm").style.display = "none";
+            document.getElementById("ewm").style.display = "none";
+            document.getElementById("lwm").style.display = "none";
+            document.getElementById("contactsubmit").style.marginTop = "25px";
+            document.getElementById("redl").style.marginTop = "30px";
+            //Local Storage
+            localStorage.setItem("mail", email)
+            localStorage.setItem("pass", pass_word)
+
+            location.href = "Dashboard/dash.html"
+
+
+        }
+    };
+
+</script>
+</html>

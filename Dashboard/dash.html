@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- <script src="scriptss.js"></script> -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>WellScan</title>
+</head>
+
+<body>
+    <nav>
+        <div class="container" onclick="tochange(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+
+        <ul>
+            <li>
+                <a class="active" href="#Dashboard">Dashboard</a>
+            </li>
+ 
+        </ul>
+        <div class="name">
+            WellScan
+        </div>
+    </nav>
+    <section class="Dashboard" id="dash">
+        <div class="patientbox" id="pb">
+            <h1 class="headpt">
+                <a id="anchorpt" onclick="change()">Add a new patient</a>
+            </h1>
+        </div>
+    </section>
+    <form class="patientform" id="ptnf">
+        <span onclick="reversechange()" class="material-symbols-outlined" id="clbtn">
+            close
+        </span>
+        <h2 class="ptformhead">
+            Enter Patient Details
+        </h2>
+        <input class="PatientfName" id="fpn" name="FPTN" placeholder="First Name" required>
+        <input class="PatientlName" id="lpn" name="LPTN" placeholder="Last Name" required>
+        <h4 class="intake">
+            Intake (in ml)
+        </h4>
+        <div class="intakediv">
+        <input type="number" min="1" max="24" class="intime" id="intym" name="intimePTN" placeholder="Intake Time(24 Hr)" required>
+        <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
+        <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
+        <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
+        
+        
+        </div>
+        <h4 class="output">
+            Output (in ml)
+        </h4>
+        <div class="outputdiv">
+        
+        <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN" placeholder="Output Time(24 Hr)" required>
+        <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
+        <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
+        <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
+        <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
+        
+    </div>
+    <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="pdetails()">
+    </form>
+    <canvas id="myChart"></canvas>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+<script>
+
+    function change() {
+        document.getElementById("dash").style.filter = "blur(2px)";
+        document.getElementById("ptnf").style.display = "block";
+        document.getElementById("ptnf").style.filter = "blur(0px)";
+
+    }
+
+    function reversechange() {
+        document.getElementById("dash").style.filter = "blur(0px)";
+        document.getElementById("ptnf").style.display = "none";
+    }
+
+
+    function pdetails(x){
+
+        //patient
+        let firstname_patient = document.getElementById("fpn").value;
+        let lastname_patient = document.getElementById("lpn").value;
+        let intime = document.getElementById("intym").value;
+        let outtime = document.getElementById("outtym").value
+
+        //intake
+        let bp = document.getElementById("bloodP").value;
+        let pulse = document.getElementById("Pulsepn").value;
+        let oral_feed = document.getElementById("orngpn").value;
+
+        //output
+        let urine = document.getElementById("urpn").value;
+        let stool = document.getElementById("stpn").value;
+        let vomit = document.getElementById("vmpn").value;
+        let suction = document.getElementById("scpn").value;
+
+        //Local Storage Storation
+        localStorage.setItem("patientfname", firstname_patient)
+        localStorage.setItem("patientlname",lastname_patient)
+        localStorage.setItem("Intime",intime)
+        localStorage.setItem("Outputtime", outtime)
+        localStorage.setItem("bp",bp)
+        localStorage.setItem("pulse",pulse)
+        localStorage.setItem("Oralfeed",oral_feed)
+        localStorage.setItem("Urine", urine)
+        localStorage.setItem("Stool",stool)
+        localStorage.setItem("Vomit",vomit)
+        localStorage.setItem("Suction", suction)
+
+        var bparr,pulsearr,ofarr,intimearr,outimearr,urinearr,stoolarr,vomitarr,suctionarr;
+
+        if(localStorage.getItem('bparr') === null){
+            bparr = [];
+            pulsearr = [];
+            ofarr = [];
+            intimearr = [];
+            outimearr = [];
+            urinearr = [];
+            stoolarr = [];
+            vomitarr = [];
+            suctionarr = [];
+        }else{
+            bparr = JSON.parse(localStorage.getItem('bparr'));
+            pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
+            ofarr = JSON.parse(localStorage.getItem('ofarr'));
+            intimearr = JSON.parse(localStorage.getItem('intimearr'));
+            outimearr = JSON.parse(localStorage.getItem('outimearr'));
+            urinearr = JSON.parse(localStorage.getItem('urinearr'));
+            stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
+            vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
+            suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
+        }
+
+        bparr.push(parseInt(bp))
+        pulsearr.push(parseInt(pulse))
+        ofarr.push(parseInt(oral_feed))
+        intimearr.push(parseInt(intime))
+        outimearr.push(parseInt(outtime))
+        urinearr.push(parseInt(urine))
+        stoolarr.push(parseInt(stool))
+        vomitarr.push(parseInt(vomit))
+        suctionarr.push(parseInt(suction))
+
+        localStorage.setItem('bparr', JSON.stringify(bparr))
+        localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
+        localStorage.setItem('ofarr', JSON.stringify(ofarr))
+        localStorage.setItem('intimearr', JSON.stringify(intimearr))
+        localStorage.setItem('outimearr', JSON.stringify(outimearr))
+        localStorage.setItem('urinearr', JSON.stringify(urinearr))
+        localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
+        localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
+        localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
+
+        changeFile()
+    }
+    function changeFile(){
+        location.href="dashgraph.html"
+    }
+</script>
+</html>
