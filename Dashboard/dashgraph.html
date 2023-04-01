@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="graph.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- <script src="scriptss.js"></script> -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>WellScan</title>
+</head>
+
+<body>
+    <nav>
+        <div class="container" onclick="tochange(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+
+        <ul>
+            <li>
+                <a class="active" href="#Dashboard">Dashboard</a>
+            </li>
+ 
+        </ul>
+        <div class="name">
+            WellScan
+        </div>
+    </nav>
+    <section class="Dashboard" id="dash">
+        <h1 class="dashhead">
+            Dashboard
+        </h1>
+        <div class="date">
+            <h2 class="datetext">
+                2nd January
+            </h2>
+        </div>
+        <div class="ptdetails">
+            <h2 id="namePTN" class="nameptn">
+            </h2>
+            <button class="delptn" onclick="delpatient()">Remove Patient</button>
+        </div>
+        <form class="patientform" id="ptnf">
+            <h4 class="intake">
+                Enter Intake (in ml)
+            </h4>
+            
+
+            <div class="intakediv"> 
+                <input type="number" class="intime" id="intym" name="intakeTime" placeholder="Time (In Hrs)" required>
+                <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
+                <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
+                <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
+            </div>
+            <h4 class="output">
+                Enter Output (in ml)
+            </h4>
+            <div class="outputdiv">
+
+                <input type="number" class="outtime" id="outtym" name="outtimePTN" placeholder="Time(In Hrs)" required>
+                <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
+                <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
+                <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
+                <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
+
+            </div>
+            <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="updatedetails()">
+        </form>
+        <div class="chartdiv">
+            <canvas class="chartcanvas" id="myChart"></canvas>
+        </div>
+        <div class="output_chartdiv">
+        <canvas class="outputC" id="outputChart"></canvas>
+    </div>
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function updatedetails(x) {
+
+        //time
+        let intime = document.getElementById("intym")
+        let outtime = document.getElementById("outtym")
+
+        //intake   
+        let bp = document.getElementById("bloodP")
+        let pulse = document.getElementById("Pulsepn");
+        let oral_feed = document.getElementById("orngpn");
+
+        //output
+        let urine = document.getElementById("urpn");
+        let stool = document.getElementById("stpn");
+        let vomit = document.getElementById("vmpn");
+        let suction = document.getElementById("scpn");
+
+        //Updating local Storage
+        if (localStorage.getItem('bparr') === null) {
+            bparr = [];
+            pulsearr = [];
+            ofarr = [];
+            intimearr = [];
+            outimearr = [];
+            stoolarr = [];  
+            urinearr = [];
+            vomitarr = [];
+            suctionarr = [];
+            
+        } else {
+            bparr = JSON.parse(localStorage.getItem('bparr'));
+            pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
+            ofarr = JSON.parse(localStorage.getItem('ofarr'));
+            intimearr = JSON.parse(localStorage.getItem('intimearr'));
+            outimearr = JSON.parse(localStorage.getItem('outimearr'));
+            stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
+            urinearr = JSON.parse(localStorage.getItem('urinearr'));
+            vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
+            suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
+        }
+        
+
+
+        bparr.push(parseInt(bp.value))
+        pulsearr.push(parseInt(pulse.value))
+        ofarr.push(parseInt(oral_feed.value))
+        intimearr.push(parseInt(intime.value))
+        outimearr.push(parseInt(outtime.value))
+        urinearr.push(parseInt(urine.value))
+        stoolarr.push(parseInt(stool.value))
+        vomitarr.push(parseInt(vomit.value))
+        suctionarr.push(parseInt(suction.value))
+
+        localStorage.setItem('bparr', JSON.stringify(bparr))
+        localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
+        localStorage.setItem('ofarr', JSON.stringify(ofarr))
+        localStorage.setItem('intimearr', JSON.stringify(intimearr))
+        localStorage.setItem('outimearr', JSON.stringify(outimearr))
+        localStorage.setItem('urinearr', JSON.stringify(urinearr))
+        localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
+        localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
+        localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
+    }
+
+
+
+    //Generating Chart
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    let intimearr = JSON.parse(localStorage.getItem("intimearr"))
+    let bparr = JSON.parse(localStorage.getItem("bparr"))
+    let pulsearr = JSON.parse(localStorage.getItem("pulsearr"))
+    let ofarr = JSON.parse(localStorage.getItem("ofarr"))
+
+    for(var i= 0;i<intimearr.length;i++){
+        var c=0;
+        for(var j = 0;j<intimearr.length;j++){
+            if(intimearr[i] == intimearr[j]) c++;
+                if(c>1)intimearr[j] = intimearr[j] + (24*c-1)
+        }
+    }
+
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: intimearr,  
+            datasets: [{
+                label: 'Blood Pressure',
+                data: bparr,
+                borderColor: 'red',
+                
+                fill: false
+            },{
+                label: 'Pulse',
+                data: pulsearr,
+                borderColor: 'blue',
+                
+                fill: false
+            }, {
+                label: 'Oral-Feed',
+                data: ofarr,
+                borderColor: 'green',
+                fill: false
+
+            }]
+        },
+        options:{
+            maintainAspectRatio: false,
+            title:{
+                display: true,
+                text: 'Fluid Intake'
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                },
+            }
+        }
+    })
+
+
+
+    // styling the chart
+        chart.canvas.parentNode.style.height = '300px';
+        chart.canvas.parentNode.style.width = '500px';
+        chart.canvas.parentNode.style.padding = '20px';
+        chart.canvas.parentNode.style.marginLeft = '1000px';
+    //Updating the chart
+    chart.update();
+
+
+
+   let outimearr = JSON.parse(localStorage.getItem("outimearr"))
+   let urinearr = JSON.parse(localStorage.getItem("urinearr"))
+   let stoolarr = JSON.parse(localStorage.getItem("stoolarr"))
+   let vomitarr = JSON.parse(localStorage.getItem("vomitarr"))
+   let suctionarr = JSON.parse(localStorage.getItem("suctionarr"))
+
+   for(var i= 0;i<outimearr.length;i++){
+    var c=0;
+    for(var j = 0;j<outimearr.length;j++){
+        if(outimearr[i] == outimearr[j]) c++;
+            if(c>1)outimearr[j] = outimearr[j] + (24*c-1)
+        }
+    }
+
+   
+    //Generating Chart
+    const cx = document.getElementById('outputChart').getContext('2d');
+
+   const output_chart = new Chart(cx, {
+        type: 'line',
+        data: {
+            labels: outimearr,  
+            datasets: [{
+                label: 'Urine',
+                data: [0,2,5],
+                borderColor: 'purple',
+                
+                fill: false
+            },{
+                label: 'Stool',
+                data: stoolarr,
+                borderColor: 'blue',
+                
+                fill: false
+            }, {
+                label: 'Vomit',
+                data: vomitarr,
+                borderColor: 'green',
+                fill: false
+
+            },
+            {
+                label: 'Suction',
+                data: suctionarr,
+                borderColor: 'pink',
+                fill: false
+
+            }]
+        },
+        options:{
+            maintainAspectRatio: false,
+            title:{
+                display: true,
+                text: 'Fluid Output'
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                },
+            }
+        }
+    })
+
+    // styling the chart
+    output_chart.canvas.parentNode.style.height = '330px';
+    output_chart.canvas.parentNode.style.width = '500px';
+    output_chart.canvas.parentNode.style.padding = '20px';
+    output_chart.canvas.parentNode.style.marginLeft = '1000px';
+    output_chart.canvas.parentNode.style.marginTop = '-355px';
+    //Updating the chart
+    output_chart.update();
+
+    function delpatient(x){
+        localStorage.clear();
+        location.href="dash.html"
+    }
+
+    document.getElementById("namePTN").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
+
+</script>
+</html>
