@@ -208,7 +208,7 @@
         var c=0;
         for(var j = 0;j<intimearr.length;j++){
             if(intimearr[i] == intimearr[j]) c++;
-                if(c>1)intimearr[j] = intimearr[j] + (24*c-1)
+                if(c>1)intimearr[j] = intimearr[j] + (24*(c-1))
         }
     }
 
@@ -273,7 +273,7 @@
     var c=0;
     for(var j = 0;j<outimearr.length;j++){
         if(outimearr[i] == outimearr[j]) c++;
-            if(c>1)outimearr[j] = outimearr[j] + (24*c-1)
+            if(c>1)outimearr[j] = outimearr[j] + (24*(c-1))
         }
     }
 
@@ -343,17 +343,17 @@
     document.getElementById("ptH").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
 
     //Intake
-    document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("intime")}ml`
+    document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("Intime")}ml`
     document.getElementById("ptD1").innerHTML = `Latest Blood Pressure Record:-  ${localStorage.getItem("bp")}ml`;
     document.getElementById("ptD2").textContent = `Latest Pulse Record:-  ${localStorage.getItem("pulse")}ml`
     document.getElementById("ptD3").textContent = `Latest Oral N.G Feed Record:-  ${localStorage.getItem("Oralfeed")}ml`
 
     //Output
-    document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("outputtime")}ml`
-    document.getElementById("ptD4").textContent = `Latest Urine Record:-  ${localStorage.getItem("urine")}ml`
-    document.getElementById("ptD5").textContent = `Latest Stool Record:-  ${localStorage.getItem("stool")}ml`
-    document.getElementById("ptD6").textContent = `Latest Vomit Record:-  ${localStorage.getItem("vomit")}ml`
-    document.getElementById("ptD7").textContent = `Latest Suction Record:-  ${localStorage.getItem("suction")}ml`
+    document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("Outputtime")}ml`
+    document.getElementById("ptD4").textContent = `Latest Urine Record:-  ${localStorage.getItem("Urine")}ml`
+    document.getElementById("ptD5").textContent = `Latest Stool Record:-  ${localStorage.getItem("Stool")}ml`
+    document.getElementById("ptD6").textContent = `Latest Vomit Record:-  ${localStorage.getItem("Vomit")}ml`
+    document.getElementById("ptD7").textContent = `Latest Suction Record:-  ${localStorage.getItem("Suction")}ml`
 
 
     
