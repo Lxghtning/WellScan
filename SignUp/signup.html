@@ -56,11 +56,12 @@
         x.classList.toggle("newnav");
     }
 
-    //Form Fetcher
+
     document.getElementById("form").addEventListener("submit", (e) => {
         e.preventDefault();
     })
 
+    //Form Fetcher
     function formfunc(x) {
         let fstname_ = document.getElementById("fname").value;
         let lstname_ = document.getElementById("lname").value;
@@ -69,8 +70,8 @@
         let confirm_Password = document.getElementById("cpw").value;
         let mail = localStorage.getItem("mail");
         if(mail === email){
-            location.href = "http://127.0.0.1:5500/Login/page.html"
-        }
+                location.href = "/Login/page.html"
+            }
         else if (pass_word != confirm_Password) {
             document.getElementById("wm").style.display = "block";
             document.getElementById("contactsubmit").style.marginTop = "40px";
@@ -94,7 +95,7 @@
             localStorage.setItem("mail", email)
             localStorage.setItem("pass", pass_word)
 
-            location.href = "Dashboard/dash.html"
+            location.href = "/Dashboard/dash.html"
 
         }
     };
