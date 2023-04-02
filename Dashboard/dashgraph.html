@@ -33,19 +33,10 @@
         </div>
     </nav>
     <section class="Dashboard" id="dash">
-        <h1 class="dashhead">
+        <h1 class="dashhead" id="dashH">
             Dashboard
         </h1>
-        <div class="date">
-            <h2 class="datetext">
-                2nd January
-            </h2>
-        </div>
-        <div class="ptdetails">
-            <h2 id="namePTN" class="nameptn">
-            </h2>
-            <button class="delptn" onclick="delpatient()">Remove Patient</button>
-        </div>
+        <div class="form">
         <form class="patientform" id="ptnf">
             <h4 class="intake">
                 Enter Intake (in ml)
@@ -53,7 +44,7 @@
             
 
             <div class="intakediv"> 
-                <input type="number" class="intime" id="intym" name="intakeTime" placeholder="Time (In Hrs)" required>
+                <input type="number" min="1" max="24" class="intime" id="intym" name="intakeTime" placeholder="Time (In Hrs)" required>
                 <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
                 <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
                 <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
@@ -63,7 +54,7 @@
             </h4>
             <div class="outputdiv">
 
-                <input type="number" class="outtime" id="outtym" name="outtimePTN" placeholder="Time(In Hrs)" required>
+                <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN" placeholder="Time(In Hrs)" required>
                 <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
                 <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
                 <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
@@ -72,16 +63,52 @@
             </div>
             <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="updatedetails()">
         </form>
+    </div>
+        <div class="ptdetails">
+            <h2 class="pth" id="ptH"></h2>
+            <div class="heads">
+                <div class="firstheads">
+            <h2 class="int">Intake</h2>
+            <h4 class="ptd8" id="ptD8"></h4>
+            <h4 class="ptd1" id="ptD1"></h4>
+            <h4 class="ptd2" id="ptD2"></h4>
+            <h4 class="ptd3" id="ptD3"></h4>
+        </div>
+            </br>
+            <h2 class="op">Output</h2>
+            <div class="secondheads">
+            <h4 class="ptd9" id="ptD9"></h4>
+            <h4 class="ptd4" id="ptD4"></h4>
+            <h4 class="ptd5" id="ptD5"></h4>
+            <h4 class="ptd6" id="ptD6"></h4>
+            <h4 class="ptd7" id="ptD7"></h4>
+        </div>
+            
+            
+        </div>
+            <button class="delptn" onclick="delpatient()">Remove Patient</button>
+        </div>
+        
         <div class="chartdiv">
             <canvas class="chartcanvas" id="myChart"></canvas>
+            <h2 class="headI">
+                Intake Graph
+            </h2>
         </div>
         <div class="output_chartdiv">
         <canvas class="outputC" id="outputChart"></canvas>
-    </div>
+        <h2 class="headO">
+            Output Graph
+        </h2>
+        </div>
     </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    document.getElementById("ptnf").addEventListener("submit", (e) => {
+        e.preventDefault();
+    })
+
     function updatedetails(x) {
 
         //time
@@ -98,6 +125,14 @@
         let stool = document.getElementById("stpn");
         let vomit = document.getElementById("vmpn");
         let suction = document.getElementById("scpn");
+
+        array_inputs = [intime, outtime, bp , pulse, oral_feed , urine , stool , vomit , suction]
+        for(var i=0; i<array_inputs.length; i++){
+            if(array_inputs[i].value === ""){
+                alert("Please enter all the values")
+                return;
+            }
+        }
 
         //Updating local Storage
         if (localStorage.getItem('bparr') === null) {
@@ -144,6 +179,19 @@
         localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
         localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
         localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
+
+        bp.value='';
+        pulse.value='';
+        oral_feed.value = '';
+        intime.value = '';
+
+        outtime.value = '';
+        urine.value = '';
+        stool.value = '';
+        vomit.value = '';
+        suction.value = '';
+
+        alert("Graph Updated")
     }
 
 
@@ -174,7 +222,8 @@
                 borderColor: 'red',
                 
                 fill: false
-            },{
+            },
+            {
                 label: 'Pulse',
                 data: pulsearr,
                 borderColor: 'blue',
@@ -205,10 +254,10 @@
 
 
     // styling the chart
-        chart.canvas.parentNode.style.height = '300px';
+        chart.canvas.parentNode.style.height = '570px';
         chart.canvas.parentNode.style.width = '500px';
         chart.canvas.parentNode.style.padding = '20px';
-        chart.canvas.parentNode.style.marginLeft = '1000px';
+        chart.canvas.parentNode.style.marginLeft = '450px';
     //Updating the chart
     chart.update();
 
@@ -238,27 +287,27 @@
             labels: outimearr,  
             datasets: [{
                 label: 'Urine',
-                data: [0,2,5],
-                borderColor: 'purple',
+                data: urinearr,
+                borderColor: 'rgba(255, 192, 0',
                 
                 fill: false
             },{
                 label: 'Stool',
                 data: stoolarr,
-                borderColor: 'blue',
+                borderColor: 'brown',
                 
                 fill: false
             }, {
                 label: 'Vomit',
                 data: vomitarr,
-                borderColor: 'green',
+                borderColor: 'rgb(154,205,50)',
                 fill: false
 
             },
             {
                 label: 'Suction',
                 data: suctionarr,
-                borderColor: 'pink',
+                borderColor: 'purple',
                 fill: false
 
             }]
@@ -278,11 +327,11 @@
     })
 
     // styling the chart
-    output_chart.canvas.parentNode.style.height = '330px';
+    output_chart.canvas.parentNode.style.height = '570px';
     output_chart.canvas.parentNode.style.width = '500px';
     output_chart.canvas.parentNode.style.padding = '20px';
     output_chart.canvas.parentNode.style.marginLeft = '1000px';
-    output_chart.canvas.parentNode.style.marginTop = '-355px';
+    output_chart.canvas.parentNode.style.marginTop = '-1115px';
     //Updating the chart
     output_chart.update();
 
@@ -291,7 +340,22 @@
         location.href="dash.html"
     }
 
-    document.getElementById("namePTN").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
+    document.getElementById("ptH").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
 
+    //Intake
+    document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("intime")}ml`
+    document.getElementById("ptD1").innerHTML = `Latest Blood Pressure Record:-  ${localStorage.getItem("bp")}ml`;
+    document.getElementById("ptD2").textContent = `Latest Pulse Record:-  ${localStorage.getItem("pulse")}ml`
+    document.getElementById("ptD3").textContent = `Latest Oral N.G Feed Record:-  ${localStorage.getItem("Oralfeed")}ml`
+
+    //Output
+    document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("outputtime")}ml`
+    document.getElementById("ptD4").textContent = `Latest Urine Record:-  ${localStorage.getItem("urine")}ml`
+    document.getElementById("ptD5").textContent = `Latest Stool Record:-  ${localStorage.getItem("stool")}ml`
+    document.getElementById("ptD6").textContent = `Latest Vomit Record:-  ${localStorage.getItem("vomit")}ml`
+    document.getElementById("ptD7").textContent = `Latest Suction Record:-  ${localStorage.getItem("suction")}ml`
+
+
+    
 </script>
 </html>

@@ -10,6 +10,9 @@
     user-select: none; */
 }
 
+.Dashboard{
+    height: 170vh;
+}
 /* -- Nav Bar -- */
 nav {
     position: sticky;
@@ -67,13 +70,37 @@ nav ul li a:hover {
     cursor: default;
 }
 
+.headI{
+    text-decoration: underline;
+    transform: rotate(-90deg);
+    margin-top: -750px;
+    margin-left: -550px;
+}
+
+.headO{
+    text-decoration: underline;
+    transform: rotate(-90deg);
+    margin-top: -750px;
+    margin-left: -550px;
+}
+
 canvas{
-    border: 5px solid black;
+    border: 3px solid black;
+    box-shadow: 1px 1px 0px #999,
+                2px 2px 0px #999,
+                3px 3px 0px #999,
+                4px 4px 0px #999,
+                5px 5px 0px #999,
+                6px 6px 0px #999;   
 }
 
 .chartdiv{
     position: absolute;
-    margin-top: -660px;
+    margin-top: -1115px;
+}
+
+.output_chartdiv{
+    position: absolute;
 }
 
 .dashhead{
@@ -82,48 +109,84 @@ canvas{
     text-decoration: underline;
 }
 
-.date{
-    border: 2px solid black;
-    height: 200px;
-    width: 200px;
-    margin-top: 20px;
-    color:black;
-    font-size: 30px;
-    
+.heads{
+    font-size: 20px;
+    margin-left: 25px;
+    margin-top: 50px;
+    display: inline-flex;
 }
 
-.nameptn{
-    margin-left: 250px;
+.firstheads{
+    margin-left: 50px;
+    margin-right: 550px;
+}
+
+.int{
+    margin-top: 10px;
     text-decoration: underline;
 }
 
+.op{
+    text-decoration: underline;
+}
+
+.secondheads{
+    margin-top: 50px;
+    margin-left: -110px;
+}
+
+.pth{
+    font-size: 40px;
+    margin-top: 10px;
+}
+
 .ptdetails{
-    margin-top: -200px;
-    margin-left: 201px;
-    height: 200px;
-    width: 820px;
+    margin-top: 20px;
+    margin-left: 10px;
+    height: 500px;
+    width: 1500px;
     border: 2px solid black;
+    box-shadow: 1px 1px 0px #999,
+    2px 2px 0px #999,
+    3px 3px 0px #999,
+    4px 4px 0px #999,
+    5px 5px 0px #999,
+    6px 6px 0px #999;   
 }
 
 .delptn{
+    border: 2px solid black;
     background-color: red;
     padding: 5px;
-    width: 150px;
-    margin-left: 650px;
-    margin-top: 110px;
+    font-size: 20px;
+    width: 300px;
+    margin-left: 600px;
+    margin-top: 90px;
 }
 
+
 .delptn:hover{
-    padding: 7px;
+    padding: 8px;
     cursor: pointer;    
 }
 
+.pth{
+    text-decoration: underline;
+    text-align: center;
+}
 
 .patientform{
+    margin-left: 10px;
     background-color: rgb(255, 255, 255);
-    height: 350px;
-    width: 1020px;
+    height: 570px;
+    width: 400px;
     border: 2px solid black;
+    box-shadow: 1px 1px 0px #999,
+                2px 2px 0px #999,
+                3px 3px 0px #999,
+                4px 4px 0px #999,
+                5px 5px 0px #999,
+                6px 6px 0px #999;
 }
 
 
@@ -135,14 +198,14 @@ input{
     margin-top: 30px;
     font-size: 20px;
     text-decoration: underline;
-    margin-left: 170px;
+    margin-left: 50px;
 }
 
 .intakediv{
     display:flex;
     flex-direction: column;
     margin-top: 5px;
-    margin-left: 150px;
+    margin-left: 50px;
     height: 25px;
     width: 250px;
 }
@@ -151,18 +214,17 @@ input{
     margin-top:15px;
 }
 
-.output{
-    margin-top: -60px;
+.output{    
+    margin-top: 160px;
     font-size: 20px;
     text-decoration: underline;
-    margin-left: 570px;
+    margin-left: 50px;
 }
 
 .outputdiv{
     display:flex;
     flex-direction: column;
-    margin-top: 5px;
-    margin-left: 550px;
+    margin-left: 50px;
     width: 250px;
     height: 25px;
 }
@@ -174,10 +236,10 @@ input{
 
 
 .submitp{
-    margin-top: 200px;
-    margin-left: 250px;
+    margin-top: 195px;
+    margin-left: 50px;
     padding: 5px;
-    width: 500px;
+    width: 300px;
     border-radius: 12px;
 }
     
