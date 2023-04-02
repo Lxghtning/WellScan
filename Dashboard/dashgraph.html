@@ -170,6 +170,16 @@
         vomitarr.push(parseInt(vomit.value))
         suctionarr.push(parseInt(suction.value))
 
+        localStorage.setItem("Intime",parseInt(intime.value))
+        localStorage.setItem("Outputtime", parseInt(outtime.value))
+        localStorage.setItem("bp",parseInt(bp.value))
+        localStorage.setItem("pulse",parseInt(pulse.value))
+        localStorage.setItem("Oralfeed",parseInt(oral_feed.value))
+        localStorage.setItem("Urine", parseInt(urine.value))
+        localStorage.setItem("Stool",parseInt(stool.value))
+        localStorage.setItem("Vomit",parseInt(vomit.value))
+        localStorage.setItem("Suction", parseInt(suction.value))
+
         localStorage.setItem('bparr', JSON.stringify(bparr))
         localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
         localStorage.setItem('ofarr', JSON.stringify(ofarr))
@@ -220,20 +230,38 @@
                 label: 'Blood Pressure',
                 data: bparr,
                 borderColor: 'red',
-                
                 fill: false
+            },{
+                type: 'bar',
+                label: 'Blood Pressure',
+                data: bparr,
+                backgroundColor: 'orange',
+                borderWidth: 1
             },
             {
                 label: 'Pulse',
                 data: pulsearr,
                 borderColor: 'blue',
-                
                 fill: false
-            }, {
+            },{
+                type: 'bar',
+                label: 'Pulse',
+                data: pulsearr,
+                backgroundColor: 'cyan',
+                borderWidth: 1
+
+            },{
                 label: 'Oral-Feed',
                 data: ofarr,
                 borderColor: 'green',
                 fill: false
+
+            },{
+                type: 'bar',
+                label: 'Oral-Feed',
+                data: ofarr,
+                backgroundColor: 'rgb(144, 238, 144)',
+                borderWidth: 1
 
             }]
         },
@@ -247,6 +275,9 @@
                 y: {
                     beginAtZero: true
                 },
+                x: {
+                    beginAtZero: true
+                },  
             }
         }
     })
@@ -288,21 +319,35 @@
             datasets: [{
                 label: 'Urine',
                 data: urinearr,
-                borderColor: 'rgba(255, 192, 0',
-                
+                borderColor: 'rgba(255, 192, 0)',
                 fill: false
+            },{
+                type: 'bar',
+                label: 'Urine',
+                data: urinearr,
+                backgroundColor: 'red',
+                borderWidth: 1
             },{
                 label: 'Stool',
                 data: stoolarr,
                 borderColor: 'brown',
                 
                 fill: false
-            }, {
+            },{
+                type: 'bar',
+                label: 'Stool',
+                data: stoolarr,
+                backgroundColor: 'blue',
+            },{
                 label: 'Vomit',
                 data: vomitarr,
                 borderColor: 'rgb(154,205,50)',
                 fill: false
-
+            },{
+                type: 'bar',
+                label: 'Vomit',
+                data: vomitarr,
+                backgroundColor: 'green',
             },
             {
                 label: 'Suction',
@@ -310,6 +355,11 @@
                 borderColor: 'purple',
                 fill: false
 
+            },{
+                type: 'bar',
+                label: 'Suction',
+                data: suctionarr,
+                backgroundColor: 'yellow',
             }]
         },
         options:{
