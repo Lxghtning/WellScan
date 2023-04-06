@@ -104,7 +104,48 @@
     </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
+    var firebaseConfig = {
+
+        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
+
+        authDomain: "hackathon--23.firebaseapp.com",
+
+        projectId: "hackathon--23",
+
+        storageBucket: "hackathon--23.appspot.com",
+
+        messagingSenderId: "596815595297",
+
+        appId: "1:596815595297:web:84854bdb064d4737e66060",
+
+        measurementId: "G-VMY2C911KT"
+
+    };
+
+
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+    const authorization = firebase.auth();
+
+    const database = firebase.firestore()
+    auth.onAuthStateChanged(doctor => {
+        if (!doctor) {
+            location.href = "/SignUp/signup.html"
+            return;
+        }
+    })
+
+    patients = database.collection("patients")
+
+        
     document.getElementById("ptnf").addEventListener("submit", (e) => {
         e.preventDefault();
     })
@@ -134,61 +175,80 @@
             }
         }
 
-        //Updating local Storage
-        if (localStorage.getItem('bparr') === null) {
-            bparr = [];
-            pulsearr = [];
-            ofarr = [];
-            intimearr = [];
-            outimearr = [];
-            stoolarr = [];  
-            urinearr = [];
-            vomitarr = [];
-            suctionarr = [];
+        patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if(doc.data.first_name == firstname_patient){
+                console.log(doc.data.bparr)
+                    patients.doc(doc.id).update({
+                        bparr: doc.data().bparr.push(parseInt(bp)),
+                        pulsearr: doc.data().pulsearr.push(parseInt(pulse)),
+                        ofarr: doc.data().ofarr.push(parseInt(oral_feed)),
+                        intimearr: doc.data().intimearr.push(parseInt(intime)),
+                        outimearr: doc.data().outimearr.push(parseInt(outtime)),
+                        urinearr: doc.data().urinearr.push(parseInt(urine)),
+                        stoolarr: doc.data().stoolarr.push(parseInt(stool)),
+                        vomitarr: doc.data().vomitarr.push(parseInt(vomit)),
+                        suctionarr: doc.data().suctionarr.push(parseInt(suction))
+                    })
+                }
+            });
+        })
+
+        // //Updating local Storage
+        // if (localStorage.getItem('bparr') === null) {
+        //     bparr = [];
+        //     pulsearr = [];
+        //     ofarr = [];
+        //     intimearr = [];
+        //     outimearr = [];
+        //     stoolarr = [];  
+        //     urinearr = [];
+        //     vomitarr = [];
+        //     suctionarr = [];
             
-        } else {
-            bparr = JSON.parse(localStorage.getItem('bparr'));
-            pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
-            ofarr = JSON.parse(localStorage.getItem('ofarr'));
-            intimearr = JSON.parse(localStorage.getItem('intimearr'));
-            outimearr = JSON.parse(localStorage.getItem('outimearr'));
-            stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
-            urinearr = JSON.parse(localStorage.getItem('urinearr'));
-            vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
-            suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
-        }
+        // } else {
+        //     bparr = JSON.parse(localStorage.getItem('bparr'));
+        //     pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
+        //     ofarr = JSON.parse(localStorage.getItem('ofarr'));
+        //     intimearr = JSON.parse(localStorage.getItem('intimearr'));
+        //     outimearr = JSON.parse(localStorage.getItem('outimearr'));
+        //     stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
+        //     urinearr = JSON.parse(localStorage.getItem('urinearr'));
+        //     vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
+        //     suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
+        // }
         
 
 
-        bparr.push(parseInt(bp.value))
-        pulsearr.push(parseInt(pulse.value))
-        ofarr.push(parseInt(oral_feed.value))
-        intimearr.push(parseInt(intime.value))
-        outimearr.push(parseInt(outtime.value))
-        urinearr.push(parseInt(urine.value))
-        stoolarr.push(parseInt(stool.value))
-        vomitarr.push(parseInt(vomit.value))
-        suctionarr.push(parseInt(suction.value))
+        // bparr.push(parseInt(bp.value))
+        // pulsearr.push(parseInt(pulse.value))
+        // ofarr.push(parseInt(oral_feed.value))
+        // intimearr.push(parseInt(intime.value))
+        // outimearr.push(parseInt(outtime.value))
+        // urinearr.push(parseInt(urine.value))
+        // stoolarr.push(parseInt(stool.value))
+        // vomitarr.push(parseInt(vomit.value))
+        // suctionarr.push(parseInt(suction.value))
 
-        localStorage.setItem("Intime",parseInt(intime.value))
-        localStorage.setItem("Outputtime", parseInt(outtime.value))
-        localStorage.setItem("bp",parseInt(bp.value))
-        localStorage.setItem("pulse",parseInt(pulse.value))
-        localStorage.setItem("Oralfeed",parseInt(oral_feed.value))
-        localStorage.setItem("Urine", parseInt(urine.value))
-        localStorage.setItem("Stool",parseInt(stool.value))
-        localStorage.setItem("Vomit",parseInt(vomit.value))
-        localStorage.setItem("Suction", parseInt(suction.value))
+        // localStorage.setItem("Intime",parseInt(intime.value))
+        // localStorage.setItem("Outputtime", parseInt(outtime.value))
+        // localStorage.setItem("bp",parseInt(bp.value))
+        // localStorage.setItem("pulse",parseInt(pulse.value))
+        // localStorage.setItem("Oralfeed",parseInt(oral_feed.value))
+        // localStorage.setItem("Urine", parseInt(urine.value))
+        // localStorage.setItem("Stool",parseInt(stool.value))
+        // localStorage.setItem("Vomit",parseInt(vomit.value))
+        // localStorage.setItem("Suction", parseInt(suction.value))
 
-        localStorage.setItem('bparr', JSON.stringify(bparr))
-        localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
-        localStorage.setItem('ofarr', JSON.stringify(ofarr))
-        localStorage.setItem('intimearr', JSON.stringify(intimearr))
-        localStorage.setItem('outimearr', JSON.stringify(outimearr))
-        localStorage.setItem('urinearr', JSON.stringify(urinearr))
-        localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
-        localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
-        localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
+        // localStorage.setItem('bparr', JSON.stringify(bparr))
+        // localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
+        // localStorage.setItem('ofarr', JSON.stringify(ofarr))
+        // localStorage.setItem('intimearr', JSON.stringify(intimearr))
+        // localStorage.setItem('outimearr', JSON.stringify(outimearr))
+        // localStorage.setItem('urinearr', JSON.stringify(urinearr))
+        // localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
+        // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
+        // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
 
         bp.value='';
         pulse.value='';
