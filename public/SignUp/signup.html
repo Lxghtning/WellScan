@@ -24,7 +24,7 @@
             <li>
                 <a>Dashboard</a>
             </li>
- 
+
             <!-- <span class="material-symbols-outlined">
                 add
             </span> -->
@@ -46,10 +46,58 @@
             <h5 class="loginredirect" id="redl">
                 Already have an account? <a href="/Login/page.html">Login</a>
             </h5>
+            <button id="siwg" class="signinwithgoogle">
+                Sign In With Google
+            </button>
         </form>
     </section>
 </body>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
+    var firebaseConfig = {
+
+        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
+
+        authDomain: "hackathon--23.firebaseapp.com",
+
+        projectId: "hackathon--23",
+
+        storageBucket: "hackathon--23.appspot.com",
+
+        messagingSenderId: "596815595297",
+
+        appId: "1:596815595297:web:84854bdb064d4737e66060",
+
+        measurementId: "G-VMY2C911KT"
+
+    };
+
+
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+    
+    const auth = firebase.auth();
+    const authorization = firebase.auth();
+
+    const sip = document.getElementById("siwg")
+
+    const google = new firebase.auth.GoogleAuthProvider();
+
+    sip.onclick = () => auth.signInWithPopup(google);
+
+    //signout.onclick = () => auth.signOut
+
+    auth.onAuthStateChanged(doctor => {
+        if(doctor){
+            console.log("docman")
+            location.href = "/Dashboard/dash.html"
+            
+        }
+    })
+
     //NAV change func
     function tochange(x) {
         x.classList.toggle("change");
@@ -69,23 +117,23 @@
         let pass_word = document.getElementById("pw").value;
         let confirm_Password = document.getElementById("cpw").value;
         let mail = localStorage.getItem("mail");
-        if(mail === email){
-                location.href = "/Login/page.html"
-            }
+        if (mail === email) {
+            location.href = "/Login/page.html"
+        }
         else if (pass_word != confirm_Password) {
             document.getElementById("wm").style.display = "block";
             document.getElementById("contactsubmit").style.marginTop = "40px";
             document.getElementById("redl").style.marginTop = "70px";
 
-            setInterval(function() {
-            document.getElementById("wm").style.display="none"
-            document.getElementById("contactsubmit").style.marginTop = "25px";
-            document.getElementById("redl").style.marginTop = "30px";
-    } , 3000);
-    
+            setInterval(function () {
+                document.getElementById("wm").style.display = "none"
+                document.getElementById("contactsubmit").style.marginTop = "25px";
+                document.getElementById("redl").style.marginTop = "30px";
+            }, 3000);
+
         }
-        
-        else{
+
+        else {
             document.getElementById("wm").style.display = "none";
             document.getElementById("contactsubmit").style.marginTop = "25px";
             document.getElementById("redl").style.marginTop = "30px";
@@ -101,4 +149,5 @@
     };
 
 </script>
+
 </html>
