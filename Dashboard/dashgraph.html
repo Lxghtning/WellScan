@@ -396,13 +396,13 @@
     document.getElementById("ptH").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
 
     //Intake
-    document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("Intime")}ml`
+    document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("Intime")} Hrs`
     document.getElementById("ptD1").innerHTML = `Latest Blood Pressure Record:-  ${localStorage.getItem("bp")}ml`;
     document.getElementById("ptD2").textContent = `Latest Pulse Record:-  ${localStorage.getItem("pulse")}ml`
     document.getElementById("ptD3").textContent = `Latest Oral N.G Feed Record:-  ${localStorage.getItem("Oralfeed")}ml`
-
+    
     //Output
-    document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("Outputtime")}ml`
+    document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("Outputtime")} Hrs`
     document.getElementById("ptD4").textContent = `Latest Urine Record:-  ${localStorage.getItem("Urine")}ml`
     document.getElementById("ptD5").textContent = `Latest Stool Record:-  ${localStorage.getItem("Stool")}ml`
     document.getElementById("ptD6").textContent = `Latest Vomit Record:-  ${localStorage.getItem("Vomit")}ml`
