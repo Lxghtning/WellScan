@@ -26,7 +26,7 @@
                 <a class="active" href="#Dashboard">Dashboard</a>
             </li>
         </ul>
-        
+
         <div class="name">
             WellScan
         </div>
@@ -51,32 +51,71 @@
             Intake (in ml)
         </h4>
         <div class="intakediv">
-        <input type="number" min="1" max="24" class="intime" id="intym" name="intimePTN" placeholder="Intake Time(24 Hr)" required>
-        <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
-        <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
-        <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
-        
-        
+            <input type="number" min="1" max="24" class="intime" id="intym" name="intimePTN"
+                placeholder="Intake Time(24 Hr)" required>
+            <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
+            <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
+            <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
+
+
         </div>
         <h4 class="output">
             Output (in ml)
         </h4>
         <div class="outputdiv">
-        
-        <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN" placeholder="Output Time(24 Hr)" required>
-        <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
-        <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
-        <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
-        <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
-        
-    </div>
-    <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="pdetails()">
+
+            <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN"
+                placeholder="Output Time(24 Hr)" required>
+            <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
+            <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
+            <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
+            <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
+
+        </div>
+        <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="pdetails()">
     </form>
     <canvas id="myChart"></canvas>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
+    var firebaseConfig = {
+
+        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
+
+        authDomain: "hackathon--23.firebaseapp.com",
+
+        projectId: "hackathon--23",
+
+        storageBucket: "hackathon--23.appspot.com",
+
+        messagingSenderId: "596815595297",
+
+        appId: "1:596815595297:web:84854bdb064d4737e66060",
+
+        measurementId: "G-VMY2C911KT"
+
+    };
+
+
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+    const authorization = firebase.auth();
+
+    const database = firebase.firestore()
+    auth.onAuthStateChanged(doctor => {
+        if(!doctor){
+            location.href = "/SignUp/signup.html"
+            return;
+        }
+    })
+
+    patients = database.collection("patients")
 
     function change() {
         document.getElementById("dash").style.filter = "blur(2px)";
@@ -90,15 +129,15 @@
         document.getElementById("ptnf").style.display = "none";
     }
 
-    function changeFile(){
-        location.href="dashgraph.html"
+    function changeFile() {
+        location.href = "dashgraph.html"
     }
 
     document.getElementById("ptnf").addEventListener("submit", (e) => {
         e.preventDefault();
     })
 
-    function pdetails(x){
+    function pdetails(x) {
 
         //patient
         let firstname_patient = document.getElementById("fpn").value;
@@ -117,67 +156,77 @@
         let vomit = document.getElementById("vmpn").value;
         let suction = document.getElementById("scpn").value;
 
-        //Local Storage Storation
-        localStorage.setItem("patientfname", firstname_patient)
-        localStorage.setItem("patientlname",lastname_patient)
-        localStorage.setItem("Intime",intime)
-        localStorage.setItem("Outputtime", outtime)
-        localStorage.setItem("bp",bp)
-        localStorage.setItem("pulse",pulse)
-        localStorage.setItem("Oralfeed",oral_feed)
-        localStorage.setItem("Urine", urine)
-        localStorage.setItem("Stool",stool)
-        localStorage.setItem("Vomit",vomit)
-        localStorage.setItem("Suction", suction)
+        patients.add({
+            first_name: firstname_patient,
+            last_name: lastname_patient
+        })
 
-        var bparr,pulsearr,ofarr,intimearr,outimearr,urinearr,stoolarr,vomitarr,suctionarr;
-
-        if(localStorage.getItem('bparr') === null){
-            bparr = [];
-            pulsearr = [];
-            ofarr = [];
-            intimearr = [];
-            outimearr = [];
-            urinearr = [];
-            stoolarr = [];
-            vomitarr = [];
-            suctionarr = [];
-        }else{
-            bparr = JSON.parse(localStorage.getItem('bparr'));
-            pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
-            ofarr = JSON.parse(localStorage.getItem('ofarr'));
-            intimearr = JSON.parse(localStorage.getItem('intimearr'));
-            outimearr = JSON.parse(localStorage.getItem('outimearr'));
-            urinearr = JSON.parse(localStorage.getItem('urinearr'));
-            stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
-            vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
-            suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
-        }
-
-        bparr.push(parseInt(bp))
-        pulsearr.push(parseInt(pulse))
-        ofarr.push(parseInt(oral_feed))
-        intimearr.push(parseInt(intime))
-        outimearr.push(parseInt(outtime))
-        urinearr.push(parseInt(urine))
-        stoolarr.push(parseInt(stool))
-        vomitarr.push(parseInt(vomit))
-        suctionarr.push(parseInt(suction))
-
-        localStorage.setItem('bparr', JSON.stringify(bparr))
-        localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
-        localStorage.setItem('ofarr', JSON.stringify(ofarr))
-        localStorage.setItem('intimearr', JSON.stringify(intimearr))
-        localStorage.setItem('outimearr', JSON.stringify(outimearr))
-        localStorage.setItem('urinearr', JSON.stringify(urinearr))
-        localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
-        localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
-        localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
+        var rem = patients.where('firstname', '==', firstname_patient)
         
-        changeFile()
+
+
+        // //Local Storage Storation
+        // localStorage.setItem("patientfname", firstname_patient)
+        // localStorage.setItem("patientlname", lastname_patient)
+        // localStorage.setItem("Intime", intime)
+        // localStorage.setItem("Outputtime", outtime)
+        // localStorage.setItem("bp", bp)
+        // localStorage.setItem("pulse", pulse)
+        // localStorage.setItem("Oralfeed", oral_feed)
+        // localStorage.setItem("Urine", urine)
+        // localStorage.setItem("Stool", stool)
+        // localStorage.setItem("Vomit", vomit)
+        // localStorage.setItem("Suction", suction)
+
+        // var bparr, pulsearr, ofarr, intimearr, outimearr, urinearr, stoolarr, vomitarr, suctionarr;
+
+        // if (localStorage.getItem('bparr') === null) {
+        //     bparr = [];
+        //     pulsearr = [];
+        //     ofarr = [];
+        //     intimearr = [];
+        //     outimearr = [];
+        //     urinearr = [];
+        //     stoolarr = [];
+        //     vomitarr = [];
+        //     suctionarr = [];
+        // } else {
+        //     bparr = JSON.parse(localStorage.getItem('bparr'));
+        //     pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
+        //     ofarr = JSON.parse(localStorage.getItem('ofarr'));
+        //     intimearr = JSON.parse(localStorage.getItem('intimearr'));
+        //     outimearr = JSON.parse(localStorage.getItem('outimearr'));
+        //     urinearr = JSON.parse(localStorage.getItem('urinearr'));
+        //     stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
+        //     vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
+        //     suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
+        // }
+
+        // bparr.push(parseInt(bp))
+        // pulsearr.push(parseInt(pulse))
+        // ofarr.push(parseInt(oral_feed))
+        // intimearr.push(parseInt(intime))
+        // outimearr.push(parseInt(outtime))
+        // urinearr.push(parseInt(urine))
+        // stoolarr.push(parseInt(stool))
+        // vomitarr.push(parseInt(vomit))
+        // suctionarr.push(parseInt(suction))
+
+        // localStorage.setItem('bparr', JSON.stringify(bparr))
+        // localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
+        // localStorage.setItem('ofarr', JSON.stringify(ofarr))
+        // localStorage.setItem('intimearr', JSON.stringify(intimearr))
+        // localStorage.setItem('outimearr', JSON.stringify(outimearr))
+        // localStorage.setItem('urinearr', JSON.stringify(urinearr))
+        // localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
+        // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
+        // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
+
+        // changeFile()
 
     }
-    
+
 
 </script>
+
 </html>
