@@ -78,22 +78,24 @@
     // Initialize Firebase
 
     firebase.initializeApp(firebaseConfig);
-    
+
     const auth = firebase.auth();
     const authorization = firebase.auth();
 
     const sip = document.getElementById("siwg")
 
     const google = new firebase.auth.GoogleAuthProvider();
+    const database = firebase.firestore()
 
+    let patients = database.collection("login")
     sip.onclick = () => auth.signInWithPopup(google);
 
     //signout.onclick = () => auth.signOut
 
     auth.onAuthStateChanged(doctor => {
-        if(doctor){
+        if (doctor) {
             location.href = "/Dashboard/dash.html"
-            
+
         }
     })
 
@@ -116,35 +118,38 @@
         let pass_word = document.getElementById("pw").value;
         let confirm_Password = document.getElementById("cpw").value;
         let mail = localStorage.getItem("mail");
-        if (mail === email) {
-            location.href = "/Login/page.html"
-        }
-        else if (pass_word != confirm_Password) {
-            document.getElementById("wm").style.display = "block";
-            document.getElementById("contactsubmit").style.marginTop = "40px";
-            document.getElementById("redl").style.marginTop = "70px";
+        patients.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (doc.data().email === email) {
+                    location.href = "/Login/page.html"
+                }
+                else if (pass_word != confirm_Password) {
+                    document.getElementById("wm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
 
-            setInterval(function () {
-                document.getElementById("wm").style.display = "none"
-                document.getElementById("contactsubmit").style.marginTop = "25px";
-                document.getElementById("redl").style.marginTop = "30px";
-            }, 3000);
+                    setInterval(function () {
+                        document.getElementById("wm").style.display = "none"
+                        document.getElementById("contactsubmit").style.marginTop = "25px";
+                        document.getElementById("redl").style.marginTop = "30px";
+                    }, 3000);
 
-        }
+                }
 
-        else {        
-            const database = firebase.firestore()
+                else {
+                    
 
-            let users = database.collection("users")
+                    patients.doc(fstname_).set({
+                        email: email,
+                        password: pass_word
+                        
+                    })
 
-            users.add({
-                email: email,
-                password: pass_word
+                    location.href = "/Dashboard/dash.html"
+
+                }
             })
-
-            location.href = "/Dashboard/dash.html"
-
-        }
+        })
     };
 
 </script>
