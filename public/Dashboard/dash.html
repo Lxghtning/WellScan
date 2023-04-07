@@ -108,6 +108,15 @@
     const authorization = firebase.auth();
 
     const database = firebase.firestore()
+<<<<<<< HEAD
+    auth.onAuthStateChanged(doctor => {
+        if (!doctor) {
+            location.href = "/SignUp/signup.html"
+            return;
+        }
+    })
+=======
+>>>>>>> 10b8b814a909d234a1598da94ba7521f15f80afd
 
     let patients = database.collection("patients")
 
@@ -152,11 +161,44 @@
 
         patients.add({
             first_name: firstname_patient,
-            last_name: lastname_patient
+            last_name: lastname_patient,
+            intime: parseInt(intime),
+            outputTime: parseInt(outtime),
+            bp: parseInt(bp),
+            pulse: parseInt(pulse),
+            oral_feed: parseInt(oral_feed),
+            urine: parseInt(urine),
+            stool: parseInt(stool),
+            vomit: parseInt(vomit),
+            suction: parseInt(suction),
+            bparr: [0],
+            pulsearr: [0],
+            ofarr: [0],
+            intimearr: [0],
+            outimearr: [0],
+            urinearr: [0],
+            stoolarr: [0],
+            vomitarr: [0],
+            suctionarr: [0]
         })
 
-        var rem = patients.where('firstname', '==', firstname_patient)
-        
+        // try {
+        //     patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
+        //         querySnapshot.forEach((document) => {
+
+        //             patients.doc(document.id).delete();
+
+        //         })
+        //     })
+
+        // }
+        // catch (error) {
+        //     console.log(error);
+        // };
+
+
+
+
 
 
         // //Local Storage Storation
@@ -175,15 +217,15 @@
         // var bparr, pulsearr, ofarr, intimearr, outimearr, urinearr, stoolarr, vomitarr, suctionarr;
 
         // if (localStorage.getItem('bparr') === null) {
-        //     bparr = [];
-        //     pulsearr = [];
-        //     ofarr = [];
-        //     intimearr = [];
-        //     outimearr = [];
-        //     urinearr = [];
-        //     stoolarr = [];
-        //     vomitarr = [];
-        //     suctionarr = [];
+        // bparr = [];
+        // pulsearr = [];
+        // ofarr = [];
+        // intimearr = [];
+        // outimearr = [];
+        // urinearr = [];
+        // stoolarr = [];
+        // vomitarr = [];
+        // suctionarr = [];
         // } else {
         //     bparr = JSON.parse(localStorage.getItem('bparr'));
         //     pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
@@ -216,7 +258,7 @@
         // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
         // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
 
-        // changeFile()
+        changeFile()
 
     }
 
