@@ -26,7 +26,7 @@
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
             </li>
- 
+
         </ul>
         <div class="name">
             WellScan
@@ -37,58 +37,63 @@
             Dashboard
         </h1>
         <div class="form">
-        <form class="patientform" id="ptnf">
-            <h4 class="intake">
-                Enter Intake (in ml)
-            </h4>
-            
+            <form class="patientform" id="ptnf">
+                <h4 class="intake">
+                    Enter Intake (in ml)
+                </h4>
+                <input class="PatientfName" id="fpn" name="FPTN" placeholder="First Name" required>
+                <input class="PatientlName" id="lpn" name="LPTN" placeholder="Last Name" required>
 
-            <div class="intakediv"> 
-                <input type="number" min="1" max="24" class="intime" id="intym" name="intakeTime" placeholder="Time (In Hrs)" required>
-                <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
-                <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
-                <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
-            </div>
-            <h4 class="output">
-                Enter Output (in ml)
-            </h4>
-            <div class="outputdiv">
+                <div class="intakediv">
+                    <input type="number" min="1" max="24" class="intime" id="intym" name="intakeTime"
+                        placeholder="Time (In Hrs)" required>
+                    <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure"
+                        required>
+                    <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
+                    <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed"
+                        required>
+                </div>
+                <h4 class="output">
+                    Enter Output (in ml)
+                </h4>
+                <div class="outputdiv">
 
-                <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN" placeholder="Time(In Hrs)" required>
-                <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
-                <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
-                <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
-                <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
+                    <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN"
+                        placeholder="Time(In Hrs)" required>
+                    <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
+                    <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
+                    <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
+                    <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
 
-            </div>
-            <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="updatedetails()">
-        </form>
-    </div>
+                </div>
+                <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="updatedetails()">
+            </form>
+        </div>
         <div class="ptdetails">
             <h2 class="pth" id="ptH"></h2>
             <div class="heads">
                 <div class="firstheads">
-            <h2 class="int">Intake</h2>
-            <h4 class="ptd8" id="ptD8"></h4>
-            <h4 class="ptd1" id="ptD1"></h4>
-            <h4 class="ptd2" id="ptD2"></h4>
-            <h4 class="ptd3" id="ptD3"></h4>
-        </div>
-            </br>
-            <h2 class="op">Output</h2>
-            <div class="secondheads">
-            <h4 class="ptd9" id="ptD9"></h4>
-            <h4 class="ptd4" id="ptD4"></h4>
-            <h4 class="ptd5" id="ptD5"></h4>
-            <h4 class="ptd6" id="ptD6"></h4>
-            <h4 class="ptd7" id="ptD7"></h4>
-        </div>
-            
-            
-        </div>
+                    <h2 class="int">Intake</h2>
+                    <h4 class="ptd8" id="ptD8"></h4>
+                    <h4 class="ptd1" id="ptD1"></h4>
+                    <h4 class="ptd2" id="ptD2"></h4>
+                    <h4 class="ptd3" id="ptD3"></h4>
+                </div>
+                </br>
+                <h2 class="op">Output</h2>
+                <div class="secondheads">
+                    <h4 class="ptd9" id="ptD9"></h4>
+                    <h4 class="ptd4" id="ptD4"></h4>
+                    <h4 class="ptd5" id="ptD5"></h4>
+                    <h4 class="ptd6" id="ptD6"></h4>
+                    <h4 class="ptd7" id="ptD7"></h4>
+                </div>
+
+
+            </div>
             <button class="delptn" onclick="delpatient()">Remove Patient</button>
         </div>
-        
+
         <div class="chartdiv">
             <canvas class="chartcanvas" id="myChart"></canvas>
             <h2 class="headI">
@@ -96,10 +101,10 @@
             </h2>
         </div>
         <div class="output_chartdiv">
-        <canvas class="outputC" id="outputChart"></canvas>
-        <h2 class="headO">
-            Output Graph
-        </h2>
+            <canvas class="outputC" id="outputChart"></canvas>
+            <h2 class="headO">
+                Output Graph
+            </h2>
         </div>
     </section>
 </body>
@@ -145,12 +150,16 @@
 
     patients = database.collection("patients")
 
-        
+
     document.getElementById("ptnf").addEventListener("submit", (e) => {
         e.preventDefault();
     })
 
     function updatedetails(x) {
+
+        //PatientName
+        let firstname_patient = document.getElementById("fpn").value;
+        let lastname_patient = document.getElementById("lpn").value;
 
         //time
         let intime = document.getElementById("intym")
@@ -167,29 +176,40 @@
         let vomit = document.getElementById("vmpn");
         let suction = document.getElementById("scpn");
 
-        array_inputs = [intime, outtime, bp , pulse, oral_feed , urine , stool , vomit , suction]
-        for(var i=0; i<array_inputs.length; i++){
-            if(array_inputs[i].value === ""){
+        array_inputs = [intime, outtime, bp, pulse, oral_feed, urine, stool, vomit, suction]
+        for (var i = 0; i < array_inputs.length; i++) {
+            if (array_inputs[i].value === "") {
                 alert("Please enter all the values")
                 return;
             }
         }
 
-        patients.where(firebase.firestore.FieldPath.documentId()).get().then((querySnapshot) => {
+        //firebase.firestore.FieldPath.documentId()
+        patients.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if(doc.data().first_name === firstname_patient){
-                console.log(doc.data().bparr)
+                if (doc.data().first_name === firstname_patient && doc.data().last_name === lastname_patient) {
+                    
                     patients.doc(doc.id).update({
-                        bparr: doc.data().bparr.push(parseInt(bp)),
-                        pulsearr: doc.data().pulsearr.push(parseInt(pulse)),
-                        ofarr: doc.data().ofarr.push(parseInt(oral_feed)),
-                        intimearr: doc.data().intimearr.push(parseInt(intime)),
-                        outimearr: doc.data().outimearr.push(parseInt(outtime)),
-                        urinearr: doc.data().urinearr.push(parseInt(urine)),
-                        stoolarr: doc.data().stoolarr.push(parseInt(stool)),
-                        vomitarr: doc.data().vomitarr.push(parseInt(vomit)),
-                        suctionarr: doc.data().suctionarr.push(parseInt(suction))
+                        intime: parseInt(intime.value),
+                        outputTime: parseInt(outtime.value),
+                        bp: parseInt(bp.value),
+                        pulse: parseInt(pulse.value),
+                        oral_feed: parseInt(oral_feed.value),
+                        urine: parseInt(urine.value),
+                        stool: parseInt(stool.value),
+                        vomit: parseInt(vomit.value),
+                        suction: parseInt(suction.value),
+                        bparr: [doc.data().bparr].concat(parseInt(bp.value)),
+                        pulsearr: [doc.data().pulsearr].concat(parseInt(pulse.value)),
+                        ofarr: [doc.data().ofarr].concat(parseInt(ofarr.value)),
+                        intimearr: [doc.data().pulsearr].concat(parseInt(intime.value)),
+                        outimearr: [doc.data().outimearr].concat(parseInt(outtime.value)),
+                        urinearr: [doc.data().urinearr].concat(parseInt(urine.value)),
+                        stoolarr: [doc.data().stoolarr].concat(parseInt(stool.value)),
+                        vomitarr: [doc.data().vomitarr].concat(parseInt(vomit.value)),
+                        suctionarr: [doc.data().suctionarr].concat(parseInt(suction.value)),
                     })
+                    console.log(doc.data().bparr)
                 }
             });
         })
@@ -205,7 +225,7 @@
         //     urinearr = [];
         //     vomitarr = [];
         //     suctionarr = [];
-            
+
         // } else {
         //     bparr = JSON.parse(localStorage.getItem('bparr'));
         //     pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
@@ -217,7 +237,7 @@
         //     vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
         //     suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
         // }
-        
+
 
 
         // bparr.push(parseInt(bp.value))
@@ -250,8 +270,8 @@
         // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
         // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
 
-        bp.value='';
-        pulse.value='';
+        bp.value = '';
+        pulse.value = '';
         oral_feed.value = '';
         intime.value = '';
 
@@ -268,40 +288,38 @@
 
     //Generating Chart
     const ctx = document.getElementById('myChart').getContext('2d');
-    let intimearr,bparr,pulsearr,ofarr;
+    let intimearr, bparr, pulsearr, ofarr;
 
-    patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                if(doc.data().first_name === firstname_patient){
-                        intimearr = doc.data().intimearr;
-                        bparr = doc.data().bparr;
-                        pulsearr = doc.data().pulsearr;
-                        ofarr = doc.data().ofarr;
-                    }})
+    patients.where('first_name', '==', document.getElementById("fpn").value).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            intimearr = doc.data().intimearr;
+            for (var i = 0; i < intimearr.length; i++) {
+                var c = 0;
+                for (var j = 0; j < intimearr.length; j++) {
+                    if (intimearr[i] == intimearr[j]) c++;
+                    if (c > 1) intimearr[j] = intimearr[j] + (24 * (c - 1))
                 }
-                )
-
-        
-
-
-    for(var i= 0;i<intimearr.length;i++){
-        var c=0;
-        for(var j = 0;j<intimearr.length;j++){
-            if(intimearr[i] == intimearr[j]) c++;
-                if(c>1)intimearr[j] = intimearr[j] + (24*(c-1))
-        }
+            }
+            bparr = doc.data().bparr;
+            pulsearr = doc.data().pulsearr;
+            ofarr = doc.data().ofarr;
+        })
     }
+    )
+
+
+
 
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: intimearr,  
+            labels: intimearr,
             datasets: [{
                 label: 'Blood Pressure',
                 data: bparr,
                 borderColor: 'red',
                 fill: false
-            },{
+            }, {
                 type: 'bar',
                 label: 'Blood Pressure',
                 data: bparr,
@@ -313,20 +331,20 @@
                 data: pulsearr,
                 borderColor: 'blue',
                 fill: false
-            },{
+            }, {
                 type: 'bar',
                 label: 'Pulse',
                 data: pulsearr,
                 backgroundColor: 'cyan',
                 borderWidth: 1
 
-            },{
+            }, {
                 label: 'Oral-Feed',
                 data: ofarr,
                 borderColor: 'green',
                 fill: false
 
-            },{
+            }, {
                 type: 'bar',
                 label: 'Oral-Feed',
                 data: ofarr,
@@ -335,9 +353,9 @@
 
             }]
         },
-        options:{
+        options: {
             maintainAspectRatio: false,
-            title:{
+            title: {
                 display: true,
                 text: 'Fluid Intake'
             },
@@ -347,7 +365,7 @@
                 },
                 x: {
                     beginAtZero: true
-                },  
+                },
             }
         }
     })
@@ -355,66 +373,70 @@
 
 
     // styling the chart
-        chart.canvas.parentNode.style.height = '570px';
-        chart.canvas.parentNode.style.width = '500px';
-        chart.canvas.parentNode.style.padding = '20px';
-        chart.canvas.parentNode.style.marginLeft = '450px';
-        
-        //Updating the chart
-        chart.update();
+    chart.canvas.parentNode.style.height = '570px';
+    chart.canvas.parentNode.style.width = '500px';
+    chart.canvas.parentNode.style.padding = '20px';
+    chart.canvas.parentNode.style.marginLeft = '450px';
+
+    //Updating the chart
+    chart.update();
 
 
+    let outimearr, urinearr, stoolarr, vomitarr, suctionarr;
 
-   let outimearr = JSON.parse(localStorage.getItem("outimearr"))
-   let urinearr = JSON.parse(localStorage.getItem("urinearr"))
-   let stoolarr = JSON.parse(localStorage.getItem("stoolarr"))
-   let vomitarr = JSON.parse(localStorage.getItem("vomitarr"))
-   let suctionarr = JSON.parse(localStorage.getItem("suctionarr"))
-
-   for(var i= 0;i<outimearr.length;i++){
-    var c=0;
-    for(var j = 0;j<outimearr.length;j++){
-        if(outimearr[i] == outimearr[j]) c++;
-            if(c>1)outimearr[j] = outimearr[j] + (24*(c-1))
-        }
+    patients.where('first_name', '==', document.getElementById("fpn").value).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            outimearr = doc.data().outimearr;
+            for (var i = 0; i < outimearr.length; i++) {
+                var c = 0;
+                for (var j = 0; j < outimearr.length; j++) {
+                    if (outimearr[i] == outimearr[j]) c++;
+                    if (c > 1) outimearr[j] = outimearr[j] + (24 * (c - 1))
+                }
+            }
+            urinearr = doc.data().urinearr;
+            stoolarr = doc.data().stoolarr;
+            vomitarr = doc.data().vomitarr;
+            suctionarr = doc.data().suctionarr;
+        })
     }
+    )
 
-   
     //Generating Chart
     const cx = document.getElementById('outputChart').getContext('2d');
 
-   const output_chart = new Chart(cx, {
+    const output_chart = new Chart(cx, {
         type: 'line',
         data: {
-            labels: outimearr,  
+            labels: outimearr,
             datasets: [{
                 label: 'Urine',
                 data: urinearr,
                 borderColor: 'rgba(255, 192, 0)',
                 fill: false
-            },{
+            }, {
                 type: 'bar',
                 label: 'Urine',
                 data: urinearr,
                 backgroundColor: 'red',
                 borderWidth: 1
-            },{
+            }, {
                 label: 'Stool',
                 data: stoolarr,
                 borderColor: 'brown',
-                
+
                 fill: false
-            },{
+            }, {
                 type: 'bar',
                 label: 'Stool',
                 data: stoolarr,
                 backgroundColor: 'blue',
-            },{
+            }, {
                 label: 'Vomit',
                 data: vomitarr,
                 borderColor: 'rgb(154,205,50)',
                 fill: false
-            },{
+            }, {
                 type: 'bar',
                 label: 'Vomit',
                 data: vomitarr,
@@ -426,16 +448,16 @@
                 borderColor: 'purple',
                 fill: false
 
-            },{
+            }, {
                 type: 'bar',
                 label: 'Suction',
                 data: suctionarr,
                 backgroundColor: 'yellow',
             }]
         },
-        options:{
+        options: {
             maintainAspectRatio: false,
-            title:{
+            title: {
                 display: true,
                 text: 'Fluid Output'
             },
@@ -459,27 +481,28 @@
     //Updating the chart
     output_chart.update();
 
-    function delpatient(x){
+    function delpatient(x) {
         localStorage.clear();
-        location.href="dash.html"
+        location.href = "dash.html"
     }
 
-    document.getElementById("ptH").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
+    // document.getElementById("ptH").innerHTML = "Details about " + localStorage.getItem("patientfname") + " " + localStorage.getItem("patientlname");
 
-    //Intake
-    document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("Intime")} Hrs`
-    document.getElementById("ptD1").innerHTML = `Latest Blood Pressure Record:-  ${localStorage.getItem("bp")}ml`;
-    document.getElementById("ptD2").textContent = `Latest Pulse Record:-  ${localStorage.getItem("pulse")}ml`
-    document.getElementById("ptD3").textContent = `Latest Oral N.G Feed Record:-  ${localStorage.getItem("Oralfeed")}ml`
-    
-    //Output
-    document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("Outputtime")} Hrs`
-    document.getElementById("ptD4").textContent = `Latest Urine Record:-  ${localStorage.getItem("Urine")}ml`
-    document.getElementById("ptD5").textContent = `Latest Stool Record:-  ${localStorage.getItem("Stool")}ml`
-    document.getElementById("ptD6").textContent = `Latest Vomit Record:-  ${localStorage.getItem("Vomit")}ml`
-    document.getElementById("ptD7").textContent = `Latest Suction Record:-  ${localStorage.getItem("Suction")}ml`
+    // //Intake
+    // document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${localStorage.getItem("Intime")} Hrs`
+    // document.getElementById("ptD1").innerHTML = `Latest Blood Pressure Record:-  ${localStorage.getItem("bp")}ml`;
+    // document.getElementById("ptD2").textContent = `Latest Pulse Record:-  ${localStorage.getItem("pulse")}ml`
+    // document.getElementById("ptD3").textContent = `Latest Oral N.G Feed Record:-  ${localStorage.getItem("Oralfeed")}ml`
+
+    // //Output
+    // document.getElementById("ptD9").textContent = `Latest Output Time recorded:-  ${localStorage.getItem("Outputtime")} Hrs`
+    // document.getElementById("ptD4").textContent = `Latest Urine Record:-  ${localStorage.getItem("Urine")}ml`
+    // document.getElementById("ptD5").textContent = `Latest Stool Record:-  ${localStorage.getItem("Stool")}ml`
+    // document.getElementById("ptD6").textContent = `Latest Vomit Record:-  ${localStorage.getItem("Vomit")}ml`
+    // document.getElementById("ptD7").textContent = `Latest Suction Record:-  ${localStorage.getItem("Suction")}ml`
 
 
-    
+
 </script>
+
 </html>
