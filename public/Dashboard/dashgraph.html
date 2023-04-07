@@ -148,7 +148,9 @@
         }
     })
 
-    patients = database.collection("patients")
+    let patients = database.collection("patients")
+    let name_patient = localStorage.getItem("name_patient").split(" ")
+
 
 
     document.getElementById("ptnf").addEventListener("submit", (e) => {
@@ -233,61 +235,6 @@
             });
         })
 
-        // //Updating local Storage
-        // if (localStorage.getItem('bparr') === null) {
-        //     bparr = [];
-        //     pulsearr = [];
-        //     ofarr = [];
-        //     intimearr = [];
-        //     outimearr = [];
-        //     stoolarr = [];  
-        //     urinearr = [];
-        //     vomitarr = [];
-        //     suctionarr = [];
-
-        // } else {
-        //     bparr = JSON.parse(localStorage.getItem('bparr'));
-        //     pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
-        //     ofarr = JSON.parse(localStorage.getItem('ofarr'));
-        //     intimearr = JSON.parse(localStorage.getItem('intimearr'));
-        //     outimearr = JSON.parse(localStorage.getItem('outimearr'));
-        //     stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
-        //     urinearr = JSON.parse(localStorage.getItem('urinearr'));
-        //     vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
-        //     suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
-        // }
-
-
-
-        // bparr.push(parseInt(bp.value))
-        // pulsearr.push(parseInt(pulse.value))
-        // ofarr.push(parseInt(oral_feed.value))
-        // intimearr.push(parseInt(intime.value))
-        // outimearr.push(parseInt(outtime.value))
-        // urinearr.push(parseInt(urine.value))
-        // stoolarr.push(parseInt(stool.value))
-        // vomitarr.push(parseInt(vomit.value))
-        // suctionarr.push(parseInt(suction.value))
-
-        // localStorage.setItem("Intime",parseInt(intime.value))
-        // localStorage.setItem("Outputtime", parseInt(outtime.value))
-        // localStorage.setItem("bp",parseInt(bp.value))
-        // localStorage.setItem("pulse",parseInt(pulse.value))
-        // localStorage.setItem("Oralfeed",parseInt(oral_feed.value))
-        // localStorage.setItem("Urine", parseInt(urine.value))
-        // localStorage.setItem("Stool",parseInt(stool.value))
-        // localStorage.setItem("Vomit",parseInt(vomit.value))
-        // localStorage.setItem("Suction", parseInt(suction.value))
-
-        // localStorage.setItem('bparr', JSON.stringify(bparr))
-        // localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
-        // localStorage.setItem('ofarr', JSON.stringify(ofarr))
-        // localStorage.setItem('intimearr', JSON.stringify(intimearr))
-        // localStorage.setItem('outimearr', JSON.stringify(outimearr))
-        // localStorage.setItem('urinearr', JSON.stringify(urinearr))
-        // localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
-        // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
-        // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
 
         // bp.value = '';
         // pulse.value = '';
@@ -311,7 +258,7 @@
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value) {
+            if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
                 intimearr = doc.data().intimearr;
                 for (var i = 0; i < intimearr.length; i++) {
                     var c = 0;
@@ -341,7 +288,8 @@
                             label: 'Blood Pressure',
                             data: bparr,
                             backgroundColor: 'orange',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            
                         },
                         {
                             label: 'Pulse',
@@ -355,20 +303,23 @@
                             data: pulsearr,
                             backgroundColor: 'cyan',
                             borderWidth: 1,
+                    
 
                         }, {
                             label: 'Oral-Feed',
                             data: ofarr,
                             borderColor: 'green',
                             fill: false,
-                            tension: 0
+                            tension: 0,
+
 
                         }, {
                             type: 'bar',
                             label: 'Oral-Feed',
                             data: ofarr,
                             backgroundColor: 'rgb(144, 238, 144)',
-                            borderWidth: 1
+                            borderWidth: 1,
+         
 
                         }]
                     },
@@ -397,6 +348,7 @@
                 chart.canvas.parentNode.style.padding = '20px';
                 chart.canvas.parentNode.style.marginLeft = '450px';
 
+
                 //Updating the chart
                 chart.update();
 
@@ -413,7 +365,7 @@
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value) {
+            if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
                 outimearr = doc.data().outimearr;
                 for (var i = 0; i < outimearr.length; i++) {
                     var c = 0;
@@ -422,6 +374,7 @@
                         if (c > 1) outimearr[j] = outimearr[j] + (24 * (c - 1))
                     }
                 }
+
                 urinearr = doc.data().urinearr;
                 stoolarr = doc.data().stoolarr;
                 vomitarr = doc.data().vomitarr;
@@ -523,8 +476,8 @@
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value) {
-                document.getElementById("ptH").innerHTML = "Details about " + doc.data().first_name + " " + doc.data().last_name;
+            if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
+                document.getElementById("ptH").innerHTML = "Details about " + name_patient[0] + " " + name_patient[1];
 
                 //Intake
                 document.getElementById("ptD8").textContent = `Last Intake Time Recorded:-  ${doc.data().intime} Hrs`

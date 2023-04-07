@@ -87,7 +87,7 @@
     const google = new firebase.auth.GoogleAuthProvider();
     const database = firebase.firestore()
 
-    let patients = database.collection("login")
+    let login = database.collection("login")
     sip.onclick = () => auth.signInWithPopup(google);
 
     //signout.onclick = () => auth.signOut
@@ -118,7 +118,7 @@
         let pass_word = document.getElementById("pw").value;
         let confirm_Password = document.getElementById("cpw").value;
         let mail = localStorage.getItem("mail");
-        patients.get().then((querySnapshot) => {
+        login.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 if (doc.data().email === email) {
                     location.href = "/Login/page.html"
@@ -139,7 +139,7 @@
                 else {
                     
 
-                    patients.doc(fstname_).set({
+                    login.doc(fstname_).set({
                         email: email,
                         password: pass_word
                         

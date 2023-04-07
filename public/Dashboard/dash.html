@@ -112,9 +112,9 @@
     let patients = database.collection("patients")
     let innerhtml = database.collection("innerhtml")
 
+    
     innerhtml.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            console.log(doc.data().innerwebel)
             newEL = document.createElement(doc.data().innertags)
             newEL.innerHTML = doc.data().innerwebel
             newEL.className = "severalhead"
@@ -127,8 +127,10 @@
             newEL.style.width = "1300px";
             newEL.style.borderRadius = "10px";
             newEL.style.textAlign = "center";
-            newEL.addEventListener("click", () => {
-            location.href = "/Dashboard/dashgraph.html"
+            newEL.addEventListener("click", function(event){
+                localStorage.setItem("name_patient", event.target.innerHTML)
+                location.href = "/Dashboard/dashgraph.html"
+               
         })
 
             document.getElementById('pb').appendChild(newEL);
@@ -185,15 +187,15 @@
             stool: parseInt(stool),
             vomit: parseInt(vomit),
             suction: parseInt(suction),
-            bparr: [0],
-            pulsearr: [0],
-            ofarr: [0],
-            intimearr: [0],
-            outimearr: [0],
-            urinearr: [0],
-            stoolarr: [0],
-            vomitarr: [0],
-            suctionarr: [0]
+            bparr: [parseInt(bp)],
+            pulsearr: [parseInt(pulse)],
+            ofarr: [parseInt(oral_feed)],
+            intimearr: [parseInt(intime)],
+            outimearr: [parseInt(outtime)],
+            urinearr: [parseInt(urine)],
+            stoolarr: [parseInt(stool)],
+            vomitarr: [parseInt(vomit)],
+            suctionarr: [parseInt(suction)]
         })
 
         createNewElement()
@@ -223,7 +225,7 @@
 
         innerhtml.doc(document.getElementById("fpn").value).set({
             innertags: several_patients.tagName.toLowerCase(),
-            innerwebel: several_patients.innerHTML
+            innerwebel: several_patients.innerHTML,
 
         })
     }
