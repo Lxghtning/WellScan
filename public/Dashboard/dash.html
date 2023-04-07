@@ -108,15 +108,6 @@
     const authorization = firebase.auth();
 
     const database = firebase.firestore()
-<<<<<<< HEAD
-    auth.onAuthStateChanged(doctor => {
-        if (!doctor) {
-            location.href = "/SignUp/signup.html"
-            return;
-        }
-    })
-=======
->>>>>>> 10b8b814a909d234a1598da94ba7521f15f80afd
 
     let patients = database.collection("patients")
 
@@ -159,7 +150,7 @@
         let vomit = document.getElementById("vmpn").value;
         let suction = document.getElementById("scpn").value;
 
-        patients.add({
+        patients.doc(firstname_patient).set({
             first_name: firstname_patient,
             last_name: lastname_patient,
             intime: parseInt(intime),
@@ -181,7 +172,7 @@
             vomitarr: [0],
             suctionarr: [0]
         })
-
+        
         // try {
         //     patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
         //         querySnapshot.forEach((document) => {
@@ -258,7 +249,7 @@
         // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
         // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
 
-        changeFile()
+        // changeFile()
 
     }
 

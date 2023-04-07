@@ -24,7 +24,7 @@
             <li>
                 <a href="/Dashboard/dash.html">Dashboard</a>
             </li>
- 
+
             <!-- <span class="material-symbols-outlined">
                 add
             </span> -->
@@ -41,10 +41,10 @@
             <input class="submitc" type="submit" id="contactsubmit" value="Sign Up" onclick="formfunc()">
             <div id="wm" class="warning">Incorrect Password!</div>
             <div id="ewm" class="Ewarning">Email not recognized!</div>
-            <div id="lwm" class="Lwarning">Login Credentials not found!</div>    
+            <div id="lwm" class="Lwarning">Login Credentials not found!</div>
             <h5 class="loginredirect" id="redl">
                 Don't have an account? <a href="/SignUp/signup.html">Sign Up</a>
-            </h5>        
+            </h5>
         </form>
     </section>
 </body>
@@ -57,7 +57,7 @@
         x.classList.toggle("newnav");
     }
 
-    
+
     //Form Fetcher
     document.getElementById("form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -70,93 +70,89 @@
         var firebaseConfig = {
 
             apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
-    
+
             authDomain: "hackathon--23.firebaseapp.com",
-    
+
             projectId: "hackathon--23",
-    
+
             storageBucket: "hackathon--23.appspot.com",
-    
+
             messagingSenderId: "596815595297",
-    
+
             appId: "1:596815595297:web:84854bdb064d4737e66060",
-    
+
             measurementId: "G-VMY2C911KT"
-    
+
         };
-    
-    
+
+
         // Initialize Firebase
-    
+
         firebase.initializeApp(firebaseConfig);
 
 
-        const db = firebase.firestore()
+        const database = firebase.firestore()
 
-        let users = db.collection("users")
-        let foundEmail, foundPassword,c=0
-        users.where('email', '==', email).get().then((querySnapshot) => {
-            console.log(querySnapshot)
+        let patients = database.collection("login")
+
+        patients.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                if (pass_word != doc.data().password && email != doc.data().password) {
+                    document.getElementById("lwm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
+
+                    setInterval(function () {
+                        document.getElementById("lwm").style.display = "none"
+                        document.getElementById("contactsubmit").style.marginTop = "25px";
+                        document.getElementById("redl").style.marginTop = "30px";
+                    }, 3000);
+                    return;
+
+                }
+                else if (pass_word != doc.data().password) {
+                    document.getElementById("wm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
+
+                    setInterval(function () {
+                        document.getElementById("wm").style.display = "none"
+                        document.getElementById("redl").style.marginTop = "40px";
+
+                    }, 3000);
+
+
+                    return;
+                }
+                else if (email != doc.data().email) {
+                    document.getElementById("ewm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
+
+                    setInterval(function () {
+                        document.getElementById("ewm").style.display = "none"
+                        document.getElementById("contactsubmit").style.marginTop = "25px";
+                        document.getElementById("redl").style.marginTop = "30px";
+                    }, 3000);
+
+                    return;
+                }
+                else if (pass_word === doc.data().password && email === doc.data().email) {
+                    document.getElementById("wm").style.display = "none";
+                    document.getElementById("ewm").style.display = "none";
+                    document.getElementById("lwm").style.display = "none";
+                    document.getElementById("contactsubmit").style.marginTop = "25px";
+                    document.getElementById("redl").style.marginTop = "30px";
+                    location.href = "/Dashboard/dash.html"
+                }
+                //Local Storage
+
+
+            })
         })
-        console.log(`${foundEmail} \n ${foundPassword}`)
-        
-        if(pass_word != localStorage.getItem("pass") && email != localStorage.getItem("mail")){
-            document.getElementById("lwm").style.display = "block";
-            document.getElementById("contactsubmit").style.marginTop = "40px";
-            document.getElementById("redl").style.marginTop = "70px";
-            
-            setInterval(function() 
-            {document.getElementById("lwm").style.display="none"
-            document.getElementById("contactsubmit").style.marginTop = "25px";
-            document.getElementById("redl").style.marginTop = "30px";
-    } , 3000);
-    return;
-
-        }
-        else if (pass_word != localStorage.getItem("pass")){
-            document.getElementById("wm").style.display = "block";
-            document.getElementById("contactsubmit").style.marginTop = "40px";
-            document.getElementById("redl").style.marginTop = "70px";
-
-            setInterval(function() {
-            document.getElementById("wm").style.display="none"
-            document.getElementById("redl").style.marginTop = "40px";
-
-    } , 3000);
-            
-
-            return;
-        }
-        else if(email != localStorage.getItem("mail")){
-            document.getElementById("ewm").style.display = "block";
-            document.getElementById("contactsubmit").style.marginTop = "40px";
-            document.getElementById("redl").style.marginTop = "70px";
-
-            setInterval(function() {
-            document.getElementById("ewm").style.display="none"
-            document.getElementById("contactsubmit").style.marginTop = "25px";
-            document.getElementById("redl").style.marginTop = "30px";
-    } , 3000);
-
-            return;
-        }
-        else if(pass_word === localStorage.getItem("pass") && email === localStorage.getItem("mail")){
-            document.getElementById("wm").style.display = "none";
-            document.getElementById("ewm").style.display = "none";
-            document.getElementById("lwm").style.display = "none";
-            document.getElementById("contactsubmit").style.marginTop = "25px";
-            document.getElementById("redl").style.marginTop = "30px";
-            //Local Storage
-
-
-
-
-
-            //location.href = "/Dashboard/dash.html"
-
-
-        }
     };
 
 </script>
+
 </html>
