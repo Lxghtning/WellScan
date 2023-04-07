@@ -175,10 +175,10 @@
             }
         }
 
-        patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
+        patients.where(firebase.firestore.FieldPath.documentId()).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if(doc.data.first_name == firstname_patient){
-                console.log(doc.data.bparr)
+                if(doc.data().first_name === firstname_patient){
+                console.log(doc.data().bparr)
                     patients.doc(doc.id).update({
                         bparr: doc.data().bparr.push(parseInt(bp)),
                         pulsearr: doc.data().pulsearr.push(parseInt(pulse)),
@@ -268,11 +268,21 @@
 
     //Generating Chart
     const ctx = document.getElementById('myChart').getContext('2d');
+    let intimearr,bparr,pulsearr,ofarr;
 
-    let intimearr = JSON.parse(localStorage.getItem("intimearr"))
-    let bparr = JSON.parse(localStorage.getItem("bparr"))
-    let pulsearr = JSON.parse(localStorage.getItem("pulsearr"))
-    let ofarr = JSON.parse(localStorage.getItem("ofarr"))
+    patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if(doc.data().first_name === firstname_patient){
+                        intimearr = doc.data().intimearr;
+                        bparr = doc.data().bparr;
+                        pulsearr = doc.data().pulsearr;
+                        ofarr = doc.data().ofarr;
+                    }})
+                }
+                )
+
+        
+
 
     for(var i= 0;i<intimearr.length;i++){
         var c=0;
@@ -349,8 +359,9 @@
         chart.canvas.parentNode.style.width = '500px';
         chart.canvas.parentNode.style.padding = '20px';
         chart.canvas.parentNode.style.marginLeft = '450px';
-    //Updating the chart
-    chart.update();
+        
+        //Updating the chart
+        chart.update();
 
 
 
