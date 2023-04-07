@@ -108,14 +108,17 @@
     const authorization = firebase.auth();
 
     const database = firebase.firestore()
+<<<<<<< HEAD
     auth.onAuthStateChanged(doctor => {
         if (!doctor) {
             location.href = "/SignUp/signup.html"
             return;
         }
     })
+=======
+>>>>>>> 10b8b814a909d234a1598da94ba7521f15f80afd
 
-    patients = database.collection("patients")
+    let patients = database.collection("patients")
 
     function change() {
         document.getElementById("dash").style.filter = "blur(2px)";

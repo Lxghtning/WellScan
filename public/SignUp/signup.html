@@ -132,15 +132,15 @@
 
         }
 
-        else {
-            document.getElementById("wm").style.display = "none";
-            document.getElementById("contactsubmit").style.marginTop = "25px";
-            document.getElementById("redl").style.marginTop = "30px";
-            //Local Storage
-            localStorage.setItem("FirstName", fstname_)
-            localStorage.setItem("LastName", lstname_)
-            localStorage.setItem("mail", email)
-            localStorage.setItem("pass", pass_word)
+        else {        
+            const database = firebase.firestore()
+
+            let users = database.collection("users")
+
+            users.add({
+                email: email,
+                password: pass_word
+            })
 
             location.href = "/Dashboard/dash.html"
 
