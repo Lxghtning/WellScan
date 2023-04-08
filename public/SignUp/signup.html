@@ -117,7 +117,6 @@
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
         let confirm_Password = document.getElementById("cpw").value;
-        let mail = localStorage.getItem("mail");
         login.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 if (doc.data().email === email) {
@@ -142,8 +141,8 @@
                     login.doc(fstname_).set({
                         email: email,
                         password: pass_word
-                        
                     })
+
 
                     location.href = "/Dashboard/dash.html"
 
