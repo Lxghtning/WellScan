@@ -107,12 +107,14 @@
     const auth = firebase.auth();
 
     const database = firebase.firestore()
-
-    let userid = auth.currentUser.uid;
-
+    
+    auth.onAuthStateChanged(function(user){
+        localStorage.setItem('userid', user.uid)
+    })
+    let userid = localStorage.getItem('userid')
     let patients = database.collection(`patients${userid}`)
     let innerhtml = database.collection(`innerhtml${userid}`)
-    
+    localStorage.clear();
     innerhtml.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             newEL = document.createElement(doc.data().innertags)

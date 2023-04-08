@@ -159,13 +159,18 @@
         }
     })
 
-    let userid = auth.currentUser.uid;
-    let newCollection = `patients${userid}`
+    auth.onAuthStateChanged(function(user){
+        localStorage.setItem('userid', user.uid)
+    })
+    let userid = localStorage.getItem('userid')
+    
+    let patientCollection = `patients${userid}`
+    let innerhtmlCollection = `innerhtml${userid}`
 
-    let patients = database.collection(newCollection)
+    let patients = database.collection(patientCollection)
     let name_patient = localStorage.getItem("name_patient").split(" ")
-    let innerhtml = database.collection("innerhtml")
-
+    let innerhtml = database.collection(innerhtmlCollection)
+    localStorage.clear();
 
 
     document.getElementById("ptnf").addEventListener("submit", (e) => {
@@ -503,9 +508,11 @@
                     innerhtml.doc(name_patient[0]).delete();
                 }
                 
+            })
         })
-    })
-    alert("Please go back to the main patients dashboard")
+
+        alert("Please go back to the main patients dashboard")
+
     }
 
 
