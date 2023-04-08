@@ -117,15 +117,15 @@
     function arrangeHours(arr) {
         const newArr = [arr[0]];
         for (let i = 1; i < arr.length; i++) {
-          const prevHour = newArr[newArr.length - 1];
-          let currHour = arr[i];
-          while (currHour <= prevHour) {
-            currHour += 24;
-          }
-          newArr.push(currHour);
+            const prevHour = newArr[newArr.length - 1];
+            let currHour = arr[i];
+            while (currHour <= prevHour) {
+                currHour += 24;
+            }
+            newArr.push(currHour);
         }
         return newArr;
-      }
+    }
     var firebaseConfig = {
 
         apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -162,6 +162,7 @@
 
     let patients = database.collection("patients")
     let name_patient = localStorage.getItem("name_patient").split(" ")
+    let innerhtml = database.collection("innerhtml")
 
 
 
@@ -248,16 +249,16 @@
         })
 
 
-        // bp.value = '';
-        // pulse.value = '';
-        // oral_feed.value = '';
-        // intime.value = '';
+        bp.value = '';
+        pulse.value = '';
+        oral_feed.value = '';
+        intime.value = '';
 
-        // outtime.value = '';
-        // urine.value = '';
-        // stool.value = '';
-        // vomit.value = '';
-        // suction.value = '';
+        outtime.value = '';
+        urine.value = '';
+        stool.value = '';
+        vomit.value = '';
+        suction.value = '';
 
         alert("Graph Updated")
     }
@@ -266,7 +267,7 @@
 
     //Generating Chart
     const ctx = document.getElementById('myChart').getContext('2d');
-    let intimearr, bparr, pulsearr, ofarr,sortedIntimeArr;
+    let intimearr, bparr, pulsearr, ofarr, sortedIntimeArr;
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -293,7 +294,7 @@
                             data: bparr,
                             backgroundColor: 'orange',
                             borderWidth: 1,
-                            
+
                         },
                         {
                             label: 'Pulse',
@@ -307,7 +308,7 @@
                             data: pulsearr,
                             backgroundColor: 'cyan',
                             borderWidth: 1,
-                    
+
 
                         }, {
                             label: 'Oral-Feed',
@@ -323,7 +324,7 @@
                             data: ofarr,
                             backgroundColor: 'rgb(144, 238, 144)',
                             borderWidth: 1,
-         
+
 
                         }]
                     },
@@ -365,7 +366,7 @@
 
 
 
-    let outimearr, urinearr, stoolarr, vomitarr, suctionarr,sortedOuttimearr;
+    let outimearr, urinearr, stoolarr, vomitarr, suctionarr, sortedOuttimearr;
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -467,10 +468,6 @@
     )
 
 
-    function delpatient(x) {
-        localStorage.clear();
-        location.href = "dash.html"
-    }
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -495,6 +492,20 @@
             }
         })
     })
+
+    function delpatient() {
+        patients.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if(doc.data().first_name == name_patient[0]){
+                    patients.doc(name_patient[0]).delete();
+                    innerhtml.doc(name_patient[0]).delete();
+                }
+                
+        })
+    })
+    alert("Please go back to the main patients dashboard")
+    }
+
 
 
 
