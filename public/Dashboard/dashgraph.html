@@ -150,7 +150,6 @@
     firebase.initializeApp(firebaseConfig);
 
     const auth = firebase.auth();
-    const authorization = firebase.auth();
 
     const database = firebase.firestore()
     auth.onAuthStateChanged(doctor => {
@@ -160,7 +159,10 @@
         }
     })
 
-    let patients = database.collection("patients")
+    let userid = auth.currentUser.uid;
+    let newCollection = `patients${userid}`
+
+    let patients = database.collection(newCollection)
     let name_patient = localStorage.getItem("name_patient").split(" ")
     let innerhtml = database.collection("innerhtml")
 

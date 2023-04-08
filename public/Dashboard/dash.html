@@ -105,13 +105,13 @@
     firebase.initializeApp(firebaseConfig);
 
     const auth = firebase.auth();
-    const authorization = firebase.auth();
 
     const database = firebase.firestore()
 
-    let patients = database.collection("patients")
-    let innerhtml = database.collection("innerhtml")
+    let userid = auth.currentUser.uid;
 
+    let patients = database.collection(`patients${userid}`)
+    let innerhtml = database.collection(`innerhtml${userid}`)
     
     innerhtml.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
