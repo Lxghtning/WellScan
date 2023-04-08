@@ -114,6 +114,18 @@
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
+    function arrangeHours(arr) {
+        const newArr = [arr[0]];
+        for (let i = 1; i < arr.length; i++) {
+          const prevHour = newArr[newArr.length - 1];
+          let currHour = arr[i];
+          while (currHour <= prevHour) {
+            currHour += 24;
+          }
+          newArr.push(currHour);
+        }
+        return newArr;
+      }
     var firebaseConfig = {
 
         apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -254,21 +266,13 @@
 
     //Generating Chart
     const ctx = document.getElementById('myChart').getContext('2d');
-    let intimearr, bparr, pulsearr, ofarr;
+    let intimearr, bparr, pulsearr, ofarr,sortedIntimeArr;
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
                 intimearr = doc.data().intimearr;
-                for (var i = 0; i < intimearr.length; i++) {
-                    var c = 0;
-                    for (var j = 0; j < intimearr.length; j++) {
-                        if (intimearr[i] == intimearr[j]) c++;
-                        if (c > 1) intimearr[j] = intimearr[j] + (24 * (c - 1))
-                    }
-                }
-
-
+                sortedIntimeArr = arrangeHours(intimearr)
                 bparr = doc.data().bparr;
                 pulsearr = doc.data().pulsearr;
                 ofarr = doc.data().ofarr;
@@ -276,7 +280,7 @@
                 const chart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: intimearr,
+                        labels: sortedIntimeArr,
                         datasets: [{
                             label: 'Blood Pressure',
                             data: bparr,
@@ -361,19 +365,13 @@
 
 
 
-    let outimearr, urinearr, stoolarr, vomitarr, suctionarr;
+    let outimearr, urinearr, stoolarr, vomitarr, suctionarr,sortedOuttimearr;
 
     patients.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
                 outimearr = doc.data().outimearr;
-                for (var i = 0; i < outimearr.length; i++) {
-                    var c = 0;
-                    for (var j = 0; j < outimearr.length; j++) {
-                        if (outimearr[i] == outimearr[j]) c++;
-                        if (c > 1) outimearr[j] = outimearr[j] + (24 * (c - 1))
-                    }
-                }
+                sortedIntimeArr = arrangeHours(outimearr)
 
                 urinearr = doc.data().urinearr;
                 stoolarr = doc.data().stoolarr;
@@ -386,7 +384,7 @@
                 const output_chart = new Chart(cx, {
                     type: 'line',
                     data: {
-                        labels: outimearr,
+                        labels: sortedOuttimearr,
                         datasets: [{
                             label: 'Urine',
                             data: urinearr,
