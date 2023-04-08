@@ -63,32 +63,33 @@
         e.preventDefault();
     })
 
+    const firebaseConfig = {
+
+        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
+
+        authDomain: "hackathon--23.firebaseapp.com",
+
+        projectId: "hackathon--23",
+
+        storageBucket: "hackathon--23.appspot.com",
+
+        messagingSenderId: "596815595297",
+
+        appId: "1:596815595297:web:84854bdb064d4737e66060",
+
+        measurementId: "G-VMY2C911KT"
+
+    };
+
+
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
     function formfunc(x) {
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
 
-        var firebaseConfig = {
-
-            apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
-
-            authDomain: "hackathon--23.firebaseapp.com",
-
-            projectId: "hackathon--23",
-
-            storageBucket: "hackathon--23.appspot.com",
-
-            messagingSenderId: "596815595297",
-
-            appId: "1:596815595297:web:84854bdb064d4737e66060",
-
-            measurementId: "G-VMY2C911KT"
-
-        };
-
-
-        // Initialize Firebase
-
-        firebase.initializeApp(firebaseConfig);
 
 
         const database = firebase.firestore()
