@@ -98,7 +98,7 @@
 
         login.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if (pass_word != doc.data().password && email != doc.data().email) {
+                if (pass_word !== doc.data().password && email != doc.data().email) {
                     document.getElementById("ewm").style.display = "none"
                     document.getElementById("wm").style.display = "none"
                     document.getElementById("lwm").style.display = "block";
@@ -113,7 +113,7 @@
             
 
                 }
-                else if (pass_word != doc.data().password) {
+                else if (pass_word !== doc.data().password) {
                     document.getElementById("lwm").style.display = "none"
                     document.getElementById("ewm").style.display = "none"
                     document.getElementById("wm").style.display = "block";
@@ -128,7 +128,7 @@
 
 
                 }
-                else if (email != doc.data().email) {
+                else if (email !== doc.data().email) {
                     document.getElementById("ewm").style.display = "block";
                     document.getElementById("contactsubmit").style.marginTop = "40px";
                     document.getElementById("redl").style.marginTop = "70px";

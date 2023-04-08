@@ -122,7 +122,7 @@
                 if (doc.data().email === email) {
                     location.href = "/Login/page.html"
                 }
-                else if (pass_word != confirm_Password) {
+                else if (pass_word !== confirm_Password) {
                     document.getElementById("wm").style.display = "block";
                     document.getElementById("contactsubmit").style.marginTop = "40px";
                     document.getElementById("redl").style.marginTop = "70px";
