@@ -94,7 +94,7 @@
 
     auth.onAuthStateChanged(doctor => {
         if (doctor) {
-            location.href = "/Dashboard/dash.html"
+            // location.href = "/Dashboard/dash.html"
 
         }
     })
@@ -119,6 +119,7 @@
         let confirm_Password = document.getElementById("cpw").value;
         login.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
+
                 if (doc.data().email === email) {
                     location.href = "/Login/page.html"
                 }
@@ -132,23 +133,26 @@
                         document.getElementById("contactsubmit").style.marginTop = "25px";
                         document.getElementById("redl").style.marginTop = "30px";
                     }, 3000);
-
+                   
                 }
 
                 else {
-                    
-
                     login.doc(fstname_).set({
                         email: email,
                         password: pass_word
                     })
 
-
-                    location.href = "/Dashboard/dash.html"
+                    localStorage.setItem("bool" , "true");
 
                 }
+
             })
         })
+        
+        if(localStorage.getItem("bool") ===  "true"){
+            location.href = "/Dashboard/dash.html"
+        }
+        localStorage.clear();
     };
 
 </script>
