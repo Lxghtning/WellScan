@@ -110,7 +110,32 @@
     const database = firebase.firestore()
 
     let patients = database.collection("patients")
+    let innerhtml = database.collection("innerhtml")
 
+    
+    innerhtml.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            newEL = document.createElement(doc.data().innertags)
+            newEL.innerHTML = doc.data().innerwebel
+            newEL.className = "severalhead"
+            newEL.style.backgroundColor = "gray";
+            newEL.style.fontSize = "27px";
+            newEL.style.color = "white";
+            newEL.style.marginTop = "30px";
+            newEL.style.marginBottom = "30px";
+            newEL.style.height = "50px";
+            newEL.style.width = "1300px";
+            newEL.style.borderRadius = "10px";
+            newEL.style.textAlign = "center";
+            newEL.addEventListener("click", function(event){
+                localStorage.setItem("name_patient", event.target.innerHTML)
+                location.href = "/Dashboard/dashgraph.html"
+               
+        })
+
+            document.getElementById('pb').appendChild(newEL);
+        })
+    })
     function change() {
         document.getElementById("dash").style.filter = "blur(2px)";
         document.getElementById("ptnf").style.display = "block";
@@ -162,95 +187,47 @@
             stool: parseInt(stool),
             vomit: parseInt(vomit),
             suction: parseInt(suction),
-            bparr: [0],
-            pulsearr: [0],
-            ofarr: [0],
-            intimearr: [0],
-            outimearr: [0],
-            urinearr: [0],
-            stoolarr: [0],
-            vomitarr: [0],
-            suctionarr: [0]
+            bparr: [parseInt(bp)],
+            pulsearr: [parseInt(pulse)],
+            ofarr: [parseInt(oral_feed)],
+            intimearr: [parseInt(intime)],
+            outimearr: [parseInt(outtime)],
+            urinearr: [parseInt(urine)],
+            stoolarr: [parseInt(stool)],
+            vomitarr: [parseInt(vomit)],
+            suctionarr: [parseInt(suction)]
         })
-        
-        // try {
-        //     patients.where('first_name', '==', firstname_patient).get().then((querySnapshot) => {
-        //         querySnapshot.forEach((document) => {
 
-        //             patients.doc(document.id).delete();
-
-        //         })
-        //     })
-
-        // }
-        // catch (error) {
-        //     console.log(error);
-        // };
-
-
-
-
-
-
-        // //Local Storage Storation
-        // localStorage.setItem("patientfname", firstname_patient)
-        // localStorage.setItem("patientlname", lastname_patient)
-        // localStorage.setItem("Intime", intime)
-        // localStorage.setItem("Outputtime", outtime)
-        // localStorage.setItem("bp", bp)
-        // localStorage.setItem("pulse", pulse)
-        // localStorage.setItem("Oralfeed", oral_feed)
-        // localStorage.setItem("Urine", urine)
-        // localStorage.setItem("Stool", stool)
-        // localStorage.setItem("Vomit", vomit)
-        // localStorage.setItem("Suction", suction)
-
-        // var bparr, pulsearr, ofarr, intimearr, outimearr, urinearr, stoolarr, vomitarr, suctionarr;
-
-        // if (localStorage.getItem('bparr') === null) {
-        // bparr = [];
-        // pulsearr = [];
-        // ofarr = [];
-        // intimearr = [];
-        // outimearr = [];
-        // urinearr = [];
-        // stoolarr = [];
-        // vomitarr = [];
-        // suctionarr = [];
-        // } else {
-        //     bparr = JSON.parse(localStorage.getItem('bparr'));
-        //     pulsearr = JSON.parse(localStorage.getItem('pulsearr'));
-        //     ofarr = JSON.parse(localStorage.getItem('ofarr'));
-        //     intimearr = JSON.parse(localStorage.getItem('intimearr'));
-        //     outimearr = JSON.parse(localStorage.getItem('outimearr'));
-        //     urinearr = JSON.parse(localStorage.getItem('urinearr'));
-        //     stoolarr = JSON.parse(localStorage.getItem('stoolarr'));
-        //     vomitarr = JSON.parse(localStorage.getItem('vomitarr'));
-        //     suctionarr = JSON.parse(localStorage.getItem('suctionarr'));
-        // }
-
-        // bparr.push(parseInt(bp))
-        // pulsearr.push(parseInt(pulse))
-        // ofarr.push(parseInt(oral_feed))
-        // intimearr.push(parseInt(intime))
-        // outimearr.push(parseInt(outtime))
-        // urinearr.push(parseInt(urine))
-        // stoolarr.push(parseInt(stool))
-        // vomitarr.push(parseInt(vomit))
-        // suctionarr.push(parseInt(suction))
-
-        // localStorage.setItem('bparr', JSON.stringify(bparr))
-        // localStorage.setItem('pulsearr', JSON.stringify(pulsearr))
-        // localStorage.setItem('ofarr', JSON.stringify(ofarr))
-        // localStorage.setItem('intimearr', JSON.stringify(intimearr))
-        // localStorage.setItem('outimearr', JSON.stringify(outimearr))
-        // localStorage.setItem('urinearr', JSON.stringify(urinearr))
-        // localStorage.setItem('stoolarr', JSON.stringify(stoolarr))
-        // localStorage.setItem('vomitarr', JSON.stringify(vomitarr))
-        // localStorage.setItem('suctionarr', JSON.stringify(suctionarr))
-
+        createNewElement()
         // changeFile()
 
+    }
+
+    function createNewElement() {
+        let several_patients = document.createElement("h1");
+
+        several_patients.className = "severalhead"
+        several_patients.style.backgroundColor = "gray";
+        several_patients.style.fontSize = "27px";
+        several_patients.style.color = "white";
+        several_patients.style.marginTop = "30px";
+        several_patients.style.height = "50px";
+        several_patients.style.width = "1300px";
+        several_patients.style.borderRadius = "10px";
+        several_patients.style.textAlign = "center";
+        several_patients.style.marginBottom = "30px";
+
+        several_patients.innerHTML = document.getElementById("fpn").value + " " + document.getElementById("lpn").value
+        several_patients.addEventListener("click", () => {
+            location.href = "/Dashboard/dashgraph.html"
+        })
+        document.getElementById('pb').appendChild(several_patients);
+
+        innerhtml.doc(document.getElementById("fpn").value).set({
+            innertags: several_patients.tagName.toLowerCase(),
+            innerwebel: several_patients.innerHTML,
+
+        })
     }
 
 
