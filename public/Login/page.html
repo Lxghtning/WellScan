@@ -81,6 +81,14 @@
 
     var auth = firebase.auth();
 
+    
+    auth.onAuthStateChanged(doctor => {
+        if (doctor) {
+            location.href = "/Dashboard/dash.html"
+
+        }
+    })
+    
     //NAV change func
     function tochange(x) {
         x.classList.toggle("change");
@@ -93,6 +101,15 @@
         e.preventDefault();
     })
 
+<<<<<<< HEAD
+    
+   
+
+
+    
+
+=======
+>>>>>>> c49c8b73a61e5ef1770006f53c3bf77b457fd1bd
     function formfunc(x) {
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
