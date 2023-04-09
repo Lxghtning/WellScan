@@ -93,12 +93,103 @@
         e.preventDefault();
     })
 
+    const firebaseConfig = {
+
+        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
+
+        authDomain: "hackathon--23.firebaseapp.com",
+
+        projectId: "hackathon--23",
+
+        storageBucket: "hackathon--23.appspot.com",
+
+        messagingSenderId: "596815595297",
+
+        appId: "1:596815595297:web:84854bdb064d4737e66060",
+
+        measurementId: "G-VMY2C911KT"
+
+    };
+
+
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
     function formfunc(x) {
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
 
 
+<<<<<<< HEAD
         auth.signInWithEmailAndPassword(email, pass_word).then(function() {
+=======
+
+        const database = firebase.firestore()
+
+        let login = database.collection("login")
+
+        login.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (pass_word !== doc.data().password && email != doc.data().email) {
+                    document.getElementById("ewm").style.display = "none"
+                    document.getElementById("wm").style.display = "none"
+                    document.getElementById("lwm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
+
+                    setInterval(function () {
+                        document.getElementById("lwm").style.display = "none"
+                        document.getElementById("contactsubmit").style.marginTop = "25px";
+                        document.getElementById("redl").style.marginTop = "30px";
+                    }, 3000);
+            
+
+                }
+                else if (pass_word !== doc.data().password) {
+                    document.getElementById("lwm").style.display = "none"
+                    document.getElementById("ewm").style.display = "none"
+                    document.getElementById("wm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
+
+                    setInterval(function () {
+                        document.getElementById("wm").style.display = "none"
+                        document.getElementById("redl").style.marginTop = "40px";
+
+                    }, 3000);
+
+
+                }
+                else if (email !== doc.data().email) {
+                    document.getElementById("ewm").style.display = "block";
+                    document.getElementById("contactsubmit").style.marginTop = "40px";
+                    document.getElementById("redl").style.marginTop = "70px";
+
+                    setInterval(function () {
+                        document.getElementById("ewm").style.display = "none"
+                        document.getElementById("contactsubmit").style.marginTop = "25px";
+                        document.getElementById("redl").style.marginTop = "30px";
+                    }, 3000);
+
+                }
+                else if (pass_word === doc.data().password && email === doc.data().email) {
+                    document.getElementById("wm").style.display = "none";
+                    document.getElementById("ewm").style.display = "none";
+                    document.getElementById("lwm").style.display = "none";
+                    document.getElementById("contactsubmit").style.marginTop = "25px";
+                    document.getElementById("redl").style.marginTop = "30px";
+        
+                    localStorage.setItem("bool" , "true");
+                    console.log(localStorage)
+                }
+
+            })
+        })
+
+        if(localStorage.getItem("bool") ===  "true"){
+            console.log("hello")
+>>>>>>> 47d9d5ba00b7e194e04fcedffd14cc41861edb40
             location.href = "/Dashboard/dash.html"
     })
 
