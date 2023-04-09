@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="graph.css">
     <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- <script src="scriptss.js"></script> -->
     <link rel="stylesheet"
@@ -113,21 +115,21 @@
                 Output Graph
             </h2>
         </div>
-        <div id="pop" class="popbg">
-            <div id="popup" class="popupdiv">
-    
-                <span class="material-symbols-outlined" id="closebtn">
-                    close
-                </span>
-                <span id="tick" class="material-symbols-outlined">
-                    done
-                </span>
-                <h5 id="intext" class="ptdtad">
-                    Patient Added!
-                </h5>
-            </div>
-        </div>
     </section>
+    <div id="pop" class="popbg">
+        <div id="popup" class="popupdiv">
+
+            <span class="material-symbols-outlined" id="closebtn">
+                close
+            </span>
+            <span id="tick" class="material-symbols-outlined">
+                done
+            </span>
+            <h5 id="intext" class="ptdtad">
+                Patient Added!
+            </h5>
+        </div>
+    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -135,30 +137,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
-    document.getElementById("closebtn").addEventListener("click", () => {
-        document.getElementById('popup').style.display = "none";
-        document.getElementById('pop').style.display = "none";
-        // document.getElementById('intext').innerHTML = "Patient Added";
-        // document.getElementById('tick').innerHTML = "done";
-        // document.getElementById('tick').style.color = 'greenyellow';
-        // document.getElementById('tick').style.border = '2px solid greenyellow';
-        location.reload();
-    })
 
-    function viewVerificationPopup() {
-        document.getElementById('pop').style.display = 'block';
-        document.getElementById('popup').style.display = 'block';
-
-    };
-
-    // function viewWrongPopup() {
-    //     document.getElementById('pop').style.display = 'block';
-    //     document.getElementById('popup').style.display = 'block';
-    //     document.getElementById('intext').innerHTML = "Patient already exists!";
-    //     document.getElementById('tick').innerHTML = "close";
-    //     document.getElementById('tick').style.color = 'red';
-    //     document.getElementById('tick').style.border = '2px solid red';
-    // }
     function arrangeHours(arr) {
         const newArr = [arr[0]];
         for (let i = 1; i < arr.length; i++) {
@@ -173,15 +152,21 @@
     }
     var firebaseConfig = {
 
-        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
-        authDomain: "hackathon--23.firebaseapp.com",
-        projectId: "hackathon--23",
-        storageBucket: "hackathon--23.appspot.com",
-        messagingSenderId: "596815595297",
-        appId: "1:596815595297:web:84854bdb064d4737e66060",
-        measurementId: "G-VMY2C911KT"
+apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
 
-    };
+authDomain: "hackathon--23.firebaseapp.com",
+
+projectId: "hackathon--23",
+
+storageBucket: "hackathon--23.appspot.com",
+
+messagingSenderId: "596815595297",
+
+appId: "1:596815595297:web:84854bdb064d4737e66060",
+
+measurementId: "G-VMY2C911KT"
+
+};
 
 
     // Initialize Firebase
@@ -318,7 +303,7 @@
             })
            
             alert("Graph Updated")
-            viewVerificationPopup()
+
         })
 
 
