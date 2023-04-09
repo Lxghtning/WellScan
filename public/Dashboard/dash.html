@@ -34,12 +34,12 @@
     <section class="Dashboard" id="dash">
         <div class="patientbox" id="pb">
             <h1 class="headpt">
-                <a id="anchorpt" onclick="change()">Add a new patient</a>
+                <a id="anchorpt">Add a new patient</a>
             </h1>
         </div>
     </section>
     <form class="patientform" id="ptnf">
-        <span onclick="reversechange()" class="material-symbols-outlined" id="clbtn">
+        <span class="material-symbols-outlined" id="clbtn">
             close
         </span>
         <h2 class="ptformhead">
@@ -72,7 +72,7 @@
             <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
 
         </div>
-        <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="pdetails()">
+        <input class="submitp" type="submit" id="patientsubmit" value="Submit">
     </form>
     <canvas id="myChart"></canvas>
 </body>
@@ -109,12 +109,13 @@
     const database = firebase.firestore()
     
     auth.onAuthStateChanged(function(user){
-        localStorage.setItem('userid', user.uid)
-    })
-    let userid = localStorage.getItem('userid')
+
+        let userid = user.uid
+    
+
     let patients = database.collection(`patients${userid}`)
     let innerhtml = database.collection(`innerhtml${userid}`)
-    localStorage.clear();
+
     innerhtml.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             newEL = document.createElement(doc.data().innertags)
@@ -138,28 +139,26 @@
             document.getElementById('pb').appendChild(newEL);
         })
     })
-    function change() {
+    document.getElementById('anchorpt').addEventListener('click', () => {
         document.getElementById("dash").style.filter = "blur(2px)";
         document.getElementById("ptnf").style.display = "block";
         document.getElementById("ptnf").style.filter = "blur(0px)";
 
-    }
+    })
 
-    function reversechange() {
+    document.getElementById("clbtn").addEventListener("click", () => {
         document.getElementById("dash").style.filter = "blur(0px)";
         document.getElementById("ptnf").style.display = "none";
         location.reload();
-    }
+    })
 
-    function changeFile() {
-        location.href = "dashgraph.html"
-    }
+
 
     document.getElementById("ptnf").addEventListener("submit", (e) => {
         e.preventDefault();
     })
 
-    function pdetails(x) {
+    document.getElementById("patientsubmit").addEventListener("click", ()=> {
 
         //patient
         let firstname_patient = document.getElementById("fpn").value;
@@ -202,9 +201,8 @@
         })
 
         createNewElement()
-        // changeFile()
-
-    }
+  
+    })
 
     function createNewElement() {
         let several_patients = document.createElement("h1");
@@ -232,8 +230,7 @@
 
         })
     }
-
+})
 
 </script>
-
 </html>

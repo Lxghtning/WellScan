@@ -86,7 +86,7 @@
     const google = new firebase.auth.GoogleAuthProvider();
     const database = firebase.firestore()
 
-    let login = database.collection("login")
+
     sip.onclick = () => auth.signInWithPopup(google);
 
     //signout.onclick = () => auth.signOut
@@ -116,42 +116,30 @@
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
         let confirm_Password = document.getElementById("cpw").value;
-        login.get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
 
-                if (doc.data().email === email) {
-                    location.href = "/Login/page.html"
-                }
-                else if (pass_word != confirm_Password) {
-                    document.getElementById("wm").style.display = "block";
-                    document.getElementById("contactsubmit").style.marginTop = "40px";
-                    document.getElementById("redl").style.marginTop = "70px";
 
-                    setInterval(function () {
-                        document.getElementById("wm").style.display = "none"
-                        document.getElementById("contactsubmit").style.marginTop = "25px";
-                        document.getElementById("redl").style.marginTop = "30px";
-                    }, 3000);
-                   
-                }
+        if (pass_word != confirm_Password) {
 
-                else {
-                    login.doc(fstname_).set({
-                        email: email,
-                        password: pass_word
-                    })
+            document.getElementById("wm").style.display = "block";
+            document.getElementById("contactsubmit").style.marginTop = "40px";
+            document.getElementById("redl").style.marginTop = "70px";
 
-                    localStorage.setItem("bool" , "true");
+            setInterval(function () {
+                document.getElementById("wm").style.display = "none"
+                document.getElementById("contactsubmit").style.marginTop = "25px";
+                document.getElementById("redl").style.marginTop = "30px";
+            }, 3000);
 
-                }
 
-            })
-        })
-        
-        if(localStorage.getItem("bool") ===  "true"){
-            location.href = "/Dashboard/dash.html"
         }
-        localStorage.clear();
+
+        else {
+            auth.createUserWithEmailAndPassword(email, pass_word).then(function () { location.href = "/Dashboard/dash.html" })
+        }
+
+
+
+
     };
 
 </script>
