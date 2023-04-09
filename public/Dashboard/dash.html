@@ -156,7 +156,7 @@
     })
 
 
-    
+
 
     auth.onAuthStateChanged(function (user) {
 
@@ -164,35 +164,36 @@
 
 
         let patients = database.collection(`patients${userid}`)
-        let innerhtml = database.collection(`innerhtml${userid}`)
+        let innerhtmlCollection = database.collection(`innerhtml${userid}`)
 
-        innerhtml.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            newEL = document.createElement(doc.data().innertags)
-            newEL.innerHTML = doc.data().innerwebel
-            newEL.className = "severalhead"
-            newEL.style.backgroundColor = "gray";
-            newEL.style.fontSize = "27px";
-            newEL.style.color = "white";
-            newEL.style.marginTop = "30px";
-            newEL.style.marginBottom = "30px";
-            newEL.style.height = "50px";
-            newEL.style.width = "1300px";
-            newEL.style.borderRadius = "10px";
-            newEL.style.textAlign = "center";
-            newEL.addEventListener("click", function (event) {
-                localStorage.setItem("name_patient", event.target.innerHTML)
-                location.href = "/Dashboard/dashgraph.html"
+        innerhtmlCollection.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                newEL = document.createElement(doc.data().innertags)
+                newEL.innerHTML = doc.data().innerwebel
+                newEL.className = "severalhead"
+                newEL.style.backgroundColor = "gray";
+                newEL.style.fontSize = "27px";
+                newEL.style.color = "white";
+                newEL.style.marginTop = "30px";
+                newEL.style.marginBottom = "30px";
+                newEL.style.height = "50px";
+                newEL.style.width = "1300px";
+                newEL.style.borderRadius = "10px";
+                newEL.style.textAlign = "center";
+                newEL.addEventListener("click", function (event) {
+                    localStorage.setItem("name_patient", event.target.innerHTML)
+                    location.href = "/Dashboard/dashgraph.html"
 
+                })
+
+                document.getElementById('pb').appendChild(newEL);
             })
-
-            document.getElementById('pb').appendChild(newEL);
         })
-    })
 
 
         document.getElementById("patientsubmit").addEventListener("click", () => {
 
+        
             //patient
             let firstname_patient = document.getElementById("fpn").value;
             let lastname_patient = document.getElementById("lpn").value;
@@ -210,43 +211,50 @@
             let vomit = document.getElementById("vmpn").value;
             let suction = document.getElementById("scpn").value;
 
-            patients.doc(firstname_patient).set({
-                first_name: firstname_patient,
-                last_name: lastname_patient,
-                intime: parseInt(intime),
-                outputTime: parseInt(outtime),
-                bp: parseInt(bp),
-                pulse: parseInt(pulse),
-                oral_feed: parseInt(oral_feed),
-                urine: parseInt(urine),
-                stool: parseInt(stool),
-                vomit: parseInt(vomit),
-                suction: parseInt(suction),
-                bparr: [parseInt(bp)],
-                pulsearr: [parseInt(pulse)],
-                ofarr: [parseInt(oral_feed)],
-                intimearr: [parseInt(intime)],
-                outimearr: [parseInt(outtime)],
-                urinearr: [parseInt(urine)],
-                stoolarr: [parseInt(stool)],
-                vomitarr: [parseInt(vomit)],
-                suctionarr: [parseInt(suction)]
-            })
 
-            innerhtml.where('innerwebel', '==', firstname_patient).get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    if (querySnapshot.empty()) {
-                        createNewElement()
-                        viewVerificationPopup()
-                       
-                    }
+       
+                innerhtmlCollection.where('innerwebel', '==', firstname_patient + ' ' + lastname_patient).get().then((querySnapshot) => {
+                    
+                        if (querySnapshot.empty) {
+                            
+
+                            createNewElement()
+                            viewVerificationPopup()
+
+                            patients.doc(firstname_patient).set({
+                                first_name: firstname_patient,
+                                last_name: lastname_patient,
+                                intime: parseInt(intime),
+                                outputTime: parseInt(outtime),
+                                bp: parseInt(bp),
+                                pulse: parseInt(pulse),
+                                oral_feed: parseInt(oral_feed),
+                                urine: parseInt(urine),
+                                stool: parseInt(stool),
+                                vomit: parseInt(vomit),
+                                suction: parseInt(suction),
+                                bparr: [parseInt(bp)],
+                                pulsearr: [parseInt(pulse)],
+                                ofarr: [parseInt(oral_feed)],
+                                intimearr: [parseInt(intime)],
+                                outimearr: [parseInt(outtime)],
+                                urinearr: [parseInt(urine)],
+                                stoolarr: [parseInt(stool)],
+                                vomitarr: [parseInt(vomit)],
+                                suctionarr: [parseInt(suction)]
+                            })
+                        }
+                    
                     else{
-                        viewWrongPopup()
-                    }
-                })
-            })
-            
-            
+                    querySnapshot.forEach((doc) => {
+
+                            viewWrongPopup()
+                        
+                    })
+        }
+    })
+
+
         })
 
         function createNewElement() {
@@ -269,7 +277,7 @@
             })
             document.getElementById('pb').appendChild(several_patients);
 
-            innerhtml.doc(document.getElementById("fpn").value).set({
+            innerhtmlCollection.doc(document.getElementById("fpn").value).set({
                 innertags: several_patients.tagName.toLowerCase(),
                 innerwebel: several_patients.innerHTML,
 

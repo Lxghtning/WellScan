@@ -10,9 +10,10 @@
     user-select: none; */
 }
 
-.Dashboard{
+.Dashboard {
     height: 170vh;
 }
+
 /* -- Nav Bar -- */
 nav {
     position: sticky;
@@ -41,7 +42,7 @@ nav ul li a {
     text-decoration: none;
 }
 
-.active{
+.active {
     color: black;
     background-color: white;
     color: black;
@@ -70,91 +71,91 @@ nav ul li a:hover {
     cursor: default;
 }
 
-.headI{
+.headI {
     text-decoration: underline;
     transform: rotate(-90deg);
     margin-top: -750px;
     margin-left: -550px;
 }
 
-.headO{
+.headO {
     text-decoration: underline;
     transform: rotate(-90deg);
     margin-top: -750px;
     margin-left: -550px;
 }
 
-canvas{
+canvas {
     border: 3px solid black;
     box-shadow: 1px 1px 0px #999,
-                2px 2px 0px #999,
-                3px 3px 0px #999,
-                4px 4px 0px #999,
-                5px 5px 0px #999,
-                6px 6px 0px #999;   
+        2px 2px 0px #999,
+        3px 3px 0px #999,
+        4px 4px 0px #999,
+        5px 5px 0px #999,
+        6px 6px 0px #999;
 }
 
-.chartdiv{
+.chartdiv {
     position: absolute;
     margin-top: -1115px;
 }
 
-.output_chartdiv{
+.output_chartdiv {
     position: absolute;
 }
 
-.dashhead{
+.dashhead {
     margin-left: 600px;
     font-size: 50px;
     text-decoration: underline;
 }
 
-.heads{
+.heads {
     font-size: 20px;
     margin-left: 25px;
     margin-top: 50px;
     display: inline-flex;
 }
 
-.firstheads{
+.firstheads {
     margin-left: 50px;
     margin-right: 550px;
 }
 
-.int{
+.int {
     margin-top: 10px;
     text-decoration: underline;
 }
 
-.op{
+.op {
     text-decoration: underline;
 }
 
-.secondheads{
+.secondheads {
     margin-top: 50px;
     margin-left: -110px;
 }
 
-.pth{
+.pth {
     font-size: 40px;
     margin-top: 10px;
 }
 
-.ptdetails{
+.ptdetails {
     margin-top: 20px;
     margin-left: 10px;
     height: 500px;
     width: 1500px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
-    2px 2px 0px #999,
-    3px 3px 0px #999,
-    4px 4px 0px #999,
-    5px 5px 0px #999,
-    6px 6px 0px #999;   
+        2px 2px 0px #999,
+        3px 3px 0px #999,
+        4px 4px 0px #999,
+        5px 5px 0px #999,
+        6px 6px 0px #999;
 }
 
-.delptn{
+.delptn {
     border: 2px solid black;
     background-color: red;
     padding: 5px;
@@ -165,44 +166,44 @@ canvas{
 }
 
 
-.delptn:hover{
+.delptn:hover {
     padding: 8px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
-.pth{
+.pth {
     text-decoration: underline;
     text-align: center;
 }
 
-.patientform{
+.patientform {
     margin-left: 10px;
     background-color: rgb(255, 255, 255);
     height: 570px;
     width: 400px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
-                2px 2px 0px #999,
-                3px 3px 0px #999,
-                4px 4px 0px #999,
-                5px 5px 0px #999,
-                6px 6px 0px #999;
+        2px 2px 0px #999,
+        3px 3px 0px #999,
+        4px 4px 0px #999,
+        5px 5px 0px #999,
+        6px 6px 0px #999;
 }
 
 
-input{
+input {
     text-align: center;
 }
 
-.intake{
+.intake {
     margin-top: 30px;
     font-size: 20px;
     text-decoration: underline;
     margin-left: 50px;
 }
 
-.intakediv{
-    display:flex;
+.intakediv {
+    display: flex;
     flex-direction: column;
     margin-top: 5px;
     margin-left: 50px;
@@ -210,56 +211,110 @@ input{
     width: 250px;
 }
 
-.intakediv>input{
-    margin-top:15px;
+.intakediv>input {
+    margin-top: 15px;
 }
 
-.output{    
+.output {
     margin-top: 160px;
     font-size: 20px;
     text-decoration: underline;
     margin-left: 50px;
 }
 
-.outputdiv{
-    display:flex;
+.outputdiv {
+    display: flex;
     flex-direction: column;
     margin-left: 50px;
     width: 250px;
     height: 25px;
 }
 
-.outputdiv>input{
-    margin-top:15px;
+.outputdiv>input {
+    margin-top: 15px;
 
 }
 
 
-.submitp{
+.submitp {
     margin-top: 195px;
     margin-left: 50px;
     padding: 5px;
     width: 300px;
     border-radius: 12px;
 }
-    
-.submitp:hover{
-    background-color:aquamarine;
+
+.submitp:hover {
+    background-color: aquamarine;
     transition: ease-in;
     cursor: pointer;
+}
+
+.popbg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.popupdiv {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    height: 254px;
+    width: 347px;
+    border: 5px solid black;
+    margin-left: 572px;
+    margin-top: 170px;
+    background-color: #343f45;
+    color: white;
+}
+
+.popupdiv span:nth-child(2) {
+    font-size: 100px;
+    color: greenyellow;
+    ;
+    border: 2px solid greenyellow;
+    border-radius: 100%;
+    margin-top: 20px;
+    margin-left: 118px;
+}
+
+#closebtn {
+    margin-left: 323px;
+}
+
+#closebtn:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.ptdtad {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 
 /*Media Queries*/
 @media (max-width: 480px) and (min-width: 320px) {
 
-    .name{
-        display:none;
+    .name {
+        display: none;
     }
+
     .greet {
         font-size: 45px;
         margin-left: 20px;
-    
+
     }
 
     .texts {
@@ -268,8 +323,8 @@ input{
         margin-top: -80px;
     }
 
-    
-    
+
+
     .container {
         display: inline-block;
     }
