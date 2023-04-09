@@ -66,7 +66,7 @@
                     <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
 
                 </div>
-                <input class="submitp" type="submit" id="patientsubmit" value="Submit" onclick="updatedetails()">
+                <input class="submitp" type="submit" id="patientsubmit" value="Submit">
             </form>
         </div>
         <div class="ptdetails">
@@ -91,7 +91,7 @@
 
 
             </div>
-            <button class="delptn" onclick="delpatient()">Remove Patient</button>
+            <button id="remptn" class="delptn">Remove Patient</button>
         </div>
 
         <div class="chartdiv">
@@ -154,9 +154,9 @@
     })
 
     auth.onAuthStateChanged(function(user){
-        localStorage.setItem('userid', user.uid)
-    })
-    let userid = localStorage.getItem('userid')
+        let userid = user.uid
+    
+ 
     
     let patientCollection = `patients${userid}`
     let innerhtmlCollection = `innerhtml${userid}`
@@ -164,14 +164,14 @@
     let patients = database.collection(patientCollection)
     let name_patient = localStorage.getItem("name_patient").split(" ")
     let innerhtml = database.collection(innerhtmlCollection)
-    localStorage.clear();
+
 
 
     document.getElementById("ptnf").addEventListener("submit", (e) => {
         e.preventDefault();
     })
 
-    function updatedetails(x) {
+    document.getElementById("patientsubmit").addEventListener("click", () => {
 
         //PatientName
         let firstname_patient = document.getElementById("fpn").value;
@@ -262,8 +262,8 @@
         suction.value = '';
 
         alert("Graph Updated")
-    }
 
+    })
 
 
     //Generating Chart
@@ -494,7 +494,7 @@
         })
     })
 
-    function delpatient() {
+    document.getElementById("remptn").addEventListener("click", () => {
         patients.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 if(doc.data().first_name == name_patient[0]){
@@ -507,9 +507,10 @@
 
         alert("Please go back to the main patients dashboard")
 
-    }
+    })
 
 
+})
 
 
 </script>
