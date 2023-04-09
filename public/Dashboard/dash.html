@@ -26,6 +26,8 @@
         <ul>
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
+                <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
+                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a>
             </li>
         </ul>
 
@@ -153,11 +155,22 @@
         e.preventDefault();
     })
 
+    document.getElementById("delacc").addEventListener("click", () => {
+        const currentUser = auth.currentUser
+        console.log(currentUser)
+        currentUser
+            .delete(currentUser)
+            .catch(err=>{console.log(err)})
+    })
 
-
+    document.getElementById("sigout").addEventListener("click", () => {
+        auth
+            .signOut()
+            .catch(err => console.log(err))
+    })
 
     auth.onAuthStateChanged(function (user) {
-
+        if(user){
         let userid = user.uid
 
 
@@ -281,6 +294,7 @@
 
             })
         }
+    }
     })
     function viewVerificationPopup() {
         document.getElementById('pop').style.display = 'block';

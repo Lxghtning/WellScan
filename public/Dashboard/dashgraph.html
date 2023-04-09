@@ -31,6 +31,8 @@
         <ul>
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
+                <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
+                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a>
             </li>
 
         </ul>
@@ -182,6 +184,7 @@ measurementId: "G-VMY2C911KT"
     })
 
     auth.onAuthStateChanged(function (user) {
+        if(user){
         let userid = user.uid
 
 
@@ -198,6 +201,21 @@ measurementId: "G-VMY2C911KT"
         document.getElementById("ptnf").addEventListener("submit", (e) => {
             e.preventDefault();
         })
+
+        document.getElementById("delacc").addEventListener("click", () => {
+            const currentUser = auth.currentUser
+            console.log(currentUser)
+            currentUser
+                .delete(currentUser)
+                .catch(err=>{console.log(err)})
+        })
+
+        document.getElementById("sigout").addEventListener("click", () => {
+            auth
+                .signOut()
+                .catch(err => console.log(err))
+        })
+    
 
         document.getElementById("patientsubmit").addEventListener("click", () => {
             //PatientName
@@ -533,8 +551,7 @@ measurementId: "G-VMY2C911KT"
             alert("Please go back to the main patients dashboard")
 
         })
-
-
+    }
     })
 
 
