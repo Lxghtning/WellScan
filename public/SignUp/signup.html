@@ -46,9 +46,6 @@
             <h5 class="loginredirect" id="redl">
                 Already have an account? <a href="/Login/page.html">Login</a>
             </h5>
-            <button id="siwg" class="signinwithgoogle">
-                Sign In With Google
-            </button>
         </form>
     </section>
 </body>
@@ -81,13 +78,7 @@
 
     const auth = firebase.auth();
 
-    const sip = document.getElementById("siwg")
-
-    const google = new firebase.auth.GoogleAuthProvider();
     const database = firebase.firestore()
-
-
-    sip.onclick = () => auth.signInWithPopup(google);
 
     //signout.onclick = () => auth.signOut
 
