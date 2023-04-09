@@ -98,15 +98,22 @@
         let pass_word = document.getElementById("pw").value;
 
 
-        auth.signInWithEmailAndPassword(email, pass_word).then(function() {
+        auth
+            .signInWithEmailAndPassword(email, pass_word).then(function() {
             location.href = "/Dashboard/dash.html"
-    })
-
-
-
-
-
-
+            })
+            .catch(err => {
+                if(typeof(err) === "object"){
+                    //console.log(err) //Future purposes
+                    var errmessage = ""
+                    switch(err.code){
+                        case "auth/invalid-email": errmessage = "The given email is incorrect. Please recheck it";break;
+                        case "auth/wrong-password": errmessage = "The given password is incorrect. Please recheck it";break;
+                        case "auth/user-not-found": errmessage = "No user under this email exists. Please go to the Sign-Up page and create an account";break;
+                    }
+                    alert(errmessage)
+                }
+            })
     };
 
 </script>
