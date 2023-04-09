@@ -11,6 +11,8 @@
     <!-- <script src="scriptss.js"></script> -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>WellScan</title>
 </head>
 
@@ -38,43 +40,60 @@
             </h1>
         </div>
     </section>
-    <form class="patientform" id="ptnf">
-        <span class="material-symbols-outlined" id="clbtn">
-            close
-        </span>
-        <h2 class="ptformhead">
-            Enter Patient Details
-        </h2>
-        <input class="PatientfName" id="fpn" name="FPTN" placeholder="First Name" required>
-        <input class="PatientlName" id="lpn" name="LPTN" placeholder="Last Name" required>
-        <h4 class="intake">
-            Intake (in ml)
-        </h4>
-        <div class="intakediv">
-            <input type="number" min="1" max="24" class="intime" id="intym" name="intimePTN"
-                placeholder="Intake Time(24 Hr)" required>
-            <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
-            <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
-            <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed" required>
+    <div id="ptnfbg" class="ptnfback">
+        <form class="patientform" id="ptnf">
+            <span class="material-symbols-outlined" id="clbtn">
+                close
+            </span>
+            <h2 class="ptformhead">
+                Enter Patient Details
+            </h2>
+            <input class="PatientfName" id="fpn" name="FPTN" placeholder="First Name" required>
+            <input class="PatientlName" id="lpn" name="LPTN" placeholder="Last Name" required>
+            <h4 class="intake">
+                Intake (in ml)
+            </h4>
+            <div class="intakediv">
+                <input type="number" min="1" max="24" class="intime" id="intym" name="intimePTN"
+                    placeholder="Intake Time(24 Hr)" required>
+                <input type="number" min="1" class="BP" id="bloodP" name="BPPTN" placeholder="Blood Pressure" required>
+                <input type="number" min="1" class="pulse" id="Pulsepn" name="PPTN" placeholder="Pulse" required>
+                <input type="number" min="1" class="ORNGF" id="orngpn" name="oralPTN" placeholder="Oral N.G Feed"
+                    required>
 
 
-        </div>
-        <h4 class="output">
-            Output (in ml)
-        </h4>
-        <div class="outputdiv">
+            </div>
+            <h4 class="output">
+                Output (in ml)
+            </h4>
+            <div class="outputdiv">
 
-            <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN"
-                placeholder="Output Time(24 Hr)" required>
-            <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
-            <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
-            <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
-            <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
+                <input type="number" min="1" max="24" class="outtime" id="outtym" name="outtimePTN"
+                    placeholder="Output Time(24 Hr)" required>
+                <input type="number" min="1" class="urine" id="urpn" name="URPTN" placeholder="Urine" required>
+                <input type="number" min="1" class="stool" id="stpn" name="STPTN" placeholder="Stool" required>
+                <input type="number" min="1" class="vomit" id="vmpn" name="VMTPNT" placeholder="Vomit" required>
+                <input type="number" min="1" class="suction" id="scpn" name="SCTPNT" placeholder="Suction" required>
 
-        </div>
-        <input class="submitp" type="submit" id="patientsubmit" value="Submit">
-    </form>
+            </div>
+            <input class="submitp" type="submit" id="patientsubmit" value="Submit">
+        </form>
+    </div>
     <canvas id="myChart"></canvas>
+    <div id="pop" class="popbg">
+        <div id="popup" class="popupdiv">
+
+            <span class="material-symbols-outlined" id="closebtn">
+                close
+            </span>
+            <span id="tick" class="material-symbols-outlined">
+                done
+            </span>
+            <h5 id="intext" class="ptdtad">
+                Patient Added!
+            </h5>
+        </div>
+    </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
@@ -107,16 +126,46 @@
     const auth = firebase.auth();
 
     const database = firebase.firestore()
+
+    document.getElementById('anchorpt').addEventListener('click', () => {
+        document.getElementById("ptnf").style.display = "block";
+        document.getElementById("ptnfbg").style.display = "block";
+
+    })
+
+    document.getElementById("clbtn").addEventListener("click", () => {
+        document.getElementById("ptnfbg").style.display = "block";
+        document.getElementById("ptnf").style.display = "none";
+        location.reload();
+    })
+
+    document.getElementById("closebtn").addEventListener("click", () => {
+        document.getElementById('popup').style.display = "none";
+        document.getElementById('pop').style.display = "none";
+        document.getElementById('intext').innerHTML = "Patient Added";
+        document.getElementById('tick').innerHTML = "done";
+        document.getElementById('tick').style.color = 'greenyellow';
+        document.getElementById('tick').style.border = '2px solid greenyellow';
+        location.reload();
+    })
+
+
+    document.getElementById("ptnf").addEventListener("submit", (e) => {
+        e.preventDefault();
+    })
+
+
     
-    auth.onAuthStateChanged(function(user){
+
+    auth.onAuthStateChanged(function (user) {
 
         let userid = user.uid
-    
 
-    let patients = database.collection(`patients${userid}`)
-    let innerhtml = database.collection(`innerhtml${userid}`)
 
-    innerhtml.get().then((querySnapshot) => {
+        let patients = database.collection(`patients${userid}`)
+        let innerhtml = database.collection(`innerhtml${userid}`)
+
+        innerhtml.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             newEL = document.createElement(doc.data().innertags)
             newEL.innerHTML = doc.data().innerwebel
@@ -130,107 +179,122 @@
             newEL.style.width = "1300px";
             newEL.style.borderRadius = "10px";
             newEL.style.textAlign = "center";
-            newEL.addEventListener("click", function(event){
+            newEL.addEventListener("click", function (event) {
                 localStorage.setItem("name_patient", event.target.innerHTML)
                 location.href = "/Dashboard/dashgraph.html"
-               
-        })
+
+            })
 
             document.getElementById('pb').appendChild(newEL);
         })
     })
-    document.getElementById('anchorpt').addEventListener('click', () => {
-        document.getElementById("dash").style.filter = "blur(2px)";
-        document.getElementById("ptnf").style.display = "block";
-        document.getElementById("ptnf").style.filter = "blur(0px)";
-
-    })
-
-    document.getElementById("clbtn").addEventListener("click", () => {
-        document.getElementById("dash").style.filter = "blur(0px)";
-        document.getElementById("ptnf").style.display = "none";
-        location.reload();
-    })
 
 
+        document.getElementById("patientsubmit").addEventListener("click", () => {
 
-    document.getElementById("ptnf").addEventListener("submit", (e) => {
-        e.preventDefault();
-    })
+            //patient
+            let firstname_patient = document.getElementById("fpn").value;
+            let lastname_patient = document.getElementById("lpn").value;
+            let intime = document.getElementById("intym").value;
+            let outtime = document.getElementById("outtym").value
 
-    document.getElementById("patientsubmit").addEventListener("click", ()=> {
+            //intake
+            let bp = document.getElementById("bloodP").value;
+            let pulse = document.getElementById("Pulsepn").value;
+            let oral_feed = document.getElementById("orngpn").value;
 
-        //patient
-        let firstname_patient = document.getElementById("fpn").value;
-        let lastname_patient = document.getElementById("lpn").value;
-        let intime = document.getElementById("intym").value;
-        let outtime = document.getElementById("outtym").value
+            //output
+            let urine = document.getElementById("urpn").value;
+            let stool = document.getElementById("stpn").value;
+            let vomit = document.getElementById("vmpn").value;
+            let suction = document.getElementById("scpn").value;
 
-        //intake
-        let bp = document.getElementById("bloodP").value;
-        let pulse = document.getElementById("Pulsepn").value;
-        let oral_feed = document.getElementById("orngpn").value;
+            patients.doc(firstname_patient).set({
+                first_name: firstname_patient,
+                last_name: lastname_patient,
+                intime: parseInt(intime),
+                outputTime: parseInt(outtime),
+                bp: parseInt(bp),
+                pulse: parseInt(pulse),
+                oral_feed: parseInt(oral_feed),
+                urine: parseInt(urine),
+                stool: parseInt(stool),
+                vomit: parseInt(vomit),
+                suction: parseInt(suction),
+                bparr: [parseInt(bp)],
+                pulsearr: [parseInt(pulse)],
+                ofarr: [parseInt(oral_feed)],
+                intimearr: [parseInt(intime)],
+                outimearr: [parseInt(outtime)],
+                urinearr: [parseInt(urine)],
+                stoolarr: [parseInt(stool)],
+                vomitarr: [parseInt(vomit)],
+                suctionarr: [parseInt(suction)]
+            })
 
-        //output
-        let urine = document.getElementById("urpn").value;
-        let stool = document.getElementById("stpn").value;
-        let vomit = document.getElementById("vmpn").value;
-        let suction = document.getElementById("scpn").value;
-
-        patients.doc(firstname_patient).set({
-            first_name: firstname_patient,
-            last_name: lastname_patient,
-            intime: parseInt(intime),
-            outputTime: parseInt(outtime),
-            bp: parseInt(bp),
-            pulse: parseInt(pulse),
-            oral_feed: parseInt(oral_feed),
-            urine: parseInt(urine),
-            stool: parseInt(stool),
-            vomit: parseInt(vomit),
-            suction: parseInt(suction),
-            bparr: [parseInt(bp)],
-            pulsearr: [parseInt(pulse)],
-            ofarr: [parseInt(oral_feed)],
-            intimearr: [parseInt(intime)],
-            outimearr: [parseInt(outtime)],
-            urinearr: [parseInt(urine)],
-            stoolarr: [parseInt(stool)],
-            vomitarr: [parseInt(vomit)],
-            suctionarr: [parseInt(suction)]
+            innerhtml.where('innerwebel', '==', firstname_patient).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (querySnapshot.empty()) {
+                        createNewElement()
+                        viewVerificationPopup()
+                       
+                    }
+                    else{
+                        viewWrongPopup()
+                    }
+                })
+            })
+            
+            
         })
 
-        createNewElement()
-  
+        function createNewElement() {
+            let several_patients = document.createElement("h1");
+
+            several_patients.className = "severalhead"
+            several_patients.style.backgroundColor = "gray";
+            several_patients.style.fontSize = "27px";
+            several_patients.style.color = "white";
+            several_patients.style.marginTop = "30px";
+            several_patients.style.height = "50px";
+            several_patients.style.width = "1300px";
+            several_patients.style.borderRadius = "10px";
+            several_patients.style.textAlign = "center";
+            several_patients.style.marginBottom = "30px";
+
+            several_patients.innerHTML = document.getElementById("fpn").value + " " + document.getElementById("lpn").value
+            several_patients.addEventListener("click", () => {
+                location.href = "/Dashboard/dashgraph.html"
+            })
+            document.getElementById('pb').appendChild(several_patients);
+
+            innerhtml.doc(document.getElementById("fpn").value).set({
+                innertags: several_patients.tagName.toLowerCase(),
+                innerwebel: several_patients.innerHTML,
+
+            })
+        }
     })
+    function viewVerificationPopup() {
+        document.getElementById('pop').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('ptnf').style.display = 'none';
+        document.getElementById('ptnfbg').style.display = 'none';
 
-    function createNewElement() {
-        let several_patients = document.createElement("h1");
+    };
 
-        several_patients.className = "severalhead"
-        several_patients.style.backgroundColor = "gray";
-        several_patients.style.fontSize = "27px";
-        several_patients.style.color = "white";
-        several_patients.style.marginTop = "30px";
-        several_patients.style.height = "50px";
-        several_patients.style.width = "1300px";
-        several_patients.style.borderRadius = "10px";
-        several_patients.style.textAlign = "center";
-        several_patients.style.marginBottom = "30px";
-
-        several_patients.innerHTML = document.getElementById("fpn").value + " " + document.getElementById("lpn").value
-        several_patients.addEventListener("click", () => {
-            location.href = "/Dashboard/dashgraph.html"
-        })
-        document.getElementById('pb').appendChild(several_patients);
-
-        innerhtml.doc(document.getElementById("fpn").value).set({
-            innertags: several_patients.tagName.toLowerCase(),
-            innerwebel: several_patients.innerHTML,
-
-        })
+    function viewWrongPopup() {
+        document.getElementById('pop').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('ptnf').style.display = 'none';
+        document.getElementById('ptnfbg').style.display = 'none';
+        document.getElementById('intext').innerHTML = "Patient already exists!";
+        document.getElementById('tick').innerHTML = "close";
+        document.getElementById('tick').style.color = 'red';
+        document.getElementById('tick').style.border = '2px solid red';
     }
-})
+
 
 </script>
+
 </html>

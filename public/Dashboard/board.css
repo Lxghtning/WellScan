@@ -100,13 +100,23 @@ nav ul li a:hover {
     text-align: center;
 }
 
+.ptnfback{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
 .patientform{
     background-color: white;
-    z-index: 1;
+    z-index: 999;
     height: 500px;
     width: 450px;
     border: 2px solid black;
-    margin-top: -50px;
+    margin-top: 108px;
     margin-left: 500px;
     box-shadow:0px 0px 65px 0px rgba(0, 0, 0, 0.43);
     display: none;
@@ -210,8 +220,58 @@ input{
     transition: ease-in;
     cursor: pointer;
 }
-    
 
+.popbg{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.popupdiv{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    height: 254px;
+    width: 347px;
+    border: 5px solid black;
+    margin-left: 572px;
+    margin-top: 170px;
+    background-color: #343f45;
+    color:white;
+}
+
+.popupdiv span:nth-child(2){
+    font-size: 100px;
+    color:greenyellow;;
+    border: 2px solid greenyellow;
+    border-radius: 100%;
+    margin-top: 20px;
+    margin-left: 118px;
+}
+
+#closebtn{
+    margin-left: 323px;
+}
+
+#closebtn:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.ptdtad{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+}
 
 /*Media Queries*/
 @media (max-width: 480px) and (min-width: 320px) {

@@ -22,7 +22,7 @@
 
         <ul>
             <li>
-                <a href="/Dashboard/dash.html">Dashboard</a>
+                <a href="#">Dashboard</a>
             </li>
 
             <!-- <span class="material-symbols-outlined">
@@ -81,6 +81,14 @@
 
     var auth = firebase.auth();
 
+    
+    auth.onAuthStateChanged(doctor => {
+        if (doctor) {
+            location.href = "/Dashboard/dash.html"
+
+        }
+    })
+    
     //NAV change func
     function tochange(x) {
         x.classList.toggle("change");
@@ -93,28 +101,11 @@
         e.preventDefault();
     })
 
-    const firebaseConfig = {
-
-        apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
-
-        authDomain: "hackathon--23.firebaseapp.com",
-
-        projectId: "hackathon--23",
-
-        storageBucket: "hackathon--23.appspot.com",
-
-        messagingSenderId: "596815595297",
-
-        appId: "1:596815595297:web:84854bdb064d4737e66060",
-
-        measurementId: "G-VMY2C911KT"
-
-    };
+    
+   
 
 
-    // Initialize Firebase
-
-    firebase.initializeApp(firebaseConfig);
+    
 
     function formfunc(x) {
         let email = document.getElementById("email").value;
