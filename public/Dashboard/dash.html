@@ -27,6 +27,7 @@
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
                 <a class="active" href="/SignUp/signup.html"> Sign out</a>
+                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a>
             </li>
         </ul>
 
@@ -155,7 +156,13 @@
         e.preventDefault();
     })
 
-
+    document.getElementById("delacc").addEventListener("click", () => {
+        const currentUser = auth.currentUser
+        console.log(currentUser)
+        currentUser
+            .delete(currentUser)
+            .catch(err=>{console.log(err)})
+    })
 
 
     auth.onAuthStateChanged(function (user) {

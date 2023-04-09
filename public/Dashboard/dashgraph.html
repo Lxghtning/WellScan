@@ -30,6 +30,7 @@
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
                 <a class="active" href="/SignUp/signup.html"> Sign out</a>
+                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a>
             </li>
 
         </ul>
@@ -214,6 +215,15 @@
         document.getElementById("ptnf").addEventListener("submit", (e) => {
             e.preventDefault();
         })
+
+        document.getElementById("delacc").addEventListener("click", () => {
+            const currentUser = auth.currentUser
+            console.log(currentUser)
+            currentUser
+                .delete(currentUser)
+                .catch(err=>{console.log(err)})
+        })
+    
 
         document.getElementById("patientsubmit").addEventListener("click", () => {
             //PatientName
