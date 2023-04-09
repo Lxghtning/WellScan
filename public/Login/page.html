@@ -39,6 +39,7 @@
             <input class="emailuser" id="email" name="userEmail" placeholder="Email" required>
             <input type="password" class="pass" id="pw" name="PassAc" placeholder="Password" required>
             <input class="submitc" type="submit" id="contactsubmit" value="Sign Up" onclick="formfunc()">
+            <button id="liwg" class="loginwithgoogle"> Log in with google </button>
             <div id="wm" class="warning">Incorrect Password!</div>
             <div id="ewm" class="Ewarning">Email not recognized!</div>
             <div id="lwm" class="Lwarning">Login Credentials not found!</div>
@@ -81,11 +82,22 @@
 
     var auth = firebase.auth();
 
+    const google = new firebase.auth.GoogleAuthProvider();
+    const lin = document.getElementById("liwg")
+
+    lin.onclick = () => {
+        auth
+            .signInWithPopup(google)
+            .catch(err => {
+                if(typeof(err) === "object"){
+                    console.log(err);
+                }
+            })
+    }
     
     auth.onAuthStateChanged(doctor => {
         if (doctor) {
             location.href = "/Dashboard/dash.html"
-
         }
     })
     
@@ -100,16 +112,6 @@
     document.getElementById("form").addEventListener("submit", (e) => {
         e.preventDefault();
     })
-
-<<<<<<< HEAD
-    
-   
-
-
-    
-
-=======
->>>>>>> c49c8b73a61e5ef1770006f53c3bf77b457fd1bd
     function formfunc(x) {
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
