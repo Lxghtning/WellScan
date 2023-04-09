@@ -134,7 +134,18 @@
         }
 
         else {
-            auth.createUserWithEmailAndPassword(email, pass_word).then(function () { location.href = "/Dashboard/dash.html" })
+            auth
+                .createUserWithEmailAndPassword(email, pass_word).then(function () { location.href = "/Dashboard/dash.html" })
+                .catch(err => {
+                    if(typeof(err) === "object"){
+                        var errmessage = ""
+                        switch(err.code){
+                            case "auth/invalid-email": errmessage = "The given email is invalid. Please recheck";break;
+                            case "auth/weak-password": errmessage = "The given password is very weak. The password must be of atleast 6 characters";break;
+                        }
+                        alert(errmessage)
+                    }
+                })
         }
 
 
