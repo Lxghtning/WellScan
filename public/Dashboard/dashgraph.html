@@ -35,10 +35,18 @@
         <ul>
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
-                <a class="active" href="/Login/page.html" id="sigout"> Sign out</a>
-                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a>
+                <div class="drp">
+                    <span id="log" class="material-symbols-outlined">
+                        menu
+                        </span>
+                        <div id="condrop" class="drpcon">
+                            <a id="signout" href="/Login/page.html"> Sign Out <i class="material-symbols-outlined"> logout </i></a>
+                            <a id="delacc" href="/Signup/signup.html"> Delete Account <i class="material-symbols-outlined"> delete </i></a>
+                            </div>
+                        </div>
+                <!-- <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
+                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a> -->
             </li>
-
         </ul>
         <div class="name">
             WellScan
@@ -175,6 +183,17 @@
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
         }
     }
+    localStorage.setItem("drop", "none")
+    document.getElementById("log").addEventListener("click", ()=> {
+        if(localStorage.getItem("drop") === "none"){
+            localStorage.setItem("drop", "block")
+            document.getElementById("condrop").style.display = "block";
+        }
+        else{
+            localStorage.setItem("drop", "none");
+            document.getElementById("condrop").style.display = "none";
+        }
+    })
     function arrangeHours(arr) {
         const newArr = [arr[0]];
         for (let i = 1; i < arr.length; i++) {
@@ -247,7 +266,7 @@
                     .catch(err => { console.log(err) })
             })
 
-            document.getElementById("sigout").addEventListener("click", () => {
+            document.getElementById("signout").addEventListener("click", () => {
                 auth
                     .signOut()
                     .catch(err => console.log(err))
@@ -461,17 +480,17 @@
                                     text: 'Fluid Intake'
                                 },
                                 scales: {
+                                    yAxes: [{
+                                        offset: true
+                                    }],
+                                    xAxes: [{
+                                        offset: true
+                                    }],
                                     y: {
                                         beginAtZero: true,
-                                        grid: {
-                                            offset: true
-                                        }
                                     },
                                     x: {
                                         beginAtZero: true,
-                                        grid: {
-                                            offset: true
-                                        }
                                     },
                                 }
                             }
