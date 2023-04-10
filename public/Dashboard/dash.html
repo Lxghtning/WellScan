@@ -26,8 +26,17 @@
         <ul>
             <li>
                 <a class="active" href="#Dashboard">Dashboard</a>
-                <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
-                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a>
+                <div class="drp">
+                    <span id="log" class="material-symbols-outlined">
+                        logout
+                        </span>
+                        <div id="condrop" class="drpcon">
+                            <a id="signout" href="#">SignOut</a>
+                            <a id="delacc" href="#">DeleteAccount</a>
+                            </div>
+                        </div>
+                <!-- <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
+                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a> -->
             </li>
         </ul>
 
@@ -106,6 +115,19 @@
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
         }
     }
+
+    localStorage.setItem("drop", "none")
+    document.getElementById("log").addEventListener("click", ()=> {
+        if(localStorage.getItem("drop") === "none"){
+            localStorage.setItem("drop", "block")
+            document.getElementById("condrop").style.display = "block";
+        }
+        else{
+            localStorage.setItem("drop", "none");
+            document.getElementById("condrop").style.display = "none";
+        }
+    })
+
     var firebaseConfig = {
 
         apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -170,7 +192,7 @@
             .catch(err=>{console.log(err)})
     })
 
-    document.getElementById("sigout").addEventListener("click", () => {
+    document.getElementById("signout").addEventListener("click", () => {
         auth
             .signOut()
             .catch(err => console.log(err))
