@@ -24,15 +24,15 @@
             <div class="bar3"></div>
         </div>
         <ul>
-            <li> 
-                <a class="active" href="#Dashboard">Dashboard</a> 
+            <li>
+                <a class="active" href="#Dashboard">Dashboard</a>
                 <div class="drp">
                     <span id="log" class="material-symbols-outlined">
-                        logout
+                        menu
                         </span>
                         <div id="condrop" class="drpcon">
-                            <a id="signout" href="#">SignOut</a>
-                            <a id="delacc" href="#">DeleteAccount</a>
+                            <a id="signout" href="/Login/page.html"> Sign Out <i class="material-symbols-outlined"> logout </i></a>
+                            <a id="delacc" href="/Signup/signup.html"> Delete Account <i class="material-symbols-outlined"> delete </i></a>
                             </div>
                         </div>
                 <!-- <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
@@ -110,9 +110,10 @@
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
-        window.onload = function () {
+    window.onload = function () {
         if (localStorage.getItem('scrollPosition') !== null && localStorage.getItem('formData') !== null) {
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
+            console.log("hi")
         }
     }
 
@@ -123,8 +124,8 @@
             document.getElementById("condrop").style.display = "block";
         }
         else{
-            localStorage.setItem("drop", "none"); 
-             document.getElementById("condrop").style.display = "none";
+            localStorage.setItem("drop", "none");
+            document.getElementById("condrop").style.display = "none";
         }
     })
 
