@@ -416,6 +416,8 @@
                                     data: bparr,
                                     backgroundColor: 'orange',
                                     borderWidth: 1,
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
 
                                 },
                                 {
@@ -430,7 +432,8 @@
                                     data: pulsearr,
                                     backgroundColor: 'cyan',
                                     borderWidth: 1,
-
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
 
                                 }, {
                                     label: 'Oral-Feed',
@@ -446,8 +449,8 @@
                                     data: ofarr,
                                     backgroundColor: 'rgb(144, 238, 144)',
                                     borderWidth: 1,
-
-
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
                                 }]
                             },
                             options: {
@@ -458,19 +461,17 @@
                                     text: 'Fluid Intake'
                                 },
                                 scales: {
-                                    xAxes: [{
-                                        barPercentage: 0.6,
-                                        categoryPercentage: 0.6,
-                                        offset: true,
-                                    }],
-                                    yAxes: [{
-                                        offset: true,
-                                    }],
                                     y: {
-                                        beginAtZero: true
+                                        beginAtZero: true,
+                                        grid: {
+                                            offset: true
+                                        }
                                     },
                                     x: {
-                                        beginAtZero: true
+                                        beginAtZero: true,
+                                        grid: {
+                                            offset: true
+                                        }
                                     },
                                 }
                             }
@@ -533,7 +534,9 @@
                                     label: 'Urine',
                                     data: urinearr,
                                     backgroundColor: 'red',
-                                    borderWidth: 1
+                                    borderWidth: 1,
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
                                 }, {
                                     label: 'Stool',
                                     data: stoolarr,
@@ -545,6 +548,8 @@
                                     label: 'Stool',
                                     data: stoolarr,
                                     backgroundColor: 'blue',
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
                                 }, {
                                     label: 'Vomit',
                                     data: vomitarr,
@@ -556,6 +561,8 @@
                                     label: 'Vomit',
                                     data: vomitarr,
                                     backgroundColor: 'green',
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
                                 },
                                 {
                                     label: 'Suction',
@@ -569,6 +576,8 @@
                                     label: 'Suction',
                                     data: suctionarr,
                                     backgroundColor: 'yellow',
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
                                 }]
                             },
                             options: {
@@ -579,18 +588,18 @@
                                     text: 'Fluid Output'
                                 },
                                 scales: {
-                                    xAxes: [{
-                                        offset: true,
-                                    }],
-                                    yAxes: [{
-                                        offset: true,
-                                    }],
                                     y: {
                                         beginAtZero: true,
+                                        grid: {
+                                            offset: true
+                                        }
                                     },
                                     x: {
                                         beginAtZero: true,
-                                    }
+                                        grid: {
+                                            offset: true
+                                        }
+                                    },
                                 }
                             }
                         })
