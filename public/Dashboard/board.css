@@ -76,22 +76,31 @@ h1:hover{
     cursor:pointer;
 }
 
+.patientdets{
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 20px;
+    
+}
+
 .patientbox {
-    margin-left: 100px;
+    position: absolute;
+    margin-left: 1200px;
     margin-top: 50px;
-    width: 1300px;
+    width: 300px;
     height: 50px;
-    background-color: gray;
+    background-color: greenyellow;
+    border: 2px solid black;
     border-radius: 10px;
 }
 
 .headpt a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .headpt a:hover {
-    color: aqua;
+    color: grey;
     cursor: pointer;
 }
 

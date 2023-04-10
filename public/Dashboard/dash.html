@@ -45,11 +45,12 @@
         </div>
     </nav>
     <section class="Dashboard" id="dash">
-        <div class="patientbox" id="pb">
+        <div class="patientbox" >
             <h1 class="headpt">
                 <a id="anchorpt">Add a new patient</a>
             </h1>
         </div>
+        <div class="patientdets" id="pb"></div>
     </section>
     <div id="ptnfbg" class="ptnfback">
         <form class="patientform" id="ptnf">
@@ -214,13 +215,12 @@
                 newEL.className = "severalhead"
                 newEL.style.backgroundColor = "gray";
                 newEL.style.fontSize = "27px";
-                newEL.style.color = "white";
-                newEL.style.marginTop = "30px";
+                newEL.style.color = "black";
                 newEL.style.marginBottom = "30px";
                 newEL.style.height = "50px";
-                newEL.style.width = "1300px";
-                newEL.style.borderRadius = "10px";
-                newEL.style.textAlign = "center";
+                newEL.style.width = "1490px";
+                newEL.style.borderRadius = "5px";
+                newEL.style.textAlign = "left";
                 newEL.addEventListener("click", function (event) {
                     localStorage.setItem("name_patient", event.target.innerHTML)
                     location.href = "/Dashboard/dashgraph.html"
@@ -317,14 +317,12 @@
             let several_patients = document.createElement("h1");
 
             several_patients.className = "severalhead"
-            several_patients.style.backgroundColor = "gray";
+            // several_patients.style.backgroundColor = "gray";
             several_patients.style.fontSize = "27px";
-            several_patients.style.color = "white";
-            several_patients.style.marginTop = "30px";
+            several_patients.style.color = "black";
             several_patients.style.height = "50px";
             several_patients.style.width = "1300px";
             several_patients.style.borderRadius = "10px";
-            several_patients.style.textAlign = "center";
             several_patients.style.marginBottom = "30px";
 
             several_patients.innerHTML = document.getElementById("fpn").value + " " + document.getElementById("lpn").value
