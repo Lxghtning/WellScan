@@ -22,12 +22,14 @@ nav {
 }
 
 nav ul {
+
     list-style: none;
     display: flex;
     margin-left: 1200px;
 }
 
 nav ul li {
+ 
     margin-top: -5px;
     margin-left: 40px;
     font-size: 20px;
@@ -273,6 +275,7 @@ input {
 }
 
 #log{
+    position:relative;
     color:white;
     margin-top: 15px;
     margin-left: 50px;
@@ -284,13 +287,14 @@ input {
 }
 
 .drp {
-    position: relative;
+
     display: inline-block;
     height: 50px;
     width: 150px;
   }
 
 .drpcon{
+    position:absolute;
     display: none;
     font-size: 20px;
     background-color: black;;

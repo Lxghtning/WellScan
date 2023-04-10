@@ -48,13 +48,31 @@
                 Already have an account? <a href="/Login/page.html">Login</a>
             </h5>
         </form>
+        
     </section>
+    <div id="pop" class="popbg">
+        <div id="popup" class="popupdiv">
+
+            <span class="material-symbols-outlined" id="closebtn">
+                close
+            </span>
+            <span id="tick" class="material-symbols-outlined">
+                close
+            </span>
+            <h5 id="intext" class="ptdtad">
+                
+            </h5>
+        </div>
+    </div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
-
+    document.getElementById("closebtn").addEventListener("click", () => {
+        document.getElementById('popup').style.display = "none";
+        document.getElementById('pop').style.display = "none";
+    })
     var firebaseConfig = {
 
         apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -131,12 +149,19 @@
                 .createUserWithEmailAndPassword(email, pass_word).then(function () { location.href = "/Dashboard/dash.html" })
                 .catch(err => {
                     if(typeof(err) === "object"){
-                        var errmessage = ""
                         switch(err.code){
-                            case "auth/invalid-email": errmessage = "The given email is invalid. Please recheck";break;
-                            case "auth/weak-password": errmessage = "The given password is very weak. The password must be of atleast 6 characters";break;
+                            case "auth/invalid-email": 
+                            document.getElementById('pop').style.display = 'block';
+                        document.getElementById('popup').style.display = 'block';
+                        document.getElementById('intext').innerHTML = "Invalid Email!";
+                            break;
+                            case "auth/weak-password":
+                            document.getElementById('pop').style.display = 'block';
+                            document.getElementById('popup').style.display = 'block';
+                            document.getElementById('intext').innerHTML = "Password must be of 6 characters!";
+                            break;
                         }
-                        alert(errmessage)
+                        
                     }
                 })
         }
