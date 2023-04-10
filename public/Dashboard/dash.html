@@ -212,14 +212,16 @@
                 newEL = document.createElement(doc.data().innertags)
                 newEL.innerHTML = doc.data().innerwebel
                 newEL.className = "severalhead"
-                newEL.style.backgroundColor = "gray";
+                newEL.style.backgroundColor = "#D3D3D3"
                 newEL.style.fontSize = "27px";
                 newEL.style.color = "black";
                 newEL.style.marginBottom = "30px";
                 newEL.style.height = "50px";
-                newEL.style.width = "1490px";
+                newEL.style.width = "1625px";
                 newEL.style.borderRadius = "5px";
-                newEL.style.textAlign = "left";
+                newEL.style.textAlign = "center";
+                newEL.style.border = "2px solid black";
+
                 newEL.addEventListener("click", function (event) {
                     localStorage.setItem("name_patient", event.target.innerHTML)
                     location.href = "/Dashboard/dashgraph.html"
