@@ -241,6 +241,7 @@ canvas {
 }
 
 .ptdetails {
+    background-color: rgb(244, 244, 244);
     margin-top: 20px;
     margin-left: 70px;
     height: 350px;
@@ -289,7 +290,7 @@ canvas {
 .patientform {
     margin-top: 20px;
     margin-left: 1100px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(244, 244, 244);
     height: 470px;
     width: 400px;
     border: 2px solid black;
