@@ -168,76 +168,54 @@ input{
 }
 
 
-/*Media Queries*/
-@media (max-width: 480px) and (min-width: 320px) {
+.popbg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
 
-    .name{
-        display:none;
-    }
-    .greet {
-        font-size: 45px;
-        margin-left: 20px;
-    
-    }
+.popupdiv {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    height: 254px;
+    width: 347px;
+    border: 5px solid black;
+    margin-left: 572px;
+    margin-top: 170px;
+    background-color: #343f45;
+    color: white;
+}
 
-    .texts {
-        margin-left: 140px;
-        font-size: 35px;
-        margin-top: -80px;
-    }
+.popupdiv span:nth-child(2) {
+    font-size: 100px;
+    color: red;
+    border: 2px solid red;
+    border-radius: 100%;
+    margin-top: 20px;
+    margin-left: 118px;
+}
 
-    
-    
-    .container {
-        display: inline-block;
-    }
+#closebtn {
+    margin-left: 323px;
+}
 
-    .bar1,
-    .bar2,
-    .bar3 {
-        width: 35px;
-        height: 5px;
-        background-color: white;
-        margin: 9px 0;
-        margin-left: 15px;
-        transition: 0.4s;
-    }
+#closebtn:hover {
+    color: red;
+    cursor: pointer;
+}
 
-    .change .bar1 {
-        transform: translate(0, 17px) rotate(-225deg);
-    }
-
-    .change .bar2 {
-        opacity: 0;
-    }
-
-    .change .bar3 {
-        transform: translate(0, -11px) rotate(225deg);
-    }
-
-    .newnav {
-        width: 250px;
-        background-color: black;
-        height: 100vh;
-        transition: 0.5s;
-    }
-
-    nav ul {
-        display: block;
-        margin-left: 100px;
-        margin-top: -30vh;
-    }
-
-    nav ul li {
-        margin-top: -100px;
-    }
-
-    nav ul li a:hover {
-        text-decoration: none;
-        cursor: pointer;
-        background-color: white;
-        color: black;
-        padding: 10px 10px;
-        border-radius: 20px;
-    }
+.ptdtad {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
 }

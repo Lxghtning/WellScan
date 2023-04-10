@@ -50,13 +50,30 @@
                 <a href="forgotpassword">Forgot Password?</a>
             </h5>
         </form>
+        <div id="pop" class="popbg">
+            <div id="popup" class="popupdiv">
+    
+                <span class="material-symbols-outlined" id="closebtn">
+                    close
+                </span>
+                <span id="tick" class="material-symbols-outlined">
+                    close
+                </span>
+                <h5 id="intext" class="ptdtad">
+                    
+                </h5>
+            </div>
+        </div>
     </section>
 </body>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
-
+    document.getElementById("closebtn").addEventListener("click", () => {
+        document.getElementById('popup').style.display = "none";
+        document.getElementById('pop').style.display = "none";
+    })
     var firebaseConfig = {
 
         apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -110,14 +127,25 @@
             })
             .catch(err => {
                 if(typeof(err) === "object"){
-                    //console.log(err) //Future purposes
-                    var errmessage = ""
+                    
                     switch(err.code){
-                        case "auth/invalid-email": errmessage = "The given email is incorrect. Please recheck it";break;
-                        case "auth/wrong-password": errmessage = "The given password is incorrect. Please recheck it";break;
-                        case "auth/user-not-found": errmessage = "No user under this email exists. Please go to the Sign-Up page and create an account";break;
+                        case "auth/invalid-email": 
+                        document.getElementById('pop').style.display = 'block';
+                        document.getElementById('popup').style.display = 'block';
+                        document.getElementById('intext').innerHTML = "Incorrect Email!";
+                        break;
+                        case "auth/wrong-password": 
+                        document.getElementById('pop').style.display = 'block';
+                        document.getElementById('popup').style.display = 'block';
+                        document.getElementById('intext').innerHTML = "Incorrect Password!";
+                        break;
+                        case "auth/user-not-found": 
+                        document.getElementById('pop').style.display = 'block';
+                        document.getElementById('popup').style.display = 'block';
+                        document.getElementById('intext').innerHTML = "User Not Found!";
+                        break;
                     }
-                    alert(errmessage)
+                    
                 }
             })
     };
