@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- <script src="scriptss.js"></script> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
+
     <title>WellScan</title>
 </head>
 
@@ -47,12 +46,12 @@
                 Don't have an account? <a href="/SignUp/signup.html">Login</a>
             </h5>
             <h5 class="resetpass">
-                <a href="forgotpassword">Forgot Password?</a>
+                <a id="forgotpass" href="#">Forgot Password?</a>
             </h5>
         </form>
         <div id="pop" class="popbg">
             <div id="popup" class="popupdiv">
-    
+                
                 <span class="material-symbols-outlined" id="closebtn">
                     close
                 </span>
@@ -62,6 +61,7 @@
                 <h5 id="intext" class="ptdtad">
                     
                 </h5>
+                <input class="email" id="emailuser" name="userEmail" placeholder="Email" required>
             </div>
         </div>
     </section>
@@ -73,6 +73,10 @@
     document.getElementById("closebtn").addEventListener("click", () => {
         document.getElementById('popup').style.display = "none";
         document.getElementById('pop').style.display = "none";
+        document.getElementById('emailuser').style.display = "none";
+        document.getElementById('tick').innerHTML = "close";
+        document.getElementById('tick').style.color = "red";
+        document.getElementById('tick').style.border = '2px solid red';
     })
     var firebaseConfig = {
 
@@ -101,7 +105,7 @@
 
     auth.onAuthStateChanged(doctor => {
         if (doctor) {
-            location.href = "/Dashboard/dash.html"
+            // location.href = "/Dashboard/dash.html"
         }
     })
     
@@ -116,6 +120,16 @@
     document.getElementById("form").addEventListener("submit", (e) => {
         e.preventDefault();
     })
+
+    document.getElementById("forgotpass").addEventListener("click", () => {
+        document.getElementById('popup').style.display = "block";
+        document.getElementById('pop').style.display = "block";
+        document.getElementById('emailuser').style.display = "block";
+        document.getElementById('tick').innerHTML = "more_horiz";
+        document.getElementById('tick').style.color = "greenyellow";
+        document.getElementById('tick').style.border = '2px solid greenyellow';
+    });
+
     function formfunc(x) {
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
@@ -127,7 +141,10 @@
             })
             .catch(err => {
                 if(typeof(err) === "object"){
-                    
+            document.getElementById('emailuser').style.display = "none";
+        document.getElementById('tick').innerHTML = "close";
+        document.getElementById('tick').style.color = "red";
+        document.getElementById('tick').style.border = '2px solid red';
                     switch(err.code){
                         case "auth/invalid-email": 
                         document.getElementById('pop').style.display = 'block';

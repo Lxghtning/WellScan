@@ -32,9 +32,8 @@ nav ul {
 }
 
 nav ul li {
- 
     margin-top: -5px;
-    margin-left: 218px;
+    margin-left: 58px;
     font-size: 20px;
     color: white;
 }
@@ -89,7 +88,7 @@ h1:hover{
 
 .patientbox {
     position: absolute;
-    margin-left: 1296px;
+    margin-left: 1160px;
     margin-top: 50px;
     width: 350px;
     height: 50px;
@@ -104,7 +103,7 @@ h1:hover{
 }
 
 .headpt a:hover {
-    color: grey;
+    color: whitesmoke;
     cursor: pointer;
 }
 

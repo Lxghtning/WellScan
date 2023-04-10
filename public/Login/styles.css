@@ -41,8 +41,8 @@ nav ul {
 }
 
 nav ul li {
-    margin-top: 7px;
-    margin-left: 40px;
+    margin-top: 15px;
+    margin-left: 150px;
     font-size: 20px;
     color: white;
 }
@@ -223,4 +223,23 @@ input{
     font-size: 25px;
     text-align: center;
     margin-top: 20px;
+}
+
+.email{
+    height:25px;
+    margin-left: 40px;
+    border: 2px solid black;
+}
+
+.resetpass{
+    margin-top: 10px;
+}
+.resetpass a{
+    margin-left: 155px;
+    text-decoration: underline;
+}
+
+.resetpass a:hover{
+    cursor:pointer;
+    font-size: 14px;
 }
