@@ -226,7 +226,6 @@ input{
 }
 
 .email{
-    color:black;
     height:25px;
     margin-left: 40px;
     border: 2px solid black;
@@ -258,5 +257,5 @@ input{
 
 .subforgot:hover{
     padding: 4px;
-    cursor:pointer;
+    cursor: pointer;
 }
