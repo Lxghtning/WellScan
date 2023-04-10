@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <title>WellScan</title>
 </head>
@@ -43,7 +44,7 @@
             <div id="ewm" class="Ewarning">Email not recognized!</div>
             <div id="lwm" class="Lwarning">Login Credentials not found!</div>
             <h5 class="loginredirect" id="redl">
-                Don't have an account? <a href="/SignUp/signup.html">Login</a>
+                Don't have an account? <a href="/SignUp/signup.html">Sign Up</a>
             </h5>
             <h5 class="resetpass">
                 <a id="forgotpass" href="#">Forgot Password?</a>
@@ -51,7 +52,7 @@
         </form>
         <div id="pop" class="popbg">
             <div id="popup" class="popupdiv">
-                
+
                 <span class="material-symbols-outlined" id="closebtn">
                     close
                 </span>
@@ -59,9 +60,10 @@
                     close
                 </span>
                 <h5 id="intext" class="ptdtad">
-                    
+
                 </h5>
-                <input class="email" id="emailuser" name="userEmail" placeholder="Email" required>
+                <input class="email" id="emailuser" name="userEmail" placeholder="Enter Email" required>
+                <input class="subforgot" type="submit" id="sub" value="Submit">
             </div>
         </div>
     </section>
@@ -71,12 +73,16 @@
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
     document.getElementById("closebtn").addEventListener("click", () => {
+        document.getElementById('intext').innerHTML = " "
         document.getElementById('popup').style.display = "none";
         document.getElementById('pop').style.display = "none";
         document.getElementById('emailuser').style.display = "none";
         document.getElementById('tick').innerHTML = "close";
+        document.getElementById('sub').style.display = "none";
         document.getElementById('tick').style.color = "red";
         document.getElementById('tick').style.border = '2px solid red';
+        document.getElementById('emailuser').value = " ";
+        
     })
     var firebaseConfig = {
 
@@ -105,10 +111,10 @@
 
     auth.onAuthStateChanged(doctor => {
         if (doctor) {
-            // location.href = "/Dashboard/dash.html"
+            location.href = "/Dashboard/dash.html"
         }
     })
-    
+
     //NAV change func
     function tochange(x) {
         x.classList.toggle("change");
@@ -125,44 +131,74 @@
         document.getElementById('popup').style.display = "block";
         document.getElementById('pop').style.display = "block";
         document.getElementById('emailuser').style.display = "block";
+        document.getElementById('sub').style.display = "block";
         document.getElementById('tick').innerHTML = "more_horiz";
         document.getElementById('tick').style.color = "greenyellow";
         document.getElementById('tick').style.border = '2px solid greenyellow';
-    });
+    })
+    try {
+        document.getElementById("sub").addEventListener("click", () => {
 
+            email = document.getElementById('emailuser').value;
+            auth.sendPasswordResetEmail(email.trim()).then(function () {
+                document.getElementById('popup').style.display = "block";
+                document.getElementById('pop').style.display = "block";
+                document.getElementById('emailuser').style.display = "none";
+
+                document.getElementById('intext').innerHTML = "Email Sent!"
+                document.getElementById('sub').style.display = "none";
+                document.getElementById('tick').innerHTML = "done";
+                document.getElementById('tick').style.color = "greenyellow";
+                document.getElementById('tick').style.border = '2px solid greenyellow';
+            }).catch(e => {
+                if (typeof (e) === "object") {
+                    document.getElementById('emailuser').style.display = "none";
+                    document.getElementById('intext').innerHTML = "Email Address Invalid!"
+                    document.getElementById('sub').style.display = "none";
+                    document.getElementById('tick').innerHTML = "close";
+                    document.getElementById('tick').style.color = "red";
+                    document.getElementById('tick').style.border = '2px solid red';
+                    
+                }
+            })
+        })
+    } catch (e) {
+        if (e instanceof TypeError) { }
+    }
     function formfunc(x) {
         let email = document.getElementById("email").value;
         let pass_word = document.getElementById("pw").value;
 
 
         auth
-            .signInWithEmailAndPassword(email, pass_word).then(function() {
-            location.href = "/Dashboard/dash.html"
+            .signInWithEmailAndPassword(email, pass_word).then(function () {
+                location.href = "/Dashboard/dash.html"
             })
             .catch(err => {
-                if(typeof(err) === "object"){
-            document.getElementById('emailuser').style.display = "none";
-        document.getElementById('tick').innerHTML = "close";
-        document.getElementById('tick').style.color = "red";
-        document.getElementById('tick').style.border = '2px solid red';
-                    switch(err.code){
-                        case "auth/invalid-email": 
-                        document.getElementById('pop').style.display = 'block';
-                        document.getElementById('popup').style.display = 'block';
-                        document.getElementById('intext').innerHTML = "Incorrect Email!";
-                        break;
-                        case "auth/wrong-password": 
-                        document.getElementById('pop').style.display = 'block';
-                        document.getElementById('popup').style.display = 'block';
-                        document.getElementById('intext').innerHTML = "Incorrect Password!";
-                        break;
-                        case "auth/user-not-found": 
-                        document.getElementById('pop').style.display = 'block';
-                        document.getElementById('popup').style.display = 'block';
-                        document.getElementById('intext').innerHTML = "User Not Found!";
-                        break;
+                if (typeof (err) === "object") {
+                    document.getElementById('emailuser').style.display = "none";
+                    document.getElementById('tick').innerHTML = "close";
+                    document.getElementById('tick').style.color = "red";
+                    document.getElementById('tick').style.border = '2px solid red';
+                    document.getElementById('sub').style.display = "none";
+                    switch (err.code) {
+                        case "auth/invalid-email":
+                            document.getElementById('pop').style.display = 'block';
+                            document.getElementById('popup').style.display = 'block';
+                            document.getElementById('intext').innerHTML = "Incorrect Email!";
+                            break;
+                        case "auth/wrong-password":
+                            document.getElementById('pop').style.display = 'block';
+                            document.getElementById('popup').style.display = 'block';
+                            document.getElementById('intext').innerHTML = "Incorrect Password!";
+                            break;
+                        case "auth/user-not-found":
+                            document.getElementById('pop').style.display = 'block';
+                            document.getElementById('popup').style.display = 'block';
+                            document.getElementById('intext').innerHTML = "User Not Found!";
+                            break;
                     }
-                    
+
                 }
             })
     };

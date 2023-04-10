@@ -435,7 +435,7 @@ input {
     background-color: black;;
     height: 70px;
     width: 200px;
-    margin-left: 10px;
+    margin-left: -33px;
     border-radius: 10px;
 }
 
@@ -446,5 +446,5 @@ input {
 }
 
 .drpcon a:hover{
-    font-size: 22px;
+    font-size: 19px;
 }

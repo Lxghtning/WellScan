@@ -9,10 +9,12 @@
     -ms-user-select: none;
     user-select: none; */
 }
+
 body {
     background-size: cover;
     background-color: #caf0f8;
 }
+
 /* -- Nav Bar -- */
 
 nav {
@@ -74,11 +76,11 @@ nav ul li a:hover {
 }
 
 
-h1:hover{
-    cursor:pointer;
+h1:hover {
+    cursor: pointer;
 }
 
-.patientdets{
+.patientdets {
     position: absolute;
     margin-top: 120px;
     margin-left: 20px;
@@ -286,14 +288,14 @@ input {
     margin-top: 20px;
 }
 
-#log{
-    position:relative;
-    color:white;
+#log {
+    position: relative;
+    color: white;
     margin-top: 15px;
     margin-left: 50px;
 }
 
-#log:hover{
+#log:hover {
     cursor: pointer;
     font-size: 27px;
 }
@@ -303,25 +305,26 @@ input {
     display: inline-block;
     height: 50px;
     width: 150px;
-  }
+}
 
-.drpcon{
-    position:absolute;
+.drpcon {
+    position: absolute;
     display: none;
     font-size: 20px;
-    background-color: black;;
+    background-color: black;
+    ;
     height: 70px;
     width: 200px;
-    margin-left: 10px;
+    margin-left: -33px;
     border-radius: 10px;
 }
 
-.drpcon a{
+.drpcon a {
     margin-left: 10px;
     color: white;
     text-decoration: none;
 }
 
-.drpcon a:hover{
-    font-size: 22px;
+.drpcon a:hover {
+    font-size: 19px;
 }

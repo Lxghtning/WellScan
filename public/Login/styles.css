@@ -226,6 +226,7 @@ input{
 }
 
 .email{
+    color:black;
     height:25px;
     margin-left: 40px;
     border: 2px solid black;
@@ -242,4 +243,20 @@ input{
 .resetpass a:hover{
     cursor:pointer;
     font-size: 14px;
+}
+
+.subforgot{
+    background-color: greenyellow;
+    width: 150px;
+    margin-left: 100px;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 3px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.subforgot:hover{
+    padding: 4px;
+    cursor:pointer;
 }
