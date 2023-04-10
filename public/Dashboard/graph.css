@@ -13,17 +13,20 @@
 .Dashboard {
     height: 135vh;
 }
-
+body {
+    background-size: cover;
+    background-color: #caf0f8;
+}
 /* -- Nav Bar -- */
+
 nav {
     position: sticky;
-    height: 50px;
+    height: 60px;
     width: 100%;
-    background-color: black;
+    background-color: rgb(35, 35, 140);
     top: 0px;
     z-index: 999;
 }
-
 nav ul {
     list-style: none;
     display: flex;

@@ -9,14 +9,17 @@
     -ms-user-select: none;
     user-select: none; */
 }
-
+body {
+    background-size: cover;
+    background-color: #caf0f8;
+}
 /* -- Nav Bar -- */
 
 nav {
     position: sticky;
-    height: 50px;
+    height: 60px;
     width: 100%;
-    background-color: black;
+    background-color: rgb(35, 35, 140);
     top: 0px;
     z-index: 999;
 }
@@ -31,7 +34,7 @@ nav ul {
 nav ul li {
  
     margin-top: -5px;
-    margin-left: 40px;
+    margin-left: 218px;
     font-size: 20px;
     color: white;
 }
@@ -51,7 +54,7 @@ nav ul li a:hover {
 }
 
 .name {
-    margin-top: -45px;
+    margin-top: -40px;
     margin-left: 50px;
     color: white;
     font-size: 30px;
@@ -85,11 +88,11 @@ h1:hover{
 
 .patientbox {
     position: absolute;
-    margin-left: 1200px;
+    margin-left: 1296px;
     margin-top: 50px;
-    width: 300px;
+    width: 350px;
     height: 50px;
-    background-color: greenyellow;
+    background-color: #4CBB17;
     border: 2px solid black;
     border-radius: 10px;
 }
