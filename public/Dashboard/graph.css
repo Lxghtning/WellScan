@@ -11,7 +11,7 @@
 }
 
 .Dashboard {
-    height: 170vh;
+    height: 135vh;
 }
 
 /* -- Nav Bar -- */
@@ -31,8 +31,8 @@ nav ul {
 }
 
 nav ul li {
-    margin-top: 7px;
-    margin-left: -60px;
+    margin-top: -5px;
+    margin-left: 40px;
     font-size: 20px;
     color: white;
 }
@@ -40,15 +40,6 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
-}
-
-
-.active {
-    color: black;
-    background-color: white;
-    color: black;
-    padding: 5px 5px;
-    border-radius: 10px;
 }
 
 nav ul li a:hover {
@@ -61,7 +52,7 @@ nav ul li a:hover {
 }
 
 .name {
-    margin-top: -35px;
+    margin-top: -45px;
     margin-left: 50px;
     color: white;
     font-size: 30px;
@@ -70,6 +61,15 @@ nav ul li a:hover {
 
 .name:hover {
     cursor: default;
+}
+
+
+.active {
+    color: black;
+    background-color: white;
+    margin-top: -15px;
+    padding: 5px 5px;
+    border-radius: 10px;
 }
 
 .headI {
@@ -177,14 +177,14 @@ canvas {
     position: absolute;
 }
 
-.nextgraph{
-    
+.nextgraph {
+
     z-index: 10;
-    color:white;
+    color: white;
     background-color: gray;
     font-size: 30px;
     border: 2px solid black;
-    height: 40px;   
+    height: 40px;
     width: 40px;
     text-align: center;
     margin-top: -220px;
@@ -192,9 +192,9 @@ canvas {
     border-radius: 10px;
 }
 
-.nextgraph:hover{
+.nextgraph:hover {
     cursor: pointer;
-    color:black;
+    color: black;
 }
 
 .dashhead {
@@ -206,9 +206,10 @@ canvas {
 .heads {
     font-size: 20px;
     margin-left: 25px;
-    margin-top: 50px;
-    display: inline-flex;
+    margin-top: 0px;
+    display: flex;
 }
+
 
 .firstheads {
     margin-left: 50px;
@@ -225,20 +226,21 @@ canvas {
 }
 
 .secondheads {
-    margin-top: 50px;
-    margin-left: -110px;
+    margin-top: 30px;
+    margin-left: -350px;
+
 }
 
 .pth {
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 10px;
 }
 
 .ptdetails {
-    margin-top: -352px;
-    margin-left: 10px;
+    margin-top: 20px;
+    margin-left: 70px;
     height: 350px;
-    width: 1050px;
+    width: 1020px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
         2px 2px 0px #999,
@@ -253,9 +255,9 @@ canvas {
     background-color: red;
     padding: 5px;
     font-size: 20px;
-    width: 300px;
-    margin-left: 600px;
-    margin-top: 90px;
+    width: 200px;
+    margin-left: 430px;
+    margin-top: 40px;
 }
 
 
@@ -270,8 +272,9 @@ canvas {
 }
 
 .PatientfName {
+    margin-top: 10px;
     width: 150px;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 .PatientlName {
@@ -283,7 +286,7 @@ canvas {
     margin-top: 20px;
     margin-left: 1100px;
     background-color: rgb(255, 255, 255);
-    height: 770px;
+    height: 470px;
     width: 400px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
@@ -299,27 +302,28 @@ input {
     text-align: center;
 }
 
-.patientnamehead{
-        margin-top: 10px;
-        font-size: 20px;
-        text-decoration: underline;
-        margin-left: 100px;
-    
+.patientnamehead {
+    margin-top: 10px;
+    font-size: 20px;
+    text-decoration: underline;
+    margin-left: 120px;
+
 }
+
 .intake {
     margin-top: 20px;
     font-size: 20px;
     text-decoration: underline;
-    margin-left: 100px;
+    margin-left: 40px;
 }
 
 .intakediv {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
-    margin-left: 50px;
+    margin-left: 30px;
     height: 25px;
-    width: 200px;
+    width: 150px;
 }
 
 .intakediv>input {
@@ -327,28 +331,28 @@ input {
 }
 
 .output {
-    margin-top: 160px;
+    margin-top: -90px;
     font-size: 20px;
     text-decoration: underline;
-    margin-left: 50px;
+    margin-left: 220px;
 }
 
 .outputdiv {
     display: flex;
     flex-direction: column;
-    margin-left: 50px;
-    width: 250px;
+    margin-left: 220px;
+    width: 150px;
     height: 25px;
 }
 
 .outputdiv>input {
-    margin-top: 15px;
+    margin-top: 20px;
 
 }
 
 
 .submitp {
-    margin-top: 195px;
+    margin-top: 220px;
     margin-left: 50px;
     padding: 5px;
     width: 300px;
@@ -363,11 +367,11 @@ input {
 
 .allpatients {
     box-shadow: 1px 1px 0px #999,
-    2px 2px 0px #999,
-    3px 3px 0px #999,
-    4px 4px 0px #999,
-    5px 5px 0px #999,
-    6px 6px 0px #999;
+        2px 2px 0px #999,
+        3px 3px 0px #999,
+        4px 4px 0px #999,
+        5px 5px 0px #999,
+        6px 6px 0px #999;
     background-image: url("\\Images\\moving.png");
     background-size: cover;
     height: 400px;
@@ -376,15 +380,16 @@ input {
     border: 2px solid black;
     border-radius: 20px;
     margin-left: 650px;
-    margin-top: -775px;
+    margin-top: -825px;
 }
 
-.textback{
+.textback {
     text-decoration: underline;
     margin-top: 50px;
     margin-left: 10px;
     font-size: 30px;
 }
+
 .back {
     margin-top: 150px;
     background-color: palevioletred;
@@ -400,78 +405,40 @@ input {
     cursor: pointer;
 }
 
+#log{
+    color:white;
+    margin-top: 15px;
+    margin-left: 50px;
+}
 
-/*Media Queries*/
-@media (max-width: 480px) and (min-width: 320px) {
+#log:hover{
+    cursor: pointer;
+    font-size: 27px;
+}
 
-    .name {
-        display: none;
-    }
+.drp {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+    width: 150px;
+  }
 
-    .greet {
-        font-size: 45px;
-        margin-left: 20px;
+.drpcon{
+    display: none;
+    font-size: 20px;
+    background-color: black;;
+    height: 70px;
+    width: 200px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
 
-    }
+.drpcon a{
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+}
 
-    .texts {
-        margin-left: 140px;
-        font-size: 35px;
-        margin-top: -80px;
-    }
-
-
-
-    .container {
-        display: inline-block;
-    }
-
-    .bar1,
-    .bar2,
-    .bar3 {
-        width: 35px;
-        height: 5px;
-        background-color: white;
-        margin: 9px 0;
-        margin-left: 15px;
-        transition: 0.4s;
-    }
-
-    .change .bar1 {
-        transform: translate(0, 17px) rotate(-225deg);
-    }
-
-    .change .bar2 {
-        opacity: 0;
-    }
-
-    .change .bar3 {
-        transform: translate(0, -11px) rotate(225deg);
-    }
-
-    .newnav {
-        width: 250px;
-        background-color: black;
-        height: 100vh;
-        transition: 0.5s;
-    }
-
-    nav ul {
-        display: block;
-        margin-left: 100px;
-        margin-top: -30vh;
-    }
-
-    nav ul li {
-        margin-top: -100px;
-    }
-
-    nav ul li a:hover {
-        text-decoration: none;
-        cursor: pointer;
-        background-color: white;
-        color: black;
-        padding: 10px 10px;
-        border-radius: 20px;
-    }
+.drpcon a:hover{
+    font-size: 22px;
 }
