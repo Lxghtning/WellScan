@@ -32,7 +32,7 @@ nav ul {
 
 nav ul li {
     margin-top: 7px;
-    margin-left: 40px;
+    margin-left: -60px;
     font-size: 20px;
     color: white;
 }
@@ -41,6 +41,7 @@ nav ul li a {
     color: white;
     text-decoration: none;
 }
+
 
 .active {
     color: black;
@@ -85,7 +86,7 @@ nav ul li a:hover {
     margin-left: -550px;
 }
 
-.popbg{
+.popbg {
     display: none;
     position: fixed;
     top: 0;
@@ -96,7 +97,7 @@ nav ul li a:hover {
     z-index: 9998;
 }
 
- .popupdiv {
+.popupdiv {
     display: none;
     position: fixed;
     top: 0;
@@ -111,7 +112,7 @@ nav ul li a:hover {
     margin-top: 170px;
     background-color: #343f45;
     color: white;
-} 
+}
 
 
 .popupdiv span:nth-child(2) {
@@ -140,7 +141,7 @@ nav ul li a:hover {
 }
 
 
-.viewpatients{
+.viewpatients {
     display: none;
     color: black;
     background-color: greenyellow;
@@ -152,11 +153,13 @@ nav ul li a:hover {
 }
 
 .viewpatients:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 canvas {
     border: 3px solid black;
+    border-radius: 20px;
+    background-color: aliceblue;
     box-shadow: 1px 1px 0px #999,
         2px 2px 0px #999,
         3px 3px 0px #999,
@@ -174,9 +177,29 @@ canvas {
     position: absolute;
 }
 
+.nextgraph{
+    
+    z-index: 10;
+    color:white;
+    background-color: gray;
+    font-size: 30px;
+    border: 2px solid black;
+    height: 40px;   
+    width: 40px;
+    text-align: center;
+    margin-top: -220px;
+    margin-left: 575px;
+    border-radius: 10px;
+}
+
+.nextgraph:hover{
+    cursor: pointer;
+    color:black;
+}
+
 .dashhead {
-    margin-left: 600px;
-    font-size: 50px;
+    margin-left: 500px;
+    font-size: 40px;
     text-decoration: underline;
 }
 
@@ -212,10 +235,10 @@ canvas {
 }
 
 .ptdetails {
-    margin-top: 20px;
+    margin-top: -352px;
     margin-left: 10px;
-    height: 500px;
-    width: 1500px;
+    height: 350px;
+    width: 1050px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
         2px 2px 0px #999,
@@ -246,10 +269,21 @@ canvas {
     text-align: center;
 }
 
+.PatientfName {
+    width: 150px;
+    margin-left: 20px;
+}
+
+.PatientlName {
+    width: 150px;
+    margin-left: 20px;
+}
+
 .patientform {
-    margin-left: 10px;
+    margin-top: 20px;
+    margin-left: 1100px;
     background-color: rgb(255, 255, 255);
-    height: 570px;
+    height: 770px;
     width: 400px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
@@ -265,11 +299,18 @@ input {
     text-align: center;
 }
 
+.patientnamehead{
+        margin-top: 10px;
+        font-size: 20px;
+        text-decoration: underline;
+        margin-left: 100px;
+    
+}
 .intake {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 20px;
     text-decoration: underline;
-    margin-left: 50px;
+    margin-left: 100px;
 }
 
 .intakediv {
@@ -278,7 +319,7 @@ input {
     margin-top: 5px;
     margin-left: 50px;
     height: 25px;
-    width: 250px;
+    width: 200px;
 }
 
 .intakediv>input {
@@ -317,6 +358,45 @@ input {
 .submitp:hover {
     background-color: aquamarine;
     transition: ease-in;
+    cursor: pointer;
+}
+
+.allpatients {
+    box-shadow: 1px 1px 0px #999,
+    2px 2px 0px #999,
+    3px 3px 0px #999,
+    4px 4px 0px #999,
+    5px 5px 0px #999,
+    6px 6px 0px #999;
+    background-image: url("\\Images\\moving.png");
+    background-size: cover;
+    height: 400px;
+    width: 400px;
+    background-color: greenyellow;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-left: 650px;
+    margin-top: -775px;
+}
+
+.textback{
+    text-decoration: underline;
+    margin-top: 50px;
+    margin-left: 10px;
+    font-size: 30px;
+}
+.back {
+    margin-top: 150px;
+    background-color: palevioletred;
+    border-radius: 100%;
+    border: 2px solid gray;
+    padding: 10px;
+    text-align: center;
+    margin-left: 310px;
+}
+
+.back:hover {
+    padding: 12px;
     cursor: pointer;
 }
 

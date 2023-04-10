@@ -101,6 +101,11 @@
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 <script>
+        window.onload = function () {
+        if (localStorage.getItem('scrollPosition') !== null && localStorage.getItem('formData') !== null) {
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+        }
+    }
     var firebaseConfig = {
 
         apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -137,6 +142,7 @@
     document.getElementById("clbtn").addEventListener("click", () => {
         document.getElementById("ptnfbg").style.display = "block";
         document.getElementById("ptnf").style.display = "none";
+        localStorage.setItem('scrollPosition', window.scrollY);
         location.reload();
     })
 
@@ -147,6 +153,7 @@
         document.getElementById('tick').innerHTML = "done";
         document.getElementById('tick').style.color = 'greenyellow';
         document.getElementById('tick').style.border = '2px solid greenyellow';
+        localStorage.setItem('scrollPosition', window.scrollY);
         location.reload();
     })
 
@@ -222,7 +229,22 @@
             let vomit = document.getElementById("vmpn").value;
             let suction = document.getElementById("scpn").value;
 
+                array_inputs = [intime, outtime, bp, pulse, oral_feed, urine, stool, vomit, suction]
+                for (var i = 0; i < array_inputs.length; i++) {
+                    if (array_inputs[i] === "") {
+                        document.getElementById("ptnfbg").style.display = "block";
+                        document.getElementById("ptnf").style.display = "none";
+                        document.getElementById('pop').style.display = 'block';
+                        document.getElementById('popup').style.display = 'block';
+                        document.getElementById('popup').style.height = '270px';
+                        document.getElementById('intext').innerHTML = "Please enter all the values!";
+                        document.getElementById('tick').innerHTML = "close";
+                        document.getElementById('tick').style.color = 'red';
+                        document.getElementById('tick').style.border = '2px solid red';
+                        return;
 
+                    }
+                }
        
                 innerhtmlCollection.where('innerwebel', '==', firstname_patient + ' ' + lastname_patient).get().then((querySnapshot) => {
                     

@@ -77,6 +77,10 @@ nav ul li a:hover {
     cursor: default;
 }
 
+h1:hover{
+    cursor:pointer;
+}
+
 .patientbox {
     margin-left: 100px;
     margin-top: 50px;
