@@ -126,8 +126,9 @@
                 done
             </span>
             <h5 id="intext" class="ptdtad">
-                Patient Added!
-            </h5>
+                Details Updated!
+            </h5>   
+            <a href="/Dashboard/dash.html"><button id="view" class="viewpatients">View Patients</button></a>
         </div>
     </div>
 </body>
@@ -216,7 +217,16 @@ measurementId: "G-VMY2C911KT"
                 .catch(err => console.log(err))
         })
     
-
+        document.getElementById("closebtn").addEventListener("click", () => {
+        document.getElementById('popup').style.display = "none";
+        document.getElementById('pop').style.display = "none";
+        document.getElementById('tick').innerHTML = "done";
+        document.getElementById('tick').style.color = 'greenyellow';
+        document.getElementById('tick').style.border = '2px solid greenyellow';
+        document.getElementById('view').style.display = "none";
+        location.reload();
+    })
+    
         document.getElementById("patientsubmit").addEventListener("click", () => {
             //PatientName
             let firstname_patient = document.getElementById("fpn").value;
@@ -302,8 +312,9 @@ measurementId: "G-VMY2C911KT"
                 });
             })
            
-            alert("Graph Updated")
-
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("pop").style.display = "block";
+        document.getElementById("view").style.display = "none";
         })
 
 
@@ -378,6 +389,12 @@ measurementId: "G-VMY2C911KT"
                                 text: 'Fluid Intake'
                             },
                             scales: {
+                                xAxes:[{
+                                    offset: true,
+                                }],
+                                yAxes:[{
+                                    offset: true,
+                                }],
                                 y: {
                                     beginAtZero: true
                                 },
@@ -479,12 +496,19 @@ measurementId: "G-VMY2C911KT"
                             }]
                         },
                         options: {
+                            
                             maintainAspectRatio: false,
                             title: {
                                 display: true,
                                 text: 'Fluid Output'
                             },
                             scales: {
+                                xAxes:[{
+                                    offset: true,
+                                }],
+                                yAxes:[{
+                                    offset: true,
+                                }],
                                 y: {
                                     beginAtZero: true,
                                 },
@@ -548,7 +572,12 @@ measurementId: "G-VMY2C911KT"
                 })
             })
 
-            alert("Please go back to the main patients dashboard")
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("pop").style.display = "block";
+        document.getElementById("view").style.display = "block";
+        document.getElementById("intext").style.display = "none";
+        document.getElementById("closebtn").style.display = "none";
+        document.getElementById("tick").style.marginTop = "50px";
 
         })
     }

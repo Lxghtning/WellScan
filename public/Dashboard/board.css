@@ -11,8 +11,8 @@
 }
 
 /* -- Nav Bar -- */
-.Home{
-    background: linear-gradient(19deg,#343f45, #343f45);
+.Home {
+    background: linear-gradient(19deg, #343f45, #343f45);
     transform-origin: 0px 0px;
     transform: skewY(-10deg);
     overflow: hidden;
@@ -37,7 +37,7 @@ nav ul {
 
 nav ul li {
     margin-top: 7px;
-    margin-left: 40px;
+    margin-left: -60px;
     font-size: 20px;
     color: white;
 }
@@ -47,7 +47,8 @@ nav ul li a {
     text-decoration: none;
 }
 
-.active{
+
+.active {
     color: black;
     background-color: white;
     color: black;
@@ -76,9 +77,8 @@ nav ul li a:hover {
     cursor: default;
 }
 
-.patientbox{
-    display: block;
-    margin-left: 100px;;
+.patientbox {
+    margin-left: 100px;
     margin-top: 50px;
     width: 1300px;
     height: 50px;
@@ -86,21 +86,21 @@ nav ul li a:hover {
     border-radius: 10px;
 }
 
-.headpt a{
+.headpt a {
     text-decoration: none;
-    color:white;
+    color: white;
 }
 
-.headpt a:hover{
+.headpt a:hover {
     color: aqua;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.headpt{
+.headpt {
     text-align: center;
 }
 
-.ptnfback{
+.ptnfback {
     display: none;
     position: fixed;
     top: 0;
@@ -110,7 +110,8 @@ nav ul li a:hover {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
-.patientform{
+
+.patientform {
     background-color: white;
     z-index: 999;
     height: 500px;
@@ -118,29 +119,29 @@ nav ul li a:hover {
     border: 2px solid black;
     margin-top: 108px;
     margin-left: 500px;
-    box-shadow:0px 0px 65px 0px rgba(0, 0, 0, 0.43);
+    box-shadow: 0px 0px 65px 0px rgba(0, 0, 0, 0.43);
     display: none;
 }
 
-#clbtn{
+#clbtn {
     margin-left: 425px;
 }
 
-#clbtn:hover{
+#clbtn:hover {
     color: red;
     cursor: pointer;
 }
 
-.ptformhead{
+.ptformhead {
     text-align: center;
     text-decoration: underline;
 }
 
-input{
+input {
     text-align: center;
 }
 
-.PatientfName{
+.PatientfName {
     width: 200px;
     height: 25px;
     margin-right: 5px;
@@ -148,12 +149,12 @@ input{
     margin-top: 30px;
 }
 
-.PatientlName{
+.PatientlName {
     width: 200px;
     height: 25px;
 }
 
-.time{
+.time {
     width: 200px;
     height: 25px;
     margin-right: 5px;
@@ -161,19 +162,20 @@ input{
     margin-top: 5px;
 }
 
-.age{
+.age {
     width: 200px;
     height: 25px;
 }
-.intake{
+
+.intake {
     margin-top: 30px;
     font-size: 20px;
     text-decoration: underline;
     margin-left: 50px;
 }
 
-.intakediv{
-    display:flex;
+.intakediv {
+    display: flex;
     flex-direction: column;
     margin-top: 5px;
     margin-left: 50px;
@@ -181,19 +183,19 @@ input{
     width: 150px;
 }
 
-.intakediv>input{
-    margin-top:15px;
+.intakediv>input {
+    margin-top: 15px;
 }
 
-.output{
+.output {
     margin-top: -60px;
     font-size: 20px;
     text-decoration: underline;
     margin-left: 250px;
 }
 
-.outputdiv{
-    display:flex;
+.outputdiv {
+    display: flex;
     flex-direction: column;
     margin-top: 5px;
     margin-left: 250px;
@@ -201,27 +203,27 @@ input{
     height: 25px;
 }
 
-.outputdiv>input{
-    margin-top:15px;
+.outputdiv>input {
+    margin-top: 15px;
 
 }
 
 
-.submitp{
+.submitp {
     margin-top: 200px;
     margin-left: 65px;
     padding: 5px;
     width: 325px;
     border-radius: 12px;
 }
-    
-.submitp:hover{
-    background-color:aquamarine;
+
+.submitp:hover {
+    background-color: aquamarine;
     transition: ease-in;
     cursor: pointer;
 }
 
-.popbg{
+.popbg {
     display: none;
     position: fixed;
     top: 0;
@@ -232,7 +234,7 @@ input{
     z-index: 9998;
 }
 
-.popupdiv{
+.popupdiv {
     display: none;
     position: fixed;
     top: 0;
@@ -246,28 +248,28 @@ input{
     margin-left: 572px;
     margin-top: 170px;
     background-color: #343f45;
-    color:white;
+    color: white;
 }
 
-.popupdiv span:nth-child(2){
+.popupdiv span:nth-child(2) {
     font-size: 100px;
-    color:greenyellow;;
+    color: greenyellow;
     border: 2px solid greenyellow;
     border-radius: 100%;
     margin-top: 20px;
     margin-left: 118px;
 }
 
-#closebtn{
+#closebtn {
     margin-left: 323px;
 }
 
-#closebtn:hover{
+#closebtn:hover {
     color: red;
     cursor: pointer;
 }
 
-.ptdtad{
+.ptdtad {
     font-size: 25px;
     text-align: center;
     margin-top: 20px;
@@ -276,13 +278,14 @@ input{
 /*Media Queries*/
 @media (max-width: 480px) and (min-width: 320px) {
 
-    .name{
-        display:none;
+    .name {
+        display: none;
     }
+
     .greet {
         font-size: 45px;
         margin-left: 20px;
-    
+
     }
 
     .texts {
@@ -291,8 +294,8 @@ input{
         margin-top: -80px;
     }
 
-    
-    
+
+
     .container {
         display: inline-block;
     }

@@ -86,7 +86,7 @@ nav ul li a:hover {
 }
 
 .popbg{
-
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -97,7 +97,7 @@ nav ul li a:hover {
 }
 
  .popupdiv {
-
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -139,6 +139,21 @@ nav ul li a:hover {
     margin-top: 20px;
 }
 
+
+.viewpatients{
+    display: none;
+    color: black;
+    background-color: greenyellow;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+.viewpatients:hover {
+    cursor:pointer;
+}
 
 canvas {
     border: 3px solid black;
