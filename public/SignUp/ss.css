@@ -124,6 +124,26 @@ input{
     width: 319px;
 }
 
+#passable{
+    position: absolute;
+    margin-top: 22px;
+    margin-left: -30px;
+}
+
+#passable:hover{
+    cursor:pointer;
+}
+
+#cpassable{
+    position: absolute;
+    margin-top: 22px;
+    margin-left: -30px;
+}
+
+#cpassable:hover{
+    cursor:pointer;
+}
+
 .cpass{
     height: 25px;
     margin-top: 20px;

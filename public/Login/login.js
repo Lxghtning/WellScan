@@ -1,3 +1,16 @@
+//Show/Hide password toggle
+document.getElementById("passable").addEventListener("click", ()=>{
+    if(document.getElementById("passable").innerHTML === "visibility_off"){
+        document.getElementById("passable").innerHTML = "visibility"
+        document.getElementById("pw").type = "password";
+    }    
+    else{
+        document.getElementById("passable").innerHTML = "visibility_off"
+        document.getElementById("pw").type = "text";
+    }
+
+})
+
 
 document.getElementById("closebtn").addEventListener("click", () => { //Cross sign for pop ups to close
     document.getElementById('intext').innerHTML = " "

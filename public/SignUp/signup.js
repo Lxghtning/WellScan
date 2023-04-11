@@ -1,3 +1,28 @@
+//Show/Hide password toggle
+document.getElementById("passable").addEventListener("click", ()=>{
+    if(document.getElementById("passable").innerHTML === "visibility_off"){
+        document.getElementById("passable").innerHTML = "visibility"
+        document.getElementById("pw").type = "password";
+    }    
+    else{
+        document.getElementById("passable").innerHTML = "visibility_off"
+        document.getElementById("pw").type = "text";
+    }
+
+})
+
+document.getElementById("cpassable").addEventListener("click", ()=>{
+    if(document.getElementById("cpassable").innerHTML === "visibility_off"){
+        document.getElementById("cpassable").innerHTML = "visibility"
+        document.getElementById("cpw").type = "password";
+        
+    }else{
+        document.getElementById("cpassable").innerHTML = "visibility_off"
+        document.getElementById("cpw").type = "text";
+    }
+
+})
+
 //closing popup
 document.getElementById("closebtn").addEventListener("click", () => {
     document.getElementById('popup').style.display = "none";
