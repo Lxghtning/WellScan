@@ -146,7 +146,7 @@ auth.onAuthStateChanged(user => {
             // Looping through the patients collection
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    if (doc.data().first_name === firstname_patient && doc.data().last_name === lastname_patient) {
+                    if (doc.data().first_name === name_patient[0] && doc.data().last_name === name_patient[1] && doc.data().unique === localStorage.getItem("randomPass")) {
                         
                         //Fetch the existing data
                         let bparr = doc.data().bparr;
@@ -212,7 +212,7 @@ auth.onAuthStateChanged(user => {
 
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
+                    if (doc.data().first_name === name_patient[0] && doc.data().last_name === name_patient[1] && doc.data().unique === localStorage.getItem("randomPass")) {
                         intimearr = doc.data().intimearr;
                         sortedIntimeArr = arrangeHours(intimearr)
                         bparr = doc.data().bparr;
@@ -316,7 +316,7 @@ auth.onAuthStateChanged(user => {
 
         patients.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
+                if (doc.data().first_name === name_patient[0] && doc.data().last_name === name_patient[1] && doc.data().unique === localStorage.getItem("randomPass")) {
                     outimearr = doc.data().outimearr;
                     sortedOuttimearr = arrangeHours(outimearr)
 
@@ -434,7 +434,7 @@ auth.onAuthStateChanged(user => {
         //Patient Details displaying
         patients.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
+                if (doc.data().first_name === name_patient[0] && doc.data().last_name === name_patient[1] && doc.data().unique === localStorage.getItem("randomPass")) {
                     document.getElementById("ptH").innerHTML = "Details about " + name_patient[0] + " " + name_patient[1];
 
                     //Intake
@@ -460,7 +460,7 @@ auth.onAuthStateChanged(user => {
         document.getElementById("remptn").addEventListener("click", () => {
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    if (doc.data().first_name == name_patient[0]) {
+                    if (doc.data().first_name === name_patient[0] && doc.data().last_name === name_patient[1] && doc.data().unique === localStorage.getItem("randomPass")) {
                         patients.doc(name_patient[0]).delete();
                         innerhtml.doc(name_patient[0]).delete();
                     }

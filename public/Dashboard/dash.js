@@ -90,6 +90,7 @@ auth.onAuthStateChanged(function (user) {
         location.href = "/SignUp/signup.html" 
         return
     }else{
+    
     // Random password generator 
     var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var passwordLength = 6;
@@ -121,6 +122,7 @@ auth.onAuthStateChanged(function (user) {
             newEL.style.border = "2px solid black";
         }
         querySnapshot.forEach((doc) => { // Iterating over each document in the collection.
+            console.log(doc.data())
             newEL = document.createElement(doc.data().innertags)
             newEL.innerHTML = doc.data().innerwebel
             newEL.className = "severalhead"
@@ -192,6 +194,7 @@ auth.onAuthStateChanged(function (user) {
                         patients.doc(firstname_patient).set({ //Stores all the data to FireStore database
                             first_name: firstname_patient,
                             last_name: lastname_patient,
+                            unique: password,
                             intime: parseInt(intime),
                             outputTime: parseInt(outtime),
                             bp: parseInt(bp),
@@ -247,6 +250,7 @@ auth.onAuthStateChanged(function (user) {
         innerhtmlCollection.doc(document.getElementById("fpn").value).set({
             innertags: several_patients.tagName.toLowerCase(),
             innerwebel: several_patients.innerHTML,
+            unique: password,
 
         })
     }
