@@ -1,9 +1,11 @@
+// Loads the page from where the user left scrolling
 window.onload = function () {
     if (localStorage.getItem('scrollPosition') !== null && localStorage.getItem('formData') !== null) {
         window.scrollTo(0, localStorage.getItem('scrollPosition'));
     }
 }
 
+// Event Listener for the dropdown on the navigation bar
 localStorage.setItem("drop", "none")
 document.getElementById("log").addEventListener("click", ()=> {
     if(localStorage.getItem("drop") === "none"){
@@ -43,12 +45,14 @@ const auth = firebase.auth();
 
 const database = firebase.firestore()
 
+// Event listener for "Add new patient" text
+
 document.getElementById('anchorpt').addEventListener('click', () => {
     document.getElementById("ptnf").style.display = "block";
     document.getElementById("ptnfbg").style.display = "block";
 
 })
-
+// Event listener for the close button in the add patient form
 document.getElementById("clbtn").addEventListener("click", () => {
     document.getElementById("ptnfbg").style.display = "block";
     document.getElementById("ptnf").style.display = "none";
@@ -56,10 +60,11 @@ document.getElementById("clbtn").addEventListener("click", () => {
     location.reload();
 })
 
+// Event listener for the "Submit" text in the add patient form
 document.getElementById("closebtn").addEventListener("click", () => {
     document.getElementById('popup').style.display = "none";
     document.getElementById('pop').style.display = "none";
-    document.getElementById('intext').innerHTML = "Patient Added";
+    document.getElementById('intext').innerHTML = "Patient Added"; //Pops up when patient is added successfully
     document.getElementById('tick').innerHTML = "done";
     document.getElementById('tick').style.color = 'greenyellow';
     document.getElementById('tick').style.border = '2px solid greenyellow';
@@ -67,7 +72,7 @@ document.getElementById("closebtn").addEventListener("click", () => {
     location.reload();
 })
 
-
+// Submit listener for add patient form
 document.getElementById("ptnf").addEventListener("submit", (e) => {
     e.preventDefault();
 })
@@ -75,19 +80,23 @@ document.getElementById("ptnf").addEventListener("submit", (e) => {
 document.getElementById("signout").addEventListener("click", () => {
     auth
         .signOut()
-        .catch(err => console.log(err))
+        .catch(err => console.log(err))  //Error handler that prints any error
 })
 
+//User is redirected to sign up page if they arent logged in
 auth.onAuthStateChanged(function (user) {
-    if(user){
-    let userid = user.uid
+    if(!user){
+        location.href = "/SignUp/signup.html" 
+        return
+    }else{
+    let userid = user.uid 
 
 
-    let patients = database.collection(`patients${userid}`)
-    let innerhtmlCollection = database.collection(`innerhtml${userid}`)
+    let patients = database.collection(`patients${userid}`) //Getting the patient's database
+    let innerhtmlCollection = database.collection(`innerhtml${userid}`) //Getting the innerhtml database to show patient list
 
     innerhtmlCollection.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc) => { // Iterating over each document in the collection. We create an element for each doc and display the patient first and last name in it as a button
             newEL = document.createElement(doc.data().innertags)
             newEL.innerHTML = doc.data().innerwebel
             newEL.className = "severalhead"
@@ -102,17 +111,17 @@ auth.onAuthStateChanged(function (user) {
             newEL.style.border = "2px solid black";
 
             newEL.addEventListener("click", function (event) {
-                localStorage.setItem("name_patient", event.target.innerHTML)
+                localStorage.setItem("name_patient", event.target.innerHTML) //Event listener for the patient button. Redirects to dashgraph
                 location.href = "/Dashboard/dashgraph.html"
 
             })
 
-            document.getElementById('pb').appendChild(newEL);
+            document.getElementById('pb').appendChild(newEL); //Appends the new created element to the HTML doc
         })
     })
 
 
-    document.getElementById("patientsubmit").addEventListener("click", () => {
+    document.getElementById("patientsubmit").addEventListener("click", () => { //Executes after patient submits the form
 
     
         //patient
@@ -134,8 +143,7 @@ auth.onAuthStateChanged(function (user) {
 
             array_inputs = [intime, outtime, bp, pulse, oral_feed, urine, stool, vomit, suction]
             for (var i = 0; i < array_inputs.length; i++) {
-                if (array_inputs[i] === "") {
-                    document.getElementById("ptnfbg").style.display = "block";
+                if (array_inputs[i] === "") { // Ensures no field is left empty
                     document.getElementById("ptnf").style.display = "none";
                     document.getElementById('pop').style.display = 'block';
                     document.getElementById('popup').style.display = 'block';
@@ -157,7 +165,7 @@ auth.onAuthStateChanged(function (user) {
                         createNewElement()
                         viewVerificationPopup()
 
-                        patients.doc(firstname_patient).set({
+                        patients.doc(firstname_patient).set({ //Stores all the data to FireStore database
                             first_name: firstname_patient,
                             last_name: lastname_patient,
                             intime: parseInt(intime),
@@ -184,7 +192,7 @@ auth.onAuthStateChanged(function (user) {
                 else{
                 querySnapshot.forEach((doc) => {
 
-                        viewWrongPopup()
+                        viewWrongPopup() // Ensures that a new patient with same name cannot be added
                     
                 })
     }
@@ -193,7 +201,7 @@ auth.onAuthStateChanged(function (user) {
 
     })
 
-    function createNewElement() {
+    function createNewElement() { // Creating a new element and storing the values in innerhtml collection
         let several_patients = document.createElement("h1");
 
         several_patients.className = "severalhead"
@@ -219,7 +227,7 @@ auth.onAuthStateChanged(function (user) {
     }
 }
 })
-function viewVerificationPopup() {
+function viewVerificationPopup() { //Pops up verification mark when patient is created successfully
     document.getElementById('pop').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
     document.getElementById('ptnf').style.display = 'none';
@@ -227,7 +235,7 @@ function viewVerificationPopup() {
 
 };
 
-function viewWrongPopup() {
+function viewWrongPopup() { // Pops up a cross mark when a petient which the same name as an existing patient is trying to be created.
     document.getElementById('pop').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
     document.getElementById('ptnf').style.display = 'none';
