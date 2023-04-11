@@ -78,15 +78,15 @@ nav ul li a:hover {
 .headI {
     text-decoration: underline;
     transform: rotate(-90deg);
-    margin-top: -750px;
-    margin-left: -550px;
+    margin-top: -810px;
+    margin-left: -540px;
 }
 
 .headO {
     text-decoration: underline;
     transform: rotate(-90deg);
-    margin-top: -750px;
-    margin-left: -550px;
+    margin-top: -810px;
+    margin-left: -540px;
 }
 
 .popbg {
@@ -180,26 +180,6 @@ canvas {
     position: absolute;
 }
 
-.nextgraph {
-
-    z-index: 10;
-    color: white;
-    background-color: gray;
-    font-size: 30px;
-    border: 2px solid black;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    margin-top: -220px;
-    margin-left: 575px;
-    border-radius: 10px;
-}
-
-.nextgraph:hover {
-    cursor: pointer;
-    color: black;
-}
-
 .dashhead {
     margin-left: 500px;
     font-size: 40px;
@@ -243,9 +223,9 @@ canvas {
 .ptdetails {
     background-color: rgb(244, 244, 244);
     margin-top: 20px;
-    margin-left: 70px;
+    margin-left: 40px;
     height: 350px;
-    width: 1020px;
+    width: 1045px;
     border: 2px solid black;
     box-shadow: 1px 1px 0px #999,
         2px 2px 0px #999,
@@ -379,24 +359,26 @@ input {
         6px 6px 0px #999;
     background-image: url("\\Images\\moving.png");
     background-size: cover;
-    height: 400px;
+    height: 351px;
     width: 400px;
     background-color: greenyellow;
     border: 2px solid black;
     border-radius: 20px;
-    margin-left: 650px;
-    margin-top: -825px;
+    margin-left: 1110px;
+    margin-top: -351px;
 }
 
 .textback {
+    position: absolute;
     text-decoration: underline;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 10px;
     font-size: 30px;
 }
 
 .back {
-    margin-top: 150px;
+    position: absolute;
+    margin-top: 250px;
     background-color: palevioletred;
     border-radius: 100%;
     border: 2px solid gray;
@@ -422,7 +404,6 @@ input {
 }
 
 .drp {
-    position: relative;
     display: inline-block;
     height: 50px;
     width: 150px;
