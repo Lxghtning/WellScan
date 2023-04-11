@@ -1,19 +1,25 @@
+
+//Laods the page from where the user left the page on the Yaxis
 window.onload = function () {
     if (localStorage.getItem('scrollPosition') !== null && localStorage.getItem('formData') !== null) {
         window.scrollTo(0, localStorage.getItem('scrollPosition'));
     }
 }
+
+//onclick event for the dropdown menu of the navigation bar
 localStorage.setItem("drop", "none")
-document.getElementById("log").addEventListener("click", ()=> {
-    if(localStorage.getItem("drop") === "none"){
+document.getElementById("log").addEventListener("click", () => {
+    if (localStorage.getItem("drop") === "none") {
         localStorage.setItem("drop", "block")
         document.getElementById("condrop").style.display = "block";
     }
-    else{
+    else {
         localStorage.setItem("drop", "none");
         document.getElementById("condrop").style.display = "none";
     }
 })
+
+//Sorting the hours
 function arrangeHours(arr) {
     const newArr = [arr[0]];
     for (let i = 1; i < arr.length; i++) {
@@ -26,6 +32,8 @@ function arrangeHours(arr) {
     }
     return newArr;
 }
+
+// Initialize Firebase
 var firebaseConfig = {
 
     apiKey: "AIzaSyCo2Fuxil6adrJXYvyw350ClCYKH1lUcMs",
@@ -45,26 +53,25 @@ var firebaseConfig = {
 };
 
 
-// Initialize Firebase
+
 
 firebase.initializeApp(firebaseConfig);
-
 const auth = firebase.auth();
-
 const database = firebase.firestore()
-auth.onAuthStateChanged(doctor => {
-    if (!doctor) {
+
+//check sif the users accounts exists or not
+auth.onAuthStateChanged(user => {
+    if (!user) {
         location.href = "/SignUp/signup.html"
         return;
     }
-})
 
-auth.onAuthStateChanged(function (user) {
-    if (user) {
+    else {
+
+
         let userid = user.uid
 
-
-
+        //Fetching Collections and name of the patient
         let patientCollection = `patients${userid}`
         let innerhtmlCollection = `innerhtml${userid}`
 
@@ -73,17 +80,19 @@ auth.onAuthStateChanged(function (user) {
         let innerhtml = database.collection(innerhtmlCollection)
 
 
-
+        //preventing the default behaviour of the submit button
         document.getElementById("ptnf").addEventListener("submit", (e) => {
             e.preventDefault();
         })
 
+        //SignOut
         document.getElementById("signout").addEventListener("click", () => {
             auth
                 .signOut()
                 .catch(err => console.log(err))
         })
 
+        //Closing the popup
         document.getElementById("closebtn").addEventListener("click", () => {
             document.getElementById('popup').style.display = "none";
             document.getElementById('pop').style.display = "none";
@@ -96,7 +105,7 @@ auth.onAuthStateChanged(function (user) {
         })
 
         document.getElementById("patientsubmit").addEventListener("click", () => {
-        
+
             //PatientName
             let firstname_patient = document.getElementById("fpn").value;
             let lastname_patient = document.getElementById("lpn").value;
@@ -116,6 +125,7 @@ auth.onAuthStateChanged(function (user) {
             let vomit = document.getElementById("vmpn").value;
             let suction = document.getElementById("scpn").value;
 
+            //Checking if all the input data is entered
             array_inputs = [intime, outtime, bp, pulse, oral_feed, urine, stool, vomit, suction]
             for (var i = 0; i < array_inputs.length; i++) {
                 if (array_inputs[i] === "") {
@@ -132,11 +142,12 @@ auth.onAuthStateChanged(function (user) {
                 }
             }
 
+            // Looping through the patients collection
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     if (doc.data().first_name === firstname_patient && doc.data().last_name === lastname_patient) {
 
-
+                        //Fetch the existing data
                         let bparr = doc.data().bparr;
                         let intimearr = doc.data().intimearr;
                         let pulsearr = doc.data().pulsearr;
@@ -146,35 +157,6 @@ auth.onAuthStateChanged(function (user) {
                         let stoolarr = doc.data().stoolarr;
                         let vomitarr = doc.data().vomitarr;
                         let suctionarr = doc.data().suctionarr;
-
-                        //PatientName
-                        let firstname_patient = document.getElementById("fpn").value;
-                        let lastname_patient = document.getElementById("lpn").value;
-
-                        //time
-                        let intime = document.getElementById("intym").value;
-                        let outtime = document.getElementById("outtym").value;
-
-                        //intake   
-                        let bp = document.getElementById("bloodP").value;
-                        let pulse = document.getElementById("Pulsepn").value;
-                        let oral_feed = document.getElementById("orngpn").value;
-
-                        //output
-                        let urine = document.getElementById("urpn").value;
-                        let stool = document.getElementById("stpn").value;
-                        let vomit = document.getElementById("vmpn").value;
-                        let suction = document.getElementById("scpn").value;
-
-                        array_inputs = [intime, outtime, bp, pulse, oral_feed, urine, stool, vomit, suction]
-                        for (var i = 0; i < array_inputs.length; i++) {
-                            if (array_inputs[i] === "") {
-                                alert("Please enter all the values")
-                                return;
-                            }
-                        }
-
-
 
                         bparr.push(parseInt(bp))
                         intimearr.push(parseInt(intime))
@@ -209,126 +191,128 @@ auth.onAuthStateChanged(function (user) {
 
                     }
                 });
+
+                generateIntakeChart(patients)
+                generateOutputChart(patients)
             })
 
-            document.getElementById("popup").style.display = "block";
-            document.getElementById("pop").style.display = "block";
-            document.getElementById("view").style.display = "none";
         })
 
 
-
+        generateIntakeChart(patients)
+        generateOutputChart(patients)
         //Generating Chart
-        const ctx = document.getElementById('myChart').getContext('2d');
-        let intimearr, bparr, pulsearr, ofarr, sortedIntimeArr;
+        function generateIntakeChart(patients) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            let intimearr, bparr, pulsearr, ofarr, sortedIntimeArr;
 
-        patients.get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
-                    intimearr = doc.data().intimearr;
-                    sortedIntimeArr = arrangeHours(intimearr)
-                    bparr = doc.data().bparr;
-                    pulsearr = doc.data().pulsearr;
-                    ofarr = doc.data().ofarr;
+            patients.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
+                        intimearr = doc.data().intimearr;
+                        sortedIntimeArr = arrangeHours(intimearr)
+                        bparr = doc.data().bparr;
+                        pulsearr = doc.data().pulsearr;
+                        ofarr = doc.data().ofarr;
 
-                    const chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: sortedIntimeArr,
-                            datasets: [{
-                                label: 'Blood Pressure',
-                                data: bparr,
-                                borderColor: 'red',
-                                fill: false,
-                                tension: 0
-                            }, {
-                                type: 'bar',
-                                label: 'Blood Pressure',
-                                data: bparr,
-                                backgroundColor: 'orange',
-                                borderWidth: 1,
-                                barPercentage: 0.6,
-                                categoryPercentage: 0.6,
+                        const chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: sortedIntimeArr,
+                                datasets: [{
+                                    label: 'Blood Pressure',
+                                    data: bparr,
+                                    borderColor: 'red',
+                                    fill: false,
+                                    tension: 0
+                                }, {
+                                    type: 'bar',
+                                    label: 'Blood Pressure',
+                                    data: bparr,
+                                    backgroundColor: 'orange',
+                                    borderWidth: 1,
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
 
+                                },
+                                {
+                                    label: 'Pulse',
+                                    data: pulsearr,
+                                    borderColor: 'blue',
+                                    fill: false,
+                                    tension: 0
+                                }, {
+                                    type: 'bar',
+                                    label: 'Pulse',
+                                    data: pulsearr,
+                                    backgroundColor: 'cyan',
+                                    borderWidth: 1,
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
+
+                                }, {
+                                    label: 'Oral-Feed',
+                                    data: ofarr,
+                                    borderColor: 'green',
+                                    fill: false,
+                                    tension: 0,
+
+
+                                }, {
+                                    type: 'bar',
+                                    label: 'Oral-Feed',
+                                    data: ofarr,
+                                    backgroundColor: 'rgb(144, 238, 144)',
+                                    borderWidth: 1,
+                                    barPercentage: 0.6,
+                                    categoryPercentage: 0.6,
+                                }]
                             },
-                            {
-                                label: 'Pulse',
-                                data: pulsearr,
-                                borderColor: 'blue',
-                                fill: false,
-                                tension: 0
-                            }, {
-                                type: 'bar',
-                                label: 'Pulse',
-                                data: pulsearr,
-                                backgroundColor: 'cyan',
-                                borderWidth: 1,
-                                barPercentage: 0.6,
-                                categoryPercentage: 0.6,
+                            options: {
 
-                            }, {
-                                label: 'Oral-Feed',
-                                data: ofarr,
-                                borderColor: 'green',
-                                fill: false,
-                                tension: 0,
-
-
-                            }, {
-                                type: 'bar',
-                                label: 'Oral-Feed',
-                                data: ofarr,
-                                backgroundColor: 'rgb(144, 238, 144)',
-                                borderWidth: 1,
-                                barPercentage: 0.6,
-                                categoryPercentage: 0.6,
-                            }]
-                        },
-                        options: {
-
-                            maintainAspectRatio: false,
-                            title: {
-                                display: true,
-                                text: 'Fluid Intake'
-                            },
-                            scales: {
-                                yAxes: [{
-                                    offset: true,
-                                }],
-                                xAxes: [{
-                                    offset: true,
+                                maintainAspectRatio: false,
+                                title: {
+                                    display: true,
+                                    text: 'Fluid Intake'
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        offset: true,
                                     }],
-                                
+                                    xAxes: [{
+                                        offset: true,
+                                    }],
+
+                                }
                             }
+                        })
+
+
+
+                        // styling the chart
+                        chart.canvas.parentNode.style.height = '400px';
+                        chart.canvas.parentNode.style.width = '500px';
+                        chart.canvas.parentNode.style.padding = '20px';
+                        chart.canvas.parentNode.style.marginLeft = '50px';
+                        chart.canvas.parentNode.style.marginTop = '-845px';
+
+                        if (localStorage.getItem('current_graph') === 'output') {
+                            chart.canvas.parentNode.style.display = 'none';
                         }
-                    })
 
 
+                        //Updating the chart
+                        chart.update();
 
-                    // styling the chart
-                    chart.canvas.parentNode.style.height = '400px';
-                    chart.canvas.parentNode.style.width = '500px';
-                    chart.canvas.parentNode.style.padding = '20px';
-                    chart.canvas.parentNode.style.marginLeft = '50px';
-                    chart.canvas.parentNode.style.marginTop = '-845px';
-
-                    if (localStorage.getItem('current_graph') === 'output') {
-                        chart.canvas.parentNode.style.display = 'none';
                     }
-
-
-                    //Updating the chart
-                    chart.update();
-
-                }
-            })
+                })
+            }
+            )
         }
-        )
 
 
 
-
-
+        function generateOutputChart(patients) {
         let outimearr, urinearr, stoolarr, vomitarr, suctionarr, sortedOuttimearr;
 
         patients.get().then((querySnapshot) => {
@@ -447,10 +431,10 @@ auth.onAuthStateChanged(function (user) {
             })
         }
         )
-
-
+    }
         //Chart End
 
+        //graph change button onclick event
         document.getElementById('next').addEventListener('click', () => {
             if (localStorage.getItem('current_graph') === 'output') {
                 localStorage.setItem('current_graph', 'intake');
@@ -467,6 +451,7 @@ auth.onAuthStateChanged(function (user) {
             localStorage.setItem('current_graph', 'intake');
         }
 
+        //Patient Details displaying
         patients.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 if (doc.data().first_name === document.getElementById("fpn").value && doc.data().last_name === document.getElementById("lpn").value || name_patient[0] === doc.data().first_name && name_patient[1] === doc.data().last_name) {
@@ -491,6 +476,7 @@ auth.onAuthStateChanged(function (user) {
             })
         })
 
+        //Deleting Patients' details
         document.getElementById("remptn").addEventListener("click", () => {
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
