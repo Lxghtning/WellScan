@@ -193,8 +193,7 @@ auth.onAuthStateChanged(user => {
                     }
                 });
 
-                generateIntakeChart(patients)
-                generateOutputChart(patients)
+                location.reload()
             })
 
         })
@@ -421,9 +420,6 @@ auth.onAuthStateChanged(user => {
                     output_chart.canvas.parentNode.style.padding = '20px';
                     output_chart.canvas.parentNode.style.marginLeft = "565px";
                     output_chart.canvas.parentNode.style.marginTop = '-867px';
-                    if (localStorage.getItem('current_graph') === 'intake') {
-                        // output_chart.canvas.parentNode.style.display = 'none';
-                    }
                     //Updating the chart
                     output_chart.update();
 
@@ -435,9 +431,6 @@ auth.onAuthStateChanged(user => {
     }
         //Chart End
 
-        if (localStorage.getItem('current_graph') === null) {
-            localStorage.setItem('current_graph', 'intake');
-        }
 
         //Patient Details displaying
         patients.get().then((querySnapshot) => {
