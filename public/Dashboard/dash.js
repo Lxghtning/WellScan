@@ -96,7 +96,7 @@ auth.onAuthStateChanged(function (user) {
     let innerhtmlCollection = database.collection(`innerhtml${userid}`) //Getting the innerhtml database to show patient list
 
     innerhtmlCollection.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => { // Iterating over each document in the collection. We create an element for each doc and display the patient first and last name in it as a button
+        querySnapshot.forEach((doc) => { // Iterating over each document in the collection.
             newEL = document.createElement(doc.data().innertags)
             newEL.innerHTML = doc.data().innerwebel
             newEL.className = "severalhead"
