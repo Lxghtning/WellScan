@@ -11,7 +11,6 @@ document.getElementById("passable").addEventListener("click", ()=>{
 
 })
 
-
 document.getElementById("closebtn").addEventListener("click", () => { //Cross sign for pop ups to close
     document.getElementById('intext').innerHTML = " "
     document.getElementById('popup').style.display = "none";
@@ -103,7 +102,7 @@ try {
     if (e instanceof TypeError) { }
 }
 function formfunc(x) { //Executed when user logs in
-    let email = document.getElementById("email").value;
+    let email = document.getElementById("email").value.trim();
     let pass_word = document.getElementById("pw").value;
 
 
