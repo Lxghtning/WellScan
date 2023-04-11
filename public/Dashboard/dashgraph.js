@@ -147,7 +147,7 @@ auth.onAuthStateChanged(user => {
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     if (doc.data().first_name === firstname_patient && doc.data().last_name === lastname_patient) {
-
+                        
                         //Fetch the existing data
                         let bparr = doc.data().bparr;
                         let intimearr = doc.data().intimearr;
@@ -168,7 +168,7 @@ auth.onAuthStateChanged(user => {
                         stoolarr.push(parseInt(stool))
                         vomitarr.push(parseInt(vomit))
                         suctionarr.push(parseInt(suction))
-
+     
                         patients.doc(firstname_patient).update({
                             intime: parseInt(intime),
                             outputTime: parseInt(outtime),
@@ -189,15 +189,19 @@ auth.onAuthStateChanged(user => {
                             vomitarr: vomitarr,
                             suctionarr: suctionarr
                         })
-
+                        generateIntakeChart(patients)
+                        generateOutputChart(patients)
+                        document.getElementById("popup").style.display = "block";
+                        document.getElementById("pop").style.display = "block";
+                        document.getElementById('intext').innerHTML = "Details Updated";
+                        document.getElementById("tick").style.marginTop = "50px";
+                        document.getElementById("popup").style.height = "270px";
                     }
                 });
-
-                location.reload()
+           
             })
 
         })
-
 
         generateIntakeChart(patients)
         generateOutputChart(patients)
@@ -295,11 +299,6 @@ auth.onAuthStateChanged(user => {
                         chart.canvas.parentNode.style.padding = '20px';
                         chart.canvas.parentNode.style.marginLeft = '20px';
                         chart.canvas.parentNode.style.marginTop = '-867px';
-
-                        if (localStorage.getItem('current_graph') === 'output') {
-                            // chart.canvas.parentNode.style.display = 'none';
-                        }
-
 
                         //Updating the chart
                         chart.update();
