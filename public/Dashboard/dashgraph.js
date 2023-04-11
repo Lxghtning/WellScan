@@ -92,8 +92,9 @@ auth.onAuthStateChanged(user => {
                 .catch(err => console.log(err))
         })
 
-        //Closing the popup
+    //Closing the popup (Changing to default settings)
         document.getElementById("closebtn").addEventListener("click", () => {
+            document.getElementById("popup").style.height = "254px";
             document.getElementById('popup').style.display = "none";
             document.getElementById('pop').style.display = "none";
             document.getElementById('tick').innerHTML = "done";
@@ -478,9 +479,10 @@ auth.onAuthStateChanged(user => {
             document.getElementById("popup").style.display = "block";
             document.getElementById("pop").style.display = "block";
             document.getElementById("view").style.display = "block";
-            document.getElementById("intext").style.display = "none";
+            document.getElementById('intext').innerHTML = "Patient Removed!";
             document.getElementById("closebtn").style.display = "none";
             document.getElementById("tick").style.marginTop = "50px";
+            document.getElementById("popup").style.height = "270px";
 
         })
     }
