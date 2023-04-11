@@ -1,4 +1,5 @@
-document.getElementById("closebtn").addEventListener("click", () => {
+
+document.getElementById("closebtn").addEventListener("click", () => { //Cross sign for pop ups to close
     document.getElementById('intext').innerHTML = " "
     document.getElementById('popup').style.display = "none";
     document.getElementById('pop').style.display = "none";
@@ -34,18 +35,14 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var auth = firebase.auth();
-
+//User is redirected to sign up page if they arent logged in
 auth.onAuthStateChanged(doctor => {
     if (doctor) {
         location.href = "/Dashboard/dash.html"
     }
 })
 
-//NAV change func
-function tochange(x) {
-    x.classList.toggle("change");
-    x.classList.toggle("newnav");
-}
+
 
 
 //Form Fetcher
@@ -53,6 +50,7 @@ document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
 })
 
+// Popup for "forgot password" text
 document.getElementById("forgotpass").addEventListener("click", () => {
     document.getElementById('popup').style.display = "block";
     document.getElementById('pop').style.display = "block";
@@ -91,34 +89,35 @@ try {
 } catch (e) {
     if (e instanceof TypeError) { }
 }
-function formfunc(x) {
+function formfunc(x) { //Executed when user logs in
     let email = document.getElementById("email").value;
     let pass_word = document.getElementById("pw").value;
 
 
     auth
         .signInWithEmailAndPassword(email, pass_word).then(function () {
-            location.href = "/Dashboard/dash.html"
+            location.href = "/Dashboard/dash.html" //Signs the user in and redirects to dashboard
         })
         .catch(err => {
             if (typeof (err) === "object") {
+                // Error popup
                 document.getElementById('emailuser').style.display = "none";
                 document.getElementById('tick').innerHTML = "close";
                 document.getElementById('tick').style.color = "red";
                 document.getElementById('tick').style.border = '2px solid red';
                 document.getElementById('sub').style.display = "none";
                 switch (err.code) {
-                    case "auth/invalid-email":
+                    case "auth/invalid-email": //Invalid email error catch
                         document.getElementById('pop').style.display = 'block';
                         document.getElementById('popup').style.display = 'block';
                         document.getElementById('intext').innerHTML = "Incorrect Email!";
                         break;
-                    case "auth/wrong-password":
+                    case "auth/wrong-password": //Invalid password error catch
                         document.getElementById('pop').style.display = 'block';
                         document.getElementById('popup').style.display = 'block';
                         document.getElementById('intext').innerHTML = "Incorrect Password!";
                         break;
-                    case "auth/user-not-found":
+                    case "auth/user-not-found": //Unknown user password error catch
                         document.getElementById('pop').style.display = 'block';
                         document.getElementById('popup').style.display = 'block';
                         document.getElementById('intext').innerHTML = "User Not Found!";
