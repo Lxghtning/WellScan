@@ -123,11 +123,14 @@ input{
     width: 319px;
 }
 
-.cpass{
-    height: 25px;
-    margin-top: 20px;
-    margin-left: 70px;
-    width: 319px;
+#passable{
+    position: absolute;
+    margin-top: 22px;
+    margin-left: -30px;
+}
+
+#passable:hover{
+    cursor:pointer;
 }
 
 .submitc{
@@ -235,6 +238,7 @@ input{
 .resetpass{
     margin-top: 10px;
 }
+
 .resetpass a{
     margin-left: 170px;
     text-decoration: underline;
