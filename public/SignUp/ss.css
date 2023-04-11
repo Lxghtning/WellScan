@@ -75,8 +75,9 @@ nav ul li a:hover {
 }
 
 
-/*Login Forum*/
+/*SignUp Form*/
 .forum{
+    background-color: rgb(244, 244, 244);
     height: 400px;
     width: 500px;
     border: 3px solid black;

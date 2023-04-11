@@ -74,8 +74,10 @@ nav ul li a:hover {
 }
 
 
-/*Login Forum*/
+/*Login Form*/
+
 .forum{
+    background-color: rgb(244, 244, 244);
     height: 400px;
     width: 500px;
     border: 3px solid black;
@@ -93,7 +95,6 @@ nav ul li a:hover {
 input{
     text-align: center;
 }
-
 .fnameuser{
     height: 25px;
     width: 150px;
@@ -235,7 +236,7 @@ input{
     margin-top: 10px;
 }
 .resetpass a{
-    margin-left: 155px;
+    margin-left: 170px;
     text-decoration: underline;
 }
 
