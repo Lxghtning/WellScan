@@ -41,11 +41,10 @@
                         </span>
                         <div id="condrop" class="drpcon">
                             <a id="signout" href="/Login/page.html"> Sign Out <i class="material-symbols-outlined"> logout </i></a>
-                            <a id="delacc" href="/Signup/signup.html"> Delete Account <i class="material-symbols-outlined"> delete </i></a>
+                           
                             </div>
                         </div>
-                <!-- <a class="active" href="/Login/page.html" id = "sigout"> Sign out</a>
-                <a class="active" href="/SignUp/signup.html" id="delacc"> Delete Account</a> -->
+               
             </li>
         </ul>
         <div class="name">
@@ -254,14 +253,6 @@
 
             document.getElementById("ptnf").addEventListener("submit", (e) => {
                 e.preventDefault();
-            })
-
-            document.getElementById("delacc").addEventListener("click", () => {
-                const currentUser = auth.currentUser
-                console.log(currentUser)
-                currentUser
-                    .delete(currentUser)
-                    .catch(err => { console.log(err) })
             })
 
             document.getElementById("signout").addEventListener("click", () => {

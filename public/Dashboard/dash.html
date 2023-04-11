@@ -32,7 +32,7 @@
                         </span>
                         <div id="condrop" class="drpcon">
                             <a id="signout" href="/Login/page.html"> Sign Out <i class="material-symbols-outlined"> logout </i></a>
-                            <a id="delacc" href="/Signup/signup.html"> Delete Account <i class="material-symbols-outlined"> delete </i></a>
+                            
                             </div>
                         </div>
     
@@ -113,7 +113,6 @@
     window.onload = function () {
         if (localStorage.getItem('scrollPosition') !== null && localStorage.getItem('formData') !== null) {
             window.scrollTo(0, localStorage.getItem('scrollPosition'));
-            console.log("hi")
         }
     }
 
@@ -183,14 +182,6 @@
 
     document.getElementById("ptnf").addEventListener("submit", (e) => {
         e.preventDefault();
-    })
-
-    document.getElementById("delacc").addEventListener("click", () => {
-        const currentUser = auth.currentUser
-        console.log(currentUser)
-        currentUser
-            .delete(currentUser)
-            .catch(err=>{console.log(err)})
     })
 
     document.getElementById("signout").addEventListener("click", () => {
