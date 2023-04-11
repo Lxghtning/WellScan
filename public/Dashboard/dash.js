@@ -203,15 +203,17 @@ auth.onAuthStateChanged(function (user) {
 
     function createNewElement() { // Creating a new element and storing the values in innerhtml collection
         let several_patients = document.createElement("h1");
-
+        
         several_patients.className = "severalhead"
-        several_patients.style.backgroundColor = "gray";
+        several_patients.style.backgroundColor = "#D3D3D3";
         several_patients.style.fontSize = "27px";
         several_patients.style.color = "black";
         several_patients.style.height = "50px";
-        several_patients.style.width = "1300px";
-        several_patients.style.borderRadius = "10px";
+        several_patients.style.width = "1490px";
+        several_patients.style.borderRadius = "5px";
         several_patients.style.marginBottom = "30px";
+        several_patients.style.textAlign = "center";
+        several_patients.style.border = "2px solid black";
 
         several_patients.innerHTML = document.getElementById("fpn").value + " " + document.getElementById("lpn").value
         several_patients.addEventListener("click", () => {
