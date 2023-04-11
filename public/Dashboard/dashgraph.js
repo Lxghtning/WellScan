@@ -290,14 +290,14 @@ auth.onAuthStateChanged(user => {
 
 
                         // styling the chart
-                        chart.canvas.parentNode.style.height = '400px';
+                        chart.canvas.parentNode.style.height = '470px';
                         chart.canvas.parentNode.style.width = '500px';
                         chart.canvas.parentNode.style.padding = '20px';
-                        chart.canvas.parentNode.style.marginLeft = '50px';
-                        chart.canvas.parentNode.style.marginTop = '-845px';
+                        chart.canvas.parentNode.style.marginLeft = '20px';
+                        chart.canvas.parentNode.style.marginTop = '-867px';
 
                         if (localStorage.getItem('current_graph') === 'output') {
-                            chart.canvas.parentNode.style.display = 'none';
+                            // chart.canvas.parentNode.style.display = 'none';
                         }
 
 
@@ -415,13 +415,13 @@ auth.onAuthStateChanged(user => {
                     })
 
                     // styling the chart
-                    output_chart.canvas.parentNode.style.height = '400px';
+                    output_chart.canvas.parentNode.style.height = '470px';
                     output_chart.canvas.parentNode.style.width = '500px';
                     output_chart.canvas.parentNode.style.padding = '20px';
-                    output_chart.canvas.parentNode.style.marginLeft = '50px';
-                    output_chart.canvas.parentNode.style.marginTop = '-845px';
+                    output_chart.canvas.parentNode.style.marginLeft = "565px";
+                    output_chart.canvas.parentNode.style.marginTop = '-867px';
                     if (localStorage.getItem('current_graph') === 'intake') {
-                        output_chart.canvas.parentNode.style.display = 'none';
+                        // output_chart.canvas.parentNode.style.display = 'none';
                     }
                     //Updating the chart
                     output_chart.update();
@@ -433,19 +433,6 @@ auth.onAuthStateChanged(user => {
         )
     }
         //Chart End
-
-        //graph change button onclick event
-        document.getElementById('next').addEventListener('click', () => {
-            if (localStorage.getItem('current_graph') === 'output') {
-                localStorage.setItem('current_graph', 'intake');
-            }
-            else {
-                localStorage.setItem('current_graph', 'output');
-            }
-            localStorage.setItem('scrollPosition', window.scrollY);
-            location.reload();
-
-        })
 
         if (localStorage.getItem('current_graph') === null) {
             localStorage.setItem('current_graph', 'intake');
