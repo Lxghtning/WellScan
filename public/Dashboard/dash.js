@@ -83,6 +83,7 @@ document.getElementById("signout").addEventListener("click", () => {
         .catch(err => console.log(err))  //Error handler that prints any error
 })
 
+
 //User is redirected to sign up page if they arent logged in
 auth.onAuthStateChanged(function (user) {
     if(!user){
@@ -96,6 +97,21 @@ auth.onAuthStateChanged(function (user) {
     let innerhtmlCollection = database.collection(`innerhtml${userid}`) //Getting the innerhtml database to show patient list
 
     innerhtmlCollection.get().then((querySnapshot) => {
+        if(querySnapshot.empty){
+            newEL = document.createElement("i")
+            newEL.innerHTML = "You have no patients!"
+            
+            newEL.className = "severalhead"
+            newEL.style.backgroundColor = "#D3D3D3"
+            newEL.style.fontSize = "27px";
+            newEL.style.color = "black";
+            newEL.style.marginBottom = "30px";
+            newEL.style.height = "50px";
+            newEL.style.width = "1490px";
+            newEL.style.borderRadius = "5px";
+            newEL.style.textAlign = "center";
+            newEL.style.border = "2px solid black";
+        }
         querySnapshot.forEach((doc) => { // Iterating over each document in the collection.
             newEL = document.createElement(doc.data().innertags)
             newEL.innerHTML = doc.data().innerwebel
@@ -115,9 +131,9 @@ auth.onAuthStateChanged(function (user) {
                 location.href = "/Dashboard/dashgraph.html"
 
             })
-
-            document.getElementById('pb').appendChild(newEL); //Appends the new created element to the HTML doc
         })
+            document.getElementById('pb').appendChild(newEL); //Appends the new created element to the HTML doc
+        
     })
 
 
@@ -190,13 +206,12 @@ auth.onAuthStateChanged(function (user) {
                     }
                 
                 else{
-                querySnapshot.forEach((doc) => {
-
-                        viewWrongPopup() // Ensures that a new patient with same name cannot be added
+                    viewWrongPopup() // Ensures that a new patient with same name cannot be added
                     
-                })
+                
     }
 })
+
 
 
     })
