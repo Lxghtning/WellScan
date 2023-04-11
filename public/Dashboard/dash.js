@@ -90,11 +90,19 @@ auth.onAuthStateChanged(function (user) {
         location.href = "/SignUp/signup.html" 
         return
     }else{
-    let userid = user.uid 
+    // Random password generator 
+    var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var passwordLength = 6;
+    var password = "";
+    for (var i = 0; i <= passwordLength; i++) {
+        var randomNumber = Math.floor(Math.random() * chars.length);
+        password += chars.substring(randomNumber, randomNumber +1);
+    }
 
+    localStorage.setItem("randomPass", password)
 
-    let patients = database.collection(`patients${userid}`) //Getting the patient's database
-    let innerhtmlCollection = database.collection(`innerhtml${userid}`) //Getting the innerhtml database to show patient list
+    let patients = database.collection(`patients${password}`) //Getting the patient's database
+    let innerhtmlCollection = database.collection(`innerhtml${password}`) //Getting the innerhtml database to show patient list
 
     innerhtmlCollection.get().then((querySnapshot) => {
         if(querySnapshot.empty){
