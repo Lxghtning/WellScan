@@ -146,7 +146,7 @@ auth.onAuthStateChanged(user => {
             // Looping through the patients collection
             patients.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    if (doc.data().first_name === firstname_patient && doc.data().last_name === lastname_patient) {
+                    if (doc.data().first_name === name_patient[0] && doc.data().last_name === name_patient[1]) {
                         
                         //Fetch the existing data
                         let bparr = doc.data().bparr;
